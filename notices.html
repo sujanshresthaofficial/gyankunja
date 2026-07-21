@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem('gyankunjaTheme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const theme = savedTheme || systemTheme;
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Latest notices, exam schedules and result updates from the Gandaki University Office of the Controller of Examinations.">
+  <title>University Notices — Gyankunja</title>
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container navbar">
+    <a class="brand" href="index.html"><span class="brand-mark">G</span><span class="brand-name">GYANKUNJA</span></a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="index.html" data-nav>Home</a><a href="notices.html" data-nav>Notices</a><a href="resources.html" data-nav>Resources</a><a href="index.html#community">Community</a><a href="about.html" data-nav>About</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-outline btn-sm" href="signup.html" data-auth-guest>Sign Up</a>
+      <a class="btn btn-primary btn-sm" href="login.html" data-auth-guest>Login</a>
+      <a class="btn btn-outline btn-sm" href="dashboard.html" data-auth-user hidden>My Dashboard</a>
+      <button class="btn btn-primary btn-sm" type="button" data-auth-user data-logout hidden>Logout</button>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" title="Switch to dark mode"><span data-theme-icon aria-hidden="true">☾</span></button>
+      <button class="menu-toggle" type="button" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</header>
+<main>
+  <section class="page-hero notice-page-hero">
+    <div class="container">
+      <span class="eyebrow">Official exam updates</span>
+      <h1>Gandaki University Notices</h1>
+      <p>Browse the latest notices, examination schedules, result announcements, retotal updates and general information from the University examination website.</p>
+      <div class="source-status-row">
+        <span class="source-status" data-notice-status><span class="status-dot"></span>Connecting to official source…</span>
+        <a class="btn btn-outline btn-sm" href="https://guexam.edu.np/notice/" target="_blank" rel="noopener noreferrer">Open Official Website ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container">
+      <div class="notice-toolbar">
+        <div class="search-filter notice-filter-group">
+          <input id="noticeSearch" type="search" placeholder="Search notices by title or keyword…" aria-label="Search notices">
+          <select id="noticeCategory" aria-label="Filter notice category">
+            <option value="all">All categories</option>
+            <option value="notice">Notice</option>
+            <option value="exam schedule">Exam Schedule</option>
+            <option value="result">Result</option>
+            <option value="retotal">Retotal</option>
+            <option value="general">General Notices</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" id="refreshNotices" type="button">↻ Refresh Notices</button>
+      </div>
+
+      <div class="notice-source-note">
+        <strong>Source:</strong> Gandaki University Office of the Controller of Examinations. Notice links open the original university page in a new tab.
+      </div>
+
+      <div class="notice-page-list" data-notice-list>
+        <div class="notice-loading"><span class="loading-spinner" aria-hidden="true"></span> Loading latest notices…</div>
+      </div>
+      <div class="empty-state" id="noticeEmpty" hidden><strong>No matching notices found.</strong><span>Try another search term or category.</span></div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><span class="brand-mark">G</span><span style="color:#fff">GYANKUNJA</span></a>
+        <p>An organized academic hub for BIT students with public semester resources, university exam notices, and personalized student dashboards.</p>
+      </div>
+      <div class="footer-col"><h4>Explore</h4><a href="index.html">Home</a><a href="notices.html">University Notices</a><a href="resources.html">Resources</a><a href="about.html">About</a></div>
+      <div class="footer-col"><h4>Semester I–IV</h4><a href="semester1.html">Semester I</a><a href="semester2.html">Semester II</a><a href="semester3.html">Semester III</a><a href="semester4.html">Semester IV</a></div>
+      <div class="footer-col"><h4>Semester V–VIII</h4><a href="semester5.html">Semester V</a><a href="semester6.html">Semester VI</a><a href="semester7.html">Semester VII</a><a href="semester8.html">Semester VIII</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Gyankunja. Front-end prototype.</span><span>Developed by Prabhab Tiwari, Sujan Shreshtha and Madhab Khanal.</span></div>
+  </div>
+</footer>
+<script src="js/app.js"></script><script src="js/notices.js"></script>
+</body>
+</html>

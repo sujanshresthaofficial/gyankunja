@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta content="light dark" name="color-scheme" />
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem('gyankunjaTheme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const theme = savedTheme || systemTheme;
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="Gyankunja is a note-sharing and academic resource platform for BIT students." name="description" />
+  <title>Gyankunja — Academic Hub for BIT Students</title>
+  <link href="images/fav.png" rel="icon" type="image/png" />
+  <link href="css/styles.css" rel="stylesheet" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container navbar">
+      <a class="brand" href="index.html"><span class="brand-mark">G</span><span class="brand-name">GYANKUNJA</span></a>
+      <nav aria-label="Primary navigation" class="nav-links"><a data-nav="" href="index.html">Home</a><a data-nav=""
+          href="notices.html">Notices</a><a data-nav="" href="resources.html">Resources</a><a
+          href="index.html#community">Community</a><a data-nav="" href="about.html">About</a></nav>
+      <div class="nav-actions">
+        <a class="btn btn-outline btn-sm" data-auth-guest="" href="signup.html">Sign Up</a>
+        <a class="btn btn-primary btn-sm" data-auth-guest="" href="login.html">Login</a>
+        <a class="btn btn-outline btn-sm" data-auth-user="" hidden="" href="dashboard.html">My Dashboard</a>
+        <button class="btn btn-primary btn-sm" data-auth-user="" data-logout="" hidden="">Logout</button>
+        <button aria-label="Switch to dark mode" class="theme-toggle" data-theme-toggle="" title="Switch to dark mode"
+          type="button"><span aria-hidden="true" data-theme-icon="">☾</span></button><button aria-label="Open menu"
+          class="menu-toggle">☰</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow"> Built for BIT students</span>
+          <h1>The Ultimate Hub for <span class="text-primary">BIT Students</span></h1>
+          <p>Find semester-wise notes, question banks, lab resources, schedules, discussions, and verified academic
+            materials in one organized platform.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="signup.html">Get Started Free</a>
+            <a class="btn btn-outline" href="resources.html">Browse Public Resources</a>
+          </div>
+          <form class="hero-search" id="homeSearch">
+            <input aria-label="Search resources" placeholder="Search notes, subjects or semesters…" type="search" />
+            <button class="btn btn-primary" type="submit">Search</button>
+          </form>
+        </div>
+        <div aria-hidden="true" class="hero-visual">
+          <div class="float-card main">
+            <div class="mini-header"><strong>Academic Resources</strong>
+              <div class="mini-dots"><span></span><span></span><span></span></div>
+            </div>
+            <div class="mini-note-grid">
+              <div class="mini-note"><span class="icon-tile">C</span><strong>C Programming</strong><small
+                  class="muted">42 study files</small></div>
+              <div class="mini-note"><span class="icon-tile">∑</span><strong>Mathematics</strong><small class="muted">38
+                  study files</small></div>
+              <div class="mini-note"><span class="icon-tile">DB</span><strong>Database</strong><small class="muted">25
+                  study files</small></div>
+              <div class="mini-note"><span class="icon-tile">AI</span><strong>AI &amp; ML</strong><small
+                  class="muted">31 study files</small></div>
+            </div>
+          </div>
+          <div class="float-card top"><strong class="text-primary">500+</strong><br /><small class="muted">Resources
+              uploaded</small></div>
+          <div class="float-card bottom"><strong>✓ Verified Notes</strong><br /><small class="muted">Shared by the
+              community</small></div>
+        </div>
+      </div>
+    </section>
+    <div class="container notice-wrap" id="notices">
+      <section class="notice-board">
+        <div class="notice-board-head">
+          <div><span class="eyebrow">Latest updates</span>
+            <h2 style="margin:8px 0 0">Notice Board</h2>
+          </div><a class="btn btn-ghost btn-sm" href="notices.html">View all →</a>
+        </div>
+        <div class="notice-list" data-limit="3" data-notice-list="">
+          <div class="notice-loading">Loading latest university notices…</div>
+        </div>
+      </section>
+    </div>
+    <section class="section" id="resources">
+      <div class="container">
+        <h2 class="section-title">Browse Public Resources by Semester</h2>
+        <p class="section-subtitle">No login is required. Select a semester to access organized subject cards, notes,
+          lab manuals, question banks, books, and references.</p>
+        <div class="semester-grid">
+          <a class="semester-card" href="semester1.html"><span class="semester-number">Semester I</span>
+            <h3>Build the Foundation</h3>
+            <p>Basics of IT, electronics, mathematics, programming, workshop, and communication.</p><span
+              class="text-primary"><strong>Explore semester →</strong></span>
+          </a>
+          <a class="semester-card" href="semester2.html"><span class="semester-number">Semester II</span>
+            <h3>Strengthen Core Skills</h3>
+            <p>Programming, digital logic, mathematics, web technology, architecture, and management.</p><span
+              class="text-primary"><strong>Explore semester →</strong></span>
+          </a>
+          <a class="semester-card" href="semester3.html"><span class="semester-number">Semester III</span>
+            <h3>Data and Development</h3>
+            <p>OOP, data structures, databases, web technology, statistics, and economics.</p><span
+              class="text-primary"><strong>Explore semester →</strong></span>
+          </a>
+          <a class="semester-card" href="semester4.html"><span class="semester-number">Semester IV</span>
+            <h3>Systems and Networks</h3>
+            <p>Java, operating systems, networking, software engineering, and numerical methods.</p><span
+              class="text-primary"><strong>Explore semester →</strong></span>
+          </a>
+          <a class="semester-card" href="semester5.html"><span class="semester-number">Semester V</span>
+            <h3>Modern Applications</h3>
+            <p>Python, security, mobile apps, system analysis, research, and electives.</p><span
+              class="text-primary"><strong>Explore semester →</strong></span>
+          </a>
+          <a class="semester-card" href="semester6.html"><span class="semester-number">Semester VI</span>
+            <h3>Intelligent Computing</h3>
+            <p>Artificial intelligence, cloud, data mining, HCI, and project management.</p><span
+              class="text-primary"><strong>Explore semester →</strong></span>
+          </a>
+          <a class="semester-card" href="semester7.html"><span class="semester-number">Semester VII</span>
+            <h3>Advanced Technology</h3>
+            <p>Machine learning, IoT, enterprise development, cyber law, and major project.</p><span
+              class="text-primary"><strong>Explore semester →</strong></span>
+          </a>
+          <a class="semester-card" href="semester8.html"><span class="semester-number">Semester VIII</span>
+            <h3>Industry Readiness</h3>
+            <p>Big data, IT governance, internship, seminar, elective, and final project.</p><span
+              class="text-primary"><strong>Explore semester →</strong></span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="section" style="background:var(--surface-alt)">
+      <div class="container">
+        <h2 class="section-title">Featured Notes</h2>
+        <p class="section-subtitle">Popular resources shared by students and organized for quick access.</p>
+        <div class="card-grid">
+          <article class="note-card">
+            <div class="note-cover">
+              <div class="file-icon">PDF</div><span class="badge badge-green">Verified</span>
+            </div>
+            <div class="note-body">
+              <h3>C Programming: Functions and Arrays</h3>
+              <div class="note-meta"><span>Semester II</span><span>• 164 views</span><span>• 32 pages</span></div>
+            </div>
+          </article>
+          <article class="note-card">
+            <div class="note-cover">
+              <div class="file-icon">PDF</div><span class="badge badge-blue">Popular</span>
+            </div>
+            <div class="note-body">
+              <h3>Basic Electronics Complete Notes</h3>
+              <div class="note-meta"><span>Semester I</span><span>• 286 views</span><span>• 48 pages</span></div>
+            </div>
+          </article>
+          <article class="note-card">
+            <div class="note-cover">
+              <div class="file-icon">DOC</div><span class="badge badge-green">Verified</span>
+            </div>
+            <div class="note-body">
+              <h3>Database Management Question Bank</h3>
+              <div class="note-meta"><span>Semester III</span><span>• 205 views</span><span>• Updated</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="community">
+      <div class="container split-grid">
+        <div class="panel">
+          <h3>Community Discussions</h3>
+          <div class="discussion-item">
+            <div class="avatar">PT</div>
+            <div>
+              <h4>How should I prepare for C Programming practical?</h4>
+              <p>12 replies • Updated 15 minutes ago</p>
+            </div><span class="badge badge-blue">New</span>
+          </div>
+          <div class="discussion-item">
+            <div class="avatar">SS</div>
+            <div>
+              <h4>Semester II mathematics reference books</h4>
+              <p>8 replies • Updated 1 hour ago</p>
+            </div><span class="badge badge-green">Solved</span>
+          </div>
+          <div class="discussion-item">
+            <div class="avatar">AK</div>
+            <div>
+              <h4>Share your best exam revision strategy</h4>
+              <p>21 replies • Updated yesterday</p>
+            </div><span class="badge badge-blue">Popular</span>
+          </div>
+          <a class="btn btn-primary btn-block" href="signup.html" style="margin-top:14px">Join the Community</a>
+        </div>
+        <div style="display:grid;gap:20px">
+          <div class="panel">
+            <h3>Academic Calendar</h3>
+            <p class="muted">Stay informed about classes, internal assessments, practicals, and university examinations.
+            </p><button class="btn btn-outline btn-block"
+              data-demo-action="Calendar data will connect to the backend later.">View Calendar</button>
+          </div>
+          <div class="panel">
+            <h3>Latest Exam Schedule</h3>
+            <p class="muted">See upcoming examinations and important academic deadlines in one place.</p><button
+              class="btn btn-outline btn-block" data-demo-action="Exam schedule will load from the database later.">View
+              Schedule</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section-sm" style="background:var(--surface-alt)">
+      <div class="container stat-grid">
+        <div class="stat-card"><strong>100+</strong><span>Active Students</span></div>
+        <div class="stat-card"><strong>50+</strong><span>Qualified Professors</span></div>
+        <div class="stat-card"><strong>10+</strong><span>Course Categories</span></div>
+        <div class="stat-card"><strong>500+</strong><span>Resources Uploaded</span></div>
+        <div class="stat-card"><strong>40+</strong><span>Subjects &amp; Notes</span></div>
+      </div>
+    </section>
+    <section class="section" id="about">
+      <div class="container quote-card">
+        <blockquote>“Education becomes more powerful when knowledge is organized, accessible, and shared. Gyankunja
+          brings BIT students together around reliable academic resources.”</blockquote><cite>— Gyankunja Student
+          Community</cite>
+      </div>
+    </section>
+
+    <!-- Student Reviews Section -->
+    <section class="student-reviews-section" id="student-reviews">
+      <div class="container">
+
+        <div class="reviews-heading">
+          <span class="eyebrow">Student Feedback</span>
+          <h2>What Students Say About Gyankunja</h2>
+          <p>
+            Share your experience and help us improve the Gyankunja academic platform.
+          </p>
+        </div>
+
+        <div class="reviews-layout">
+
+          <!-- Review Submission Form -->
+          <div class="review-form-card">
+
+            <h3>Submit Your Review</h3>
+
+            <form id="reviewForm">
+
+              <div class="review-form-group">
+                <label for="reviewName">Student Name</label>
+                <input type="text" id="reviewName" placeholder="Enter your full name" maxlength="50" required>
+              </div>
+
+              <div class="review-form-group">
+                <label for="reviewSemester">Semester</label>
+
+                <select id="reviewSemester" required>
+                  <option value="">Select your semester</option>
+                  <option value="Semester I">Semester I</option>
+                  <option value="Semester II">Semester II</option>
+                  <option value="Semester III">Semester III</option>
+                  <option value="Semester IV">Semester IV</option>
+                  <option value="Semester V">Semester V</option>
+                  <option value="Semester VI">Semester VI</option>
+                  <option value="Semester VII">Semester VII</option>
+                  <option value="Semester VIII">Semester VIII</option>
+                </select>
+              </div>
+
+              <div class="review-form-group">
+                <label for="reviewRating">Rating</label>
+
+                <select id="reviewRating" required>
+                  <option value="">Select rating</option>
+                  <option value="5">★★★★★ — Excellent</option>
+                  <option value="4">★★★★☆ — Very Good</option>
+                  <option value="3">★★★☆☆ — Good</option>
+                  <option value="2">★★☆☆☆ — Average</option>
+                  <option value="1">★☆☆☆☆ — Poor</option>
+                </select>
+              </div>
+
+              <div class="review-form-group">
+                <label for="reviewMessage">Your Review</label>
+
+                <textarea id="reviewMessage" rows="5" maxlength="300"
+                  placeholder="Write your experience with Gyankunja..." required></textarea>
+
+                <small>
+                  Maximum 300 characters
+                </small>
+              </div>
+
+              <button class="btn btn-primary review-submit-btn" type="submit">
+                Submit Review
+              </button>
+
+              <p class="review-form-message" id="reviewFormMessage"></p>
+
+            </form>
+          </div>
+
+
+          <!-- Submitted Reviews -->
+          <div class="reviews-display-area">
+
+            <div class="reviews-display-header">
+              <div>
+                <span class="eyebrow">Community Reviews</span>
+                <h3>Recent Student Reviews</h3>
+              </div>
+
+              <span class="review-count" id="reviewCount">
+                0 Reviews
+              </span>
+            </div>
+
+            <div class="reviews-list" id="reviewsList">
+
+              <div class="reviews-empty-state" id="reviewsEmptyState">
+                <span aria-hidden="true">✦</span>
+                <h4>No reviews submitted yet</h4>
+                <p>Be the first student to share your experience.</p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html"><span class="brand-mark">G</span><span
+              style="color:#fff">GYANKUNJA</span></a>
+          <p>An organized academic hub for BIT students with public semester resources, university exam notices, and
+            personalized student dashboards.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4><a href="index.html">Home</a><a href="notices.html">University Notices</a><a
+            href="resources.html">Resources</a><a href="about.html">About</a>
+        </div>
+        <div class="footer-col">
+          <h4>Semester I–IV</h4><a href="semester1.html">Semester I</a><a href="semester2.html">Semester II</a><a
+            href="semester3.html">Semester III</a><a href="semester4.html">Semester IV</a>
+        </div>
+        <div class="footer-col">
+          <h4>Semester V–VIII</h4><a href="semester5.html">Semester V</a><a href="semester6.html">Semester VI</a><a
+            href="semester7.html">Semester VII</a><a href="semester8.html">Semester VIII</a>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Gyankunja. Front-end prototype.</span><span>Developed by Prabhab Tiwari,
+          Sujan Shreshtha and Madhab Khanal.</span></div>
+    </div>
+  </footer>
+  <script src="js/app.js"></script>
+  <script>
+    document.getElementById('homeSearch').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const term = this.querySelector('input').value.trim();
+      if (!term) return Gyankunja.toast('Enter a subject or note name to search.');
+      Gyankunja.toast(`Search for “${term}” will connect to the database later.`);
+    });
+  </script>
+  <script src="js/notices.js"></script>
+</body>
+
+</html>

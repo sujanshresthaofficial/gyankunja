@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="light dark" name="color-scheme"/>
+<script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem('gyankunjaTheme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const theme = savedTheme || systemTheme;
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login — Gyankunja</title>
+<link href="images/fav.png" rel="icon" type="image/png"/>
+<link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body class="auth-page auth-page-with-navbar">
+<header class="site-header">
+<div class="container navbar">
+<a class="brand" href="index.html"><span class="brand-mark">G</span><span class="brand-name">GYANKUNJA</span></a>
+<nav aria-label="Primary navigation" class="nav-links"><a data-nav="" href="index.html">Home</a><a data-nav="" href="notices.html">Notices</a><a data-nav="" href="resources.html">Resources</a><a href="index.html#community">Community</a><a data-nav="" href="about.html">About</a></nav>
+<div class="nav-actions">
+<a class="btn btn-outline btn-sm" data-auth-guest="" data-nav="" href="signup.html">Sign Up</a>
+<a class="btn btn-primary btn-sm" data-auth-guest="" data-nav="" href="login.html">Login</a>
+<a class="btn btn-outline btn-sm" data-auth-user="" hidden="" href="dashboard.html">My Dashboard</a>
+<button class="btn btn-primary btn-sm" data-auth-user="" data-logout="" hidden="" type="button">Logout</button>
+<button aria-label="Switch to dark mode" class="theme-toggle theme-toggle-with-label" data-theme-toggle="" title="Switch to dark mode" type="button">
+<span aria-hidden="true" data-theme-icon="">☾</span>
+<span class="theme-toggle-text" data-theme-label="">Dark</span>
+</button>
+<button aria-label="Open menu" class="menu-toggle" type="button">☰</button>
+</div>
+</div>
+</header>
+<main class="auth-shell auth-shell-wide">
+<div class="auth-brand"><a class="brand" href="index.html"><span class="brand-mark">G</span><span class="brand-name" style="font-size:1.45rem">GYANKUNJA</span></a></div>
+<section class="auth-card">
+<h1>Welcome Back to Gyankunja</h1>
+<p>Sign in to open a dashboard personalized for your current semester.</p>
+<div class="alert" id="formAlert"></div>
+<form id="loginForm" novalidate="">
+<div class="form-group"><label for="identifier">Student Login ID or Email Address</label><input autocomplete="username" class="form-control" id="identifier" name="identifier" placeholder="Example: BIT-SEM1-001" required="" type="text"/></div>
+<div class="form-group"><label for="password">Password</label><div class="input-wrap"><input autocomplete="current-password" class="form-control" id="password" name="password" placeholder="Enter your password" required="" type="password"/><button class="password-toggle" data-target="#password" type="button">Show</button></div></div>
+<div class="form-options"><a class="text-primary" data-demo-action="Password reset will be available after backend integration." href="#">Forgot password?</a><label class="check-label"><input name="remember" type="checkbox"/> Remember me</label></div>
+<button class="btn btn-primary btn-block" type="submit">SIGN IN</button>
+</form>
+<div class="auth-divider">Semester demo accounts</div>
+<p class="demo-hint">Use a different account to test how the dashboard automatically displays notes for that student's semester.</p>
+<div aria-label="Demo login credentials" class="credential-grid">
+<div><strong>Semester I</strong><code>BIT-SEM1-001</code><span>sem1@123</span></div>
+<div><strong>Semester II</strong><code>BIT-SEM2-001</code><span>sem2@123</span></div>
+<div><strong>Semester III</strong><code>BIT-SEM3-001</code><span>sem3@123</span></div>
+<div><strong>Semester IV</strong><code>BIT-SEM4-001</code><span>sem4@123</span></div>
+<div><strong>Semester V</strong><code>BIT-SEM5-001</code><span>sem5@123</span></div>
+<div><strong>Semester VI</strong><code>BIT-SEM6-001</code><span>sem6@123</span></div>
+<div><strong>Semester VII</strong><code>BIT-SEM7-001</code><span>sem7@123</span></div>
+<div><strong>Semester VIII</strong><code>BIT-SEM8-001</code><span>sem8@123</span></div>
+</div>
+<p class="auth-footer-text">New to Gyankunja? <a class="text-primary" href="signup.html"><strong>Create an account</strong></a></p>
+<p class="auth-footer-text public-resource-link">Semester notes are public: <a class="text-primary" href="resources.html"><strong>Browse Resources</strong></a></p>
+</section>
+</main>
+<div class="auth-wave"></div>
+<script src="js/app.js"></script><script src="js/auth.js"></script>
+<script>
+    if (new URLSearchParams(location.search).has('required')) {
+      const alertBox = document.getElementById('formAlert');
+      alertBox.className = 'alert show alert-danger';
+      alertBox.textContent = 'Please log in before opening your personal dashboard.';
+    }
+  </script>
+</body>
+</html>

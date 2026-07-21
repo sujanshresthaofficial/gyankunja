@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="color-scheme" content="light dark">
+
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem("gyankunjaTheme");
+
+        const systemTheme = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches
+          ? "dark"
+          : "light";
+
+        const theme = savedTheme || systemTheme;
+
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      } catch (error) {
+        document.documentElement.dataset.theme = "light";
+        document.documentElement.style.colorScheme = "light";
+      }
+    })();
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description"
+    content="Learn about Gyankunja and the student developers behind the academic note-sharing platform.">
+
+  <title>About — Gyankunja</title>
+
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    /*
+      Developer image styling
+
+      This CSS affects only images inside developer cards.
+      It will not change logos or other images on the page.
+    */
+
+    .developer-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+    }
+
+    .developer-image-wrapper {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 20px;
+      border: 4px solid var(--primary-color, #174ea6);
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: #e5e7eb;
+      box-shadow: 0 8px 24px rgba(23, 78, 166, 0.18);
+      flex-shrink: 0;
+    }
+
+    .developer-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .developer-card h3 {
+      margin: 0 0 6px;
+    }
+
+    .developer-role {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--primary-color, #174ea6);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .developer-card p {
+      margin-top: 0;
+    }
+
+    @media (max-width: 768px) {
+      .developer-image-wrapper {
+        width: 125px;
+        height: 125px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container navbar">
+
+      <a class="brand" href="index.html">
+        <span class="brand-mark">G</span>
+        <span class="brand-name">GYANKUNJA</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html" data-nav>Home</a>
+        <a href="notices.html" data-nav>Notices</a>
+        <a href="resources.html" data-nav>Resources</a>
+        <a href="index.html#community">Community</a>
+        <a href="about.html" data-nav>About</a>
+      </nav>
+
+      <div class="nav-actions">
+
+        <a class="btn btn-outline btn-sm" href="signup.html" data-auth-guest>
+          Sign Up
+        </a>
+
+        <a class="btn btn-primary btn-sm" href="login.html" data-auth-guest>
+          Login
+        </a>
+
+        <a class="btn btn-outline btn-sm" href="dashboard.html" data-auth-user hidden>
+          My Dashboard
+        </a>
+
+        <button class="btn btn-primary btn-sm" type="button" data-auth-user data-logout hidden>
+          Logout
+        </button>
+
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode"
+          title="Switch to dark mode">
+          <span data-theme-icon aria-hidden="true">☾</span>
+        </button>
+
+        <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+          ☰
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Hero Section -->
+    <section class="page-hero about-hero">
+      <div class="container">
+
+        <span class="eyebrow">
+          Built by students, for students
+        </span>
+
+        <h1>About Gyankunja</h1>
+
+        <p>
+          Gyankunja is an academic note-sharing platform designed to make
+          BIT learning resources easier to discover, organize and access
+          semester by semester.
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- About Introduction -->
+    <section class="section">
+      <div class="container about-intro-grid">
+
+        <article class="about-story-card">
+
+          <span class="about-icon">G</span>
+
+          <div>
+
+            <span class="eyebrow">Our Purpose</span>
+
+            <h2>A single academic hub for the BIT community</h2>
+
+            <p>
+              Students often receive notes, lab files, question banks,
+              notices and schedules through many disconnected channels.
+              Gyankunja brings those materials together in one clear
+              platform so students can spend less time searching and
+              more time learning.
+            </p>
+
+            <p>
+              The public resource section lets anyone browse notes from
+              Semester I to Semester VIII, while a signed-in student
+              receives a dashboard focused on their current semester.
+            </p>
+
+          </div>
+        </article>
+
+
+        <div class="about-feature-stack">
+
+          <article class="mini-feature">
+            <span aria-hidden="true">▤</span>
+
+            <div>
+              <h3>Organized Resources</h3>
+
+              <p>
+                Semester-wise notes, lab manuals, question banks and
+                reference materials.
+              </p>
+            </div>
+          </article>
+
+
+          <article class="mini-feature">
+            <span aria-hidden="true">◉</span>
+
+            <div>
+              <h3>University Notices</h3>
+
+              <p>
+                Latest examination notices requested from the official
+                Gandaki University examination website.
+              </p>
+            </div>
+          </article>
+
+
+          <article class="mini-feature">
+            <span aria-hidden="true">⌂</span>
+
+            <div>
+              <h3>Personal Dashboard</h3>
+
+              <p>
+                A semester-specific dashboard experience for signed-in
+                students.
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Developers Section -->
+    <section class="section developer-section">
+
+      <div class="container">
+
+        <h2 class="section-title">
+          Meet the Student Developers
+        </h2>
+
+        <p class="section-subtitle">
+          Gyankunja is developed by three second-semester Information
+          Technology students working together to create a practical
+          academic platform for BIT students.
+        </p>
+
+
+        <div class="developer-grid">
+
+          <!-- Prabhab -->
+          <article class="developer-card">
+
+            <div class="developer-image-wrapper">
+              <img src="images/prabhab.jpg" alt="Prabhab Tiwari" loading="lazy">
+            </div>
+
+            <h3>Prabhab Tiwari</h3>
+
+            <span class="developer-role">
+              Second-Semester IT Student
+            </span>
+
+            <p>
+              Contributing to product planning, user-interface design
+              and front-end development of the Gyankunja platform.
+            </p>
+
+          </article>
+
+
+          <!-- Sujan -->
+          <article class="developer-card">
+
+            <div class="developer-image-wrapper">
+              <img src="images/Sujan.png" alt="Sujan Shreshtha" loading="lazy">
+            </div>
+
+            <h3>Sujan Shreshtha</h3>
+
+            <span class="developer-role">
+              Second-Semester IT Student
+            </span>
+
+            <p>
+              Contributing to platform structure, academic resource
+              organization and overall project development.
+            </p>
+
+          </article>
+
+
+          <!-- Madhab -->
+          <article class="developer-card">
+
+            <div class="developer-image-wrapper">
+              <img src="images/madhab.png" alt="Madhab Khanal" loading="lazy">
+            </div>
+
+            <h3>Madhab Khanal</h3>
+
+            <span class="developer-role">
+              Second-Semester IT Student
+            </span>
+
+            <p>
+              Contributing to feature planning, content organization
+              and implementation of the academic platform.
+            </p>
+
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Values Section -->
+    <section class="section">
+      <div class="container values-grid">
+
+        <article class="value-card">
+
+          <span>01</span>
+
+          <h3>Accessible</h3>
+
+          <p>
+            Core semester resources remain public so students can browse
+            academic notes without being forced to log in.
+          </p>
+
+        </article>
+
+
+        <article class="value-card">
+
+          <span>02</span>
+
+          <h3>Relevant</h3>
+
+          <p>
+            Signed-in users receive notes and schedules aligned with
+            the semester saved in their student account.
+          </p>
+
+        </article>
+
+
+        <article class="value-card">
+
+          <span>03</span>
+
+          <h3>Community-Oriented</h3>
+
+          <p>
+            The long-term goal is to let students share useful
+            materials, discuss questions and support junior learners.
+          </p>
+
+        </article>
+
+
+        <article class="value-card">
+
+          <span>04</span>
+
+          <h3>Expandable</h3>
+
+          <p>
+            The current HTML, CSS and JavaScript prototype is prepared
+            for future backend, database and secure authentication
+            integration.
+          </p>
+
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- Call to Action -->
+    <section class="section-sm about-cta-section">
+
+      <div class="container about-cta">
+
+        <div>
+
+          <span class="eyebrow">Start Exploring</span>
+
+          <h2>Find the resources for your semester</h2>
+
+          <p>
+            Browse the public academic library or sign in to open your
+            personalized student dashboard.
+          </p>
+
+        </div>
+
+
+        <div class="hero-actions">
+
+          <a class="btn btn-primary" href="resources.html">
+            Browse Resources
+          </a>
+
+          <a class="btn btn-outline" href="login.html">
+            Student Login
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- Footer -->
+  <footer class="site-footer">
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+
+          <a class="brand" href="index.html">
+            <span class="brand-mark">G</span>
+            <span style="color: #ffffff;">GYANKUNJA</span>
+          </a>
+
+          <p>
+            An organized academic hub for BIT students with public
+            semester resources, university exam notices and personalized
+            student dashboards.
+          </p>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>Explore</h4>
+
+          <a href="index.html">Home</a>
+          <a href="notices.html">University Notices</a>
+          <a href="resources.html">Resources</a>
+          <a href="about.html">About</a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>Semester I–IV</h4>
+
+          <a href="semester1.html">Semester I</a>
+          <a href="semester2.html">Semester II</a>
+          <a href="semester3.html">Semester III</a>
+          <a href="semester4.html">Semester IV</a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>Semester V–VIII</h4>
+
+          <a href="semester5.html">Semester V</a>
+          <a href="semester6.html">Semester VI</a>
+          <a href="semester7.html">Semester VII</a>
+          <a href="semester8.html">Semester VIII</a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          © 2026 Gyankunja. Front-end prototype.
+        </span>
+
+        <span>
+          Developed by Prabhab Tiwari, Sujan Shreshtha and Madhab Khanal.
+        </span>
+
+      </div>
+
+    </div>
+  </footer>
+
+
+  <script src="js/app.js"></script>
+
+</body>
+
+</html>

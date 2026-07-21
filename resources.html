@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="light dark" name="color-scheme"/>
+<script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem('gyankunjaTheme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const theme = savedTheme || systemTheme;
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Browse public BIT notes and resources for Semester I to Semester VIII." name="description"/>
+<title>Public Resources — Gyankunja</title>
+<link href="images/fav.png" rel="icon" type="image/png"/>
+<link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<header class="site-header"><div class="container navbar">
+<a class="brand" href="index.html"><span class="brand-mark">G</span><span class="brand-name">GYANKUNJA</span></a>
+<nav aria-label="Primary navigation" class="nav-links"><a data-nav="" href="index.html">Home</a><a data-nav="" href="notices.html">Notices</a><a data-nav="" href="resources.html">Resources</a><a href="index.html#community">Community</a><a data-nav="" href="about.html">About</a></nav>
+<div class="nav-actions">
+<a class="btn btn-outline btn-sm" data-auth-guest="" href="signup.html">Sign Up</a><a class="btn btn-primary btn-sm" data-auth-guest="" href="login.html">Login</a>
+<a class="btn btn-outline btn-sm" data-auth-user="" hidden="" href="dashboard.html">My Dashboard</a><button class="btn btn-primary btn-sm" data-auth-user="" data-logout="" hidden="">Logout</button>
+<button aria-label="Switch to dark mode" class="theme-toggle" data-theme-toggle="" title="Switch to dark mode" type="button"><span aria-hidden="true" data-theme-icon="">☾</span></button><button aria-label="Open menu" class="menu-toggle">☰</button>
+</div>
+</div></header>
+<main>
+<section class="page-hero"><div class="container"><span class="eyebrow">Open academic library</span><h1>Public Semester Resources</h1><p>No login is required to browse semester notes, syllabuses, lab manuals, question banks, books, and references.</p></div></section>
+<section class="section"><div class="container"><h2 class="section-title">Choose Your Semester</h2><p class="section-subtitle">All eight semester resource pages are available publicly. Login is only required for the personalized student dashboard.</p><div class="semester-grid"><a class="semester-card" href="semester1.html"><span class="semester-number">Semester I</span><h3>Build the Foundation</h3><p>Basics of IT, electronics, mathematics, programming, workshop, and communication.</p><span class="text-primary"><strong>Open public notes →</strong></span></a>
+<a class="semester-card" href="semester2.html"><span class="semester-number">Semester II</span><h3>Strengthen Core Skills</h3><p>Programming, digital logic, mathematics, web technology, architecture, and management.</p><span class="text-primary"><strong>Open public notes →</strong></span></a>
+<a class="semester-card" href="semester3.html"><span class="semester-number">Semester III</span><h3>Data and Development</h3><p>OOP, data structures, databases, web technology, statistics, and economics.</p><span class="text-primary"><strong>Open public notes →</strong></span></a>
+<a class="semester-card" href="semester4.html"><span class="semester-number">Semester IV</span><h3>Systems and Networks</h3><p>Java, operating systems, networking, software engineering, and numerical methods.</p><span class="text-primary"><strong>Open public notes →</strong></span></a>
+<a class="semester-card" href="semester5.html"><span class="semester-number">Semester V</span><h3>Modern Applications</h3><p>Python, security, mobile apps, system analysis, research, and electives.</p><span class="text-primary"><strong>Open public notes →</strong></span></a>
+<a class="semester-card" href="semester6.html"><span class="semester-number">Semester VI</span><h3>Intelligent Computing</h3><p>Artificial intelligence, cloud, data mining, HCI, and project management.</p><span class="text-primary"><strong>Open public notes →</strong></span></a>
+<a class="semester-card" href="semester7.html"><span class="semester-number">Semester VII</span><h3>Advanced Technology</h3><p>Machine learning, IoT, enterprise development, cyber law, and major project.</p><span class="text-primary"><strong>Open public notes →</strong></span></a>
+<a class="semester-card" href="semester8.html"><span class="semester-number">Semester VIII</span><h3>Industry Readiness</h3><p>Big data, IT governance, internship, seminar, elective, and final project.</p><span class="text-primary"><strong>Open public notes →</strong></span></a></div></div></section>
+<section class="section-sm" style="background:var(--surface-alt)"><div class="container split-grid"><div class="panel"><h3>Public Access</h3><p class="muted">Anyone can browse academic resources without creating an account.</p><a class="btn btn-outline btn-block" href="semester1.html">Open Semester I</a></div><div class="panel"><h3>Personal Dashboard</h3><p class="muted">Sign in to see only the notes, exam schedule, and uploads for your registered semester.</p><a class="btn btn-primary btn-block" href="login.html">Student Login</a></div></div></section>
+</main>
+<footer class="site-footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="index.html"><span class="brand-mark">G</span><span style="color:#fff">GYANKUNJA</span></a>
+<p>An organized academic hub for BIT students with public semester resources, university exam notices, and personalized student dashboards.</p>
+</div>
+<div class="footer-col"><h4>Explore</h4><a href="index.html">Home</a><a href="notices.html">University Notices</a><a href="resources.html">Resources</a><a href="about.html">About</a></div>
+<div class="footer-col"><h4>Semester I–IV</h4><a href="semester1.html">Semester I</a><a href="semester2.html">Semester II</a><a href="semester3.html">Semester III</a><a href="semester4.html">Semester IV</a></div>
+<div class="footer-col"><h4>Semester V–VIII</h4><a href="semester5.html">Semester V</a><a href="semester6.html">Semester VI</a><a href="semester7.html">Semester VII</a><a href="semester8.html">Semester VIII</a></div>
+</div>
+<div class="footer-bottom"><span>© 2026 Gyankunja. Front-end prototype.</span><span>Developed by Prabhab Tiwari, Sujan Shreshtha and Madhab Khanal.</span></div>
+</div>
+</footer>
+<script src="js/app.js"></script>
+</body></html>

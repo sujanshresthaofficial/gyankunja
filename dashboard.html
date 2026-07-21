@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="light dark" name="color-scheme"/>
+<script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem('gyankunjaTheme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const theme = savedTheme || systemTheme;
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard — Gyankunja</title>
+<link href="images/fav.png" rel="icon" type="image/png"/>
+<link href="css/styles.css" rel="stylesheet"/><script src="js/protect.js"></script>
+</head>
+<body class="dashboard-body">
+<div class="dashboard-layout">
+<aside class="sidebar">
+<a class="brand" href="dashboard.html"><span class="brand-mark">G</span><span class="brand-name">GYANKUNJA</span></a>
+<nav class="side-nav">
+<a class="side-link active" href="dashboard.html"><span class="side-icon">⌂</span><span>My Home</span></a>
+<a class="side-link" data-my-notes="" href="semester1.html"><span class="side-icon">▤</span><span>My Notes</span></a>
+<a class="side-link" data-open-upload="" href="#"><span class="side-icon">↥</span><span>Uploads</span></a>
+<a class="side-link" data-demo-action="Saved notes will load from the database later." href="#"><span class="side-icon">★</span><span>Saved</span></a>
+<a class="side-link" data-demo-action="Group management will connect to the backend later." href="#"><span class="side-icon">◎</span><span>Groups</span></a>
+<a class="side-link" href="notices.html"><span class="side-icon">◉</span><span>Notices</span></a><a class="side-link" href="about.html"><span class="side-icon">i</span><span>About</span></a></nav>
+<div class="sidebar-bottom"><button class="side-link" data-logout="" style="width:100%;border:0;background:transparent"><span class="side-icon">↪</span><span>Logout</span></button></div>
+</aside>
+<div class="dashboard-main">
+<header class="dashboard-topbar">
+<button aria-label="Open sidebar" class="mobile-side-toggle">☰</button>
+<div class="dashboard-search"><input id="dashboardSearch" placeholder="Search your recent notes…" type="search"/></div>
+<button aria-label="Switch to dark mode" class="theme-toggle" data-theme-toggle="" title="Switch to dark mode" type="button"><span aria-hidden="true" data-theme-icon="">☾</span></button>
+<div class="user-menu"><div><strong data-user-firstname="">Student</strong><div class="muted" data-user-semester="" style="font-size:.72rem">Semester I</div></div><div class="user-avatar" data-user-initials="">ST</div></div>
+</header>
+<main class="dashboard-content">
+<section class="welcome-card">
+<div class="welcome-user"><div class="user-avatar" data-user-initials="">ST</div><div><h1>Welcome, <span data-user-name="">Student</span>!</h1><p data-user-email="">student@gyankunja.edu.np</p><p style="font-size:.84rem;margin-top:5px">Your personalized study dashboard is ready.</p></div></div>
+<button class="btn btn-primary" data-open-upload="">Upload Note</button>
+</section>
+<section class="dashboard-section">
+<div class="dashboard-section-head"><div><h2><span data-dashboard-semester="">Semester I</span> Notes</h2><p>Only resources for your registered semester are shown inside your dashboard.</p></div><a class="btn btn-outline btn-sm" data-my-notes="" href="semester1.html">See all</a></div>
+<div class="dashboard-note-grid" id="dashboardNotes"></div>
+</section>
+<section class="dashboard-section exam-contrib-grid">
+<div class="panel"><div class="dashboard-section-head"><div><h2>Exam Schedule</h2><p>Your upcoming academic events.</p></div></div><div class="exam-list" id="dashboardExams"></div></div>
+<div class="panel"><div class="dashboard-section-head"><div><h2>My Contributions</h2><p>Track the value you add to the community.</p></div></div><div class="contribution-grid"><div class="contribution-card"><strong>1,842</strong><span class="muted">Total reputation</span></div><div class="contribution-card"><strong data-upload-count="">18</strong><span class="muted">Resources uploaded</span></div><div class="contribution-card"><strong>96</strong><span class="muted">Helpful votes</span></div></div><div class="chart-box"><svg class="chart-svg" preserveaspectratio="none" viewbox="0 0 600 180"><defs><lineargradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#174ea6" stop-opacity=".30"></stop><stop offset="1" stop-color="#174ea6" stop-opacity=".03"></stop></lineargradient></defs><path d="M0,70 C55,45 80,160 145,130 S215,30 275,95 S350,130 405,72 S475,115 525,55 S575,60 600,42 L600,180 L0,180Z" fill="url(#fill)"></path><path d="M0,70 C55,45 80,160 145,130 S215,30 275,95 S350,130 405,72 S475,115 525,55 S575,60 600,42" fill="none" stroke="#174ea6" stroke-width="3"></path></svg></div></div>
+</section>
+</main>
+</div>
+</div>
+<div class="modal" id="uploadModal"><div class="modal-card"><div class="modal-head"><h2>Upload a New Note</h2><button class="icon-button" data-close-modal="">✕</button></div><form id="uploadForm"><div class="form-group"><label>Note title</label><input class="form-control" placeholder="Enter note title" required=""/></div><div class="form-row"><div class="form-group"><label>Semester</label><select class="form-control" id="uploadSemester" required=""></select></div><div class="form-group"><label>Subject</label><input class="form-control" placeholder="Subject name" required=""/></div></div><div class="form-group"><label>Choose file</label><input class="form-control" required="" type="file"/></div><div class="form-group"><label>Description</label><textarea class="form-control" placeholder="Brief description of the resource"></textarea></div><button class="btn btn-primary btn-block">Save Upload</button></form></div></div>
+<script src="js/app.js"></script><script src="js/dashboard.js"></script>
+</body>
+</html>
