@@ -68,7 +68,7 @@
 
   const page = document.body.dataset.semester;
   const number = Number(page || new URLSearchParams(location.search).get('semester') || 1);
-  const roman = ['I','II','III','IV','V','VI','VII','VIII'][number - 1];
+  const roman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'][number - 1];
   const courses = semesterData[number] || semesterData[1];
 
   document.querySelectorAll('[data-semester-title]').forEach(el => el.textContent = `Semester ${roman}`);

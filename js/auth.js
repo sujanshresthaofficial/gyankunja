@@ -33,7 +33,7 @@
       if (legacy && !users.some(user => user.email?.toLowerCase() === legacy.email?.toLowerCase())) {
         users.push(legacy);
       }
-    } catch {}
+    } catch { }
     return users;
   };
 
