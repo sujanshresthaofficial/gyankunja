@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # gyankunja
 A note sharing web application.
 =======
@@ -57,4 +56,3 @@ The authentication is a browser-storage demonstration only. Replace it with serv
 ## Run
 
 Open the folder in VS Code and run `index.html` with Live Server. Internet access is needed for the live university notice request.
->>>>>>> 4297c4b (Frontend of Gyankunj from Prabhab Workspace)
