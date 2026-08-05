@@ -3,12 +3,19 @@
 // php/config.php — database connection (WAMP defaults)
 // =====================================================
 
+// Start the session on every page that includes this file.
+// This is what lets coordinator_login.php "remember" who is
+// logged in across page loads (approve.php checks this).
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'gyankunja');
 define('DB_USER', 'root');   // WAMP default
 define('DB_PASS', '');       // WAMP default — no password
 
-// Physical f If it is saved dollar underscore cost U and if set only method dollar underscore post dollar direct dollar underscore dollar post dollar underscore post dollar underscore already authentication what are my name post save one let's say password passwordolder where files are stored.
+// Physical folder where files are stored.
 // __DIR__ = .../gyankunja/php, so ../uploads/ = .../gyankunja/uploads/
 define('UPLOAD_DIR', __DIR__ . '/../uploads/');
 
@@ -29,4 +36,14 @@ try {
 } catch (PDOException $e) {
     http_response_code(500);
     die(json_encode(['success' => false, 'message' => 'Database connection failed: ' . $e->getMessage()]));
+}
+
+// Call this at the top of any page that only coordinators/admins
+// should be able to open. It sends anyone not logged in back to
+// the coordinator login page.
+function require_coordinator_login() {
+    if (empty($_SESSION['coordinator_id'])) {
+        header('Location: coordinator_login.php');
+        exit;
+    }
 }
