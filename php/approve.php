@@ -73,7 +73,7 @@ $pendingFiles = $pdo->query(
                 • <?= htmlspecialchars($f['uploaded_at']) ?>
             </div>
             <p><?= htmlspecialchars($f['description']) ?></p>
-            <p><a href="../<?= htmlspecialchars($f['file_path']) ?>" target="_blank">
+            <p><a href="download.php?id=<?= (int) $f['id'] ?>" target="_blank">
                 View file (<?= htmlspecialchars($f['original_name']) ?>)
             </a></p>
 

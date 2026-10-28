@@ -23,6 +23,11 @@
   box-sizing: border-box;
 }
 
+*::selection {
+  background-color: #00FFFF;
+  color: #000000;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -994,7 +999,7 @@ textarea.form-control {
 .user-menu {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
 .user-avatar {
@@ -1735,7 +1740,6 @@ html[data-theme="dark"] {
 }
 
 .theme-toggle:hover {
-  transform: translateY(-1px) rotate(8deg);
   background: var(--primary-light);
   border-color: #86aee7;
 }
@@ -1753,7 +1757,7 @@ html[data-theme="dark"] {
 }
 
 .dashboard-topbar>.theme-toggle {
-  margin-left: auto;
+  margin-right: 5%;
 }
 
 html[data-theme="dark"] body {
@@ -1969,11 +1973,11 @@ html[data-theme="dark"] .toast {
   gap: 7px;
 }
 
-.theme-toggle-text {
+/* .theme-toggle-text {
   font-size: .78rem;
   font-weight: 850;
   letter-spacing: .01em;
-}
+} */
 
 html[data-theme="dark"] .auth-page-with-navbar .site-header {
   background: rgba(15, 22, 33, .96);
@@ -2329,21 +2333,80 @@ html[data-theme="dark"] .auth-page-with-navbar .site-header {
 }
 
 .developer-card h3 {
-  margin: 0 0 5px;
-  font-size: 1.18rem;
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  font-weight: 850;
 }
 
 .developer-role {
+  margin: 0;
+  padding: 0;
   display: block;
   color: var(--primary);
-  font-size: .78rem;
-  font-weight: 850;
+  font-size: 16px;
 }
 
 .developer-card p {
   margin: 14px 0 0;
   color: var(--muted);
   font-size: .86rem;
+}
+
+.developer-section .developer-card .user_social .social_icons .social_link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.developer-section .developer-card .user_social ul {
+  margin: 0;
+  padding: 5px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  gap: 5px;
+}
+
+.developer-section .developer-card .user_social ul li {
+  margin: 0;
+  padding: 5px;
+}
+
+.developer-section .developer-card .user_social ul li .fa-brands {
+  margin: 0;
+  padding: 0;
+  height: 31px;
+  width: 31px;
+  color: var(--primary);
+  font-size: 36px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: ease-in-out 150ms;
+}
+
+.developer-section .developer-card .user_social ul li .fa-brands:hover {
+  margin: 0;
+  padding: 0;
+  height: 31px;
+  width: 31px;
+  color: var(--primary);
+  font-size: 36px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(1.2);
+  transition: ease-in-out 150ms;
+}
+
+.developer-section .developer-card .user_social ul li .fa-brands {
+  box-shadow: 0 8px 12px rgba(3, 0, 58, 0.3);
 }
 
 .values-grid {
@@ -2830,3 +2893,132 @@ html[data-theme="dark"] .notice-loading {
     flex-direction: column;
   }
 }
+
+/* ===== Student-uploaded (approved) notes on semester pages ===== */
+.notes-status {
+  margin: 0 0 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--primary-light);
+  font-size: .85rem;
+}
+
+.course-notes {
+  padding: 8px 15px 15px 15px;
+  border-top: 1px solid var(--line);
+}
+
+.course-notes-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 0 8px;
+  font-size: .78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--primary);
+}
+
+.course-notes-head .count {
+  min-width: 22px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  text-align: center;
+  background: var(--primary-light);
+}
+
+.note-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.note-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+}
+
+.note-ext {
+  flex: none;
+  min-width: 38px;
+  padding: 4px 0;
+  border-radius: 6px;
+  text-align: center;
+  font-size: .66rem;
+  font-weight: 800;
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.note-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.note-info a {
+  display: block;
+  font-size: .85rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.note-info small {
+  display: block;
+  margin-top: 2px;
+  font-size: .72rem;
+  opacity: .75;
+}
+
+.note-download {
+  flex: none;
+  align-self: center;
+  padding: 4px 9px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  font-weight: 800;
+}
+
+.note-download:hover {
+  background: var(--primary-light);
+}
+
+.note-empty {
+  margin: 0;
+  font-size: .82rem;
+}
+
+.other-notes {
+  margin-top: 18px;
+}
+
+.other-notes .other-card {
+  max-width: 100%;
+}
+
+/* ===== Category buttons + notes panel on semester pages ===== */
+.resource-btn { cursor: pointer; }
+.resource-btn.active {
+  color: #fff;
+  border-color: var(--primary);
+  background: var(--primary);
+}
+html[data-theme="dark"] .resource-btn.active { color: #0b1220; }
+.cat-count {
+  min-width: 18px;
+  padding: 0 6px;
+  border-radius: 999px;
+  font-size: .68rem;
+  text-align: center;
+  background: var(--primary-light);
+  color: var(--primary);
+}
+.resource-btn.active .cat-count { background: rgba(255, 255, 255, .25); color: inherit; }

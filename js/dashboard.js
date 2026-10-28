@@ -1,6 +1,18 @@
-(() => {
-  const user = Gyankunja.getUser();
-  if (!user) return;
+(async () => {
+  // The login lives on the server (PHP session); ask it who is logged in.
+  let user = null;
+  try {
+    const me = await (await fetch('php/auth_me.php', { cache: 'no-store' })).json();
+    if (me.loggedIn && me.role === 'student') user = me.user;
+    else if (me.loggedIn) { location.replace('admin.html'); return; } // coordinators/admins have their own dashboard
+  } catch { /* server not reachable */ }
+  if (!user) {
+    ['gyankunjaAuth', 'gyankunjaUser'].forEach(k => { localStorage.removeItem(k); sessionStorage.removeItem(k); });
+    location.replace('login.html?required=1');
+    return;
+  }
+  // keep the small browser copy (used by the navigation bar) in step with the database
+  (localStorage.getItem('gyankunjaAuth') ? localStorage : sessionStorage).setItem('gyankunjaUser', JSON.stringify(user));
 
   const semesterNumber = Math.max(1, ['Semester I', 'Semester II', 'Semester III', 'Semester IV', 'Semester V', 'Semester VI', 'Semester VII', 'Semester VIII'].indexOf(user.semester) + 1);
   const roman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'][semesterNumber - 1];
@@ -140,6 +152,30 @@
     uploadSemester.innerHTML = `<option value="${user.semester}">${user.semester}</option>`;
   }
 
+  // Subject dropdown: the same course list the semester pages use, so an
+  // approved note always shows up under the exact subject it was uploaded for.
+  const uploadSubject = document.querySelector('#uploadSubject');
+  const fillSubjects = () => {
+    if (!uploadSubject) return;
+    const list = (window.GyankunjaCourses || {})[semesterNumber] || [];
+    uploadSubject.innerHTML = '<option value="" disabled selected>Select a subject</option>' +
+      list.map(([code, title]) => {
+        const value = window.GyankunjaSubjectValue(code, title);
+        return `<option value="${value}">${code} — ${title}</option>`;
+      }).join('');
+  };
+  fillSubjects();
+
+  // Category dropdown: Syllabus, Theory Notes, ... (same list the semester pages show)
+  const CATEGORIES = window.GyankunjaCategories || ['Syllabus', 'Theory Notes', 'Lab Manuals', 'Question Bank', 'Books', 'References'];
+  const uploadCategory = document.querySelector('#uploadCategory');
+  const fillCategories = () => {
+    if (!uploadCategory) return;
+    uploadCategory.innerHTML = '<option value="" disabled selected>Select a category</option>' +
+      CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('');
+  };
+  fillCategories();
+
   // ---------------------------------------------------------------
   // Real upload: sends the form to php/upload.php and stores it in
   // MySQL as 'pending'. Replaces the old localStorage-only fake save.
@@ -154,10 +190,15 @@
       const submitButton = uploadForm.querySelector('button[type="submit"]');
       const formData = new FormData(uploadForm);
 
-      // Tag the upload with the currently logged-in demo user.
-      // (Temporary until real server-side sessions replace this.)
-      formData.append('uploader_name', user.name);
-      formData.append('uploader_login', user.email);
+      // Check the size here first so a too-big file gives a clear message
+      const chosen = uploadForm.file && uploadForm.file.files[0];
+      if (chosen && chosen.size > 2 * 1024 * 1024) {
+        if (uploadStatusMsg) {
+          uploadStatusMsg.style.color = '#c0392b';
+          uploadStatusMsg.textContent = `This file is ${(chosen.size / 1048576).toFixed(1)} MB. The limit is 2 MB — please compress it or split it.`;
+        }
+        return;
+      }
 
       if (submitButton) submitButton.disabled = true;
       if (uploadStatusMsg) {
@@ -178,6 +219,9 @@
 
             uploadForm.reset();
             if (uploadSemester) uploadSemester.innerHTML = `<option value="${user.semester}">${user.semester}</option>`;
+            fillSubjects();
+            fillCategories();
+            loadMyUploads();
             if (uploadStatusMsg) uploadStatusMsg.textContent = '';
             modal.classList.remove('open');
 
@@ -210,6 +254,76 @@
       document.querySelectorAll('.dashboard-note-grid .note-card').forEach(card => {
         card.style.display = card.textContent.toLowerCase().includes(term) ? '' : 'none';
       });
+    });
+  }
+
+  // ---------------------------------------------------------------
+  // My Uploads: the student's own notes and their review status
+  // ---------------------------------------------------------------
+  const esc = v => String(v ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+  const myUploads = document.querySelector('#myUploads');
+  const loadMyUploads = async () => {
+    if (!myUploads) return;
+    try {
+      const data = await (await fetch('php/my_files.php', { cache: 'no-store' })).json();
+      if (!data.success) throw new Error(data.message);
+      myUploads.innerHTML = data.files.length ? data.files.map(f => `
+        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--line)">
+          <div><strong>${esc(f.title)}</strong>
+            <div class="muted" style="font-size:.8rem">${esc(f.semester)} · ${esc(f.subject)} · ${esc(f.category)}</div>
+            ${f.review_remarks ? `<div class="muted" style="font-size:.8rem">Coordinator note: ${esc(f.review_remarks)}</div>` : ''}
+          </div>
+          <span class="badge ${f.status === 'approved' ? 'badge-green' : 'badge-blue'}" style="align-self:center">${esc(f.status)}</span>
+        </div>`).join('') : '<p class="muted" style="margin:0">You have not uploaded anything yet. Use “Upload Note” to share your first one.</p>';
+    } catch {
+      myUploads.innerHTML = '<p class="muted" style="margin:0">Could not load your uploads right now.</p>';
+    }
+  };
+  loadMyUploads();
+
+  // ---------------------------------------------------------------
+  // My Profile: edit your own details (saved in MySQL)
+  // ---------------------------------------------------------------
+  const profileModal = document.querySelector('#profileModal');
+  const profileForm = document.querySelector('#profileForm');
+  const profileMsg = document.querySelector('#profileMsg');
+  if (profileModal && profileForm) {
+    const fillProfile = () => {
+      profileForm.name.value = user.name;
+      profileForm.studentId.value = user.studentId || '';
+      profileForm.email.value = user.email;
+      profileForm.program.value = user.program;
+      profileForm.semester.value = user.semester;
+      profileForm.current_password.value = '';
+      profileForm.new_password.value = '';
+      profileMsg.textContent = '';
+    };
+    document.querySelectorAll('[data-open-profile]').forEach(b => b.addEventListener('click', e => {
+      e.preventDefault();
+      fillProfile();
+      profileModal.classList.add('open');
+    }));
+    document.querySelector('[data-close-profile]').addEventListener('click', () => profileModal.classList.remove('open'));
+    profileModal.addEventListener('click', e => { if (e.target === profileModal) profileModal.classList.remove('open'); });
+
+    profileForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      profileMsg.style.color = '';
+      profileMsg.textContent = 'Saving…';
+      try {
+        const res = await fetch('php/profile_update.php', { method: 'POST', body: new URLSearchParams(new FormData(profileForm)) });
+        const data = await res.json();
+        if (!data.success) {
+          profileMsg.style.color = '#c0392b';
+          profileMsg.textContent = data.message || 'Could not save.';
+          return;
+        }
+        (localStorage.getItem('gyankunjaAuth') ? localStorage : sessionStorage).setItem('gyankunjaUser', JSON.stringify(data.user));
+        location.reload(); // reload so the semester-specific dashboard matches the new details
+      } catch {
+        profileMsg.style.color = '#c0392b';
+        profileMsg.textContent = 'Could not reach the server. Is WAMP running?';
+      }
     });
   }
 })();
