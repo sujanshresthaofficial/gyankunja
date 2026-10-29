@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta content="light dark" name="color-scheme" />
+    <script>
+        (() => {
+            try {
+                const savedTheme = localStorage.getItem('gyankunjaTheme');
+                const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                const theme = savedTheme || systemTheme;
+                document.documentElement.dataset.theme = theme;
+                document.documentElement.style.colorScheme = theme;
+            } catch {
+                document.documentElement.dataset.theme = 'light';
+            }
+        })();
+    </script>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Admin Dashboard — Gyankunja</title>
+    <link href="images/fav.png" rel="icon" type="image/png" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/admin.css" rel="stylesheet" />
+</head>
+
+<body class="admin-body">
+    <header class="admin-top">
+        <a class="brand" href="index.html"><span class="brand-mark">G</span><span
+                class="brand-name">GYANKUNJA</span></a>
+        <span class="admin-title">Admin / Coordinator Dashboard</span>
+        <div class="admin-top-right">
+            <span class="admin-who"><strong id="adminName">…</strong> <span class="role-badge"
+                    id="adminRole"></span></span>
+            <button aria-label="Switch to dark mode" class="theme-toggle" data-theme-toggle=""
+                title="Switch to dark mode" type="button"><span aria-hidden="true" data-theme-icon="">☾</span></button>
+            <button class="btn btn-outline btn-sm" data-logout="" type="button">Logout</button>
+        </div>
+    </header>
+
+    <main class="admin-wrap">
+        <nav class="admin-tabs" role="tablist">
+            <button class="admin-tab active" data-tab="uploads" type="button">Student Uploads <span class="tab-count"
+                    id="pendingBadge" hidden></span></button>
+            <button class="admin-tab" data-tab="coordinators" id="tabCoordinators" type="button" hidden>Coordinators
+                &amp; Admins</button>
+            <button class="admin-tab" data-tab="account" type="button">My Account</button>
+        </nav>
+
+        <div class="alert" id="adminAlert"></div>
+
+        <!-- ===== Uploads ===== -->
+        <section class="admin-panel" data-panel="uploads">
+            <div class="admin-toolbar">
+                <div class="chip-row" id="statusChips">
+                    <button class="chip active" data-status="pending" type="button">Pending <span
+                            id="cPending">0</span></button>
+                    <button class="chip" data-status="approved" type="button">Approved <span
+                            id="cApproved">0</span></button>
+                    <button class="chip" data-status="rejected" type="button">Rejected <span
+                            id="cRejected">0</span></button>
+                    <button class="chip" data-status="all" type="button">All</button>
+                </div>
+                <div class="admin-filters">
+                    <select aria-label="Semester" class="form-control" id="filterSemester">
+                        <option value="">All semesters</option>
+                        <option>Semester I</option>
+                        <option>Semester II</option>
+                        <option>Semester III</option>
+                        <option>Semester IV</option>
+                        <option>Semester V</option>
+                        <option>Semester VI</option>
+                        <option>Semester VII</option>
+                        <option>Semester VIII</option>
+                    </select>
+                    <input class="form-control" id="filterSearch" placeholder="Search title, subject, uploader…"
+                        type="search" />
+                </div>
+            </div>
+            <div id="fileList" class="file-list"></div>
+        </section>
+
+        <!-- ===== Coordinators & admins ===== -->
+        <section class="admin-panel" data-panel="coordinators" hidden>
+            <div class="admin-toolbar">
+                <h2 style="margin:0">Coordinators &amp; Admins</h2>
+                <button class="btn btn-primary btn-sm" id="newStaffBtn" type="button">+ Add account</button>
+            </div>
+            <form class="panel staff-form" id="staffForm" hidden>
+                <h3 id="staffFormTitle">Add account</h3>
+                <input name="id" type="hidden" />
+                <div class="form-row">
+                    <div class="form-group"><label for="staffName">Full name</label><input class="form-control"
+                            id="staffName" name="name" required /></div>
+                    <div class="form-group"><label for="staffEmail">Email (used to log in)</label><input
+                            class="form-control" id="staffEmail" name="email" required type="email" /></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label for="staffRole">Role</label>
+                        <select class="form-control" id="staffRole" name="role">
+                            <option value="coordinator">Coordinator (reviews uploads)</option>
+                            <option value="admin">Admin (everything, manages accounts)</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label for="staffPassword" id="staffPasswordLabel">Password</label><input
+                            autocomplete="new-password" class="form-control" id="staffPassword" name="password"
+                            type="password" /></div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                    <button class="btn btn-outline btn-sm" id="staffCancel" type="button">Cancel</button>
+                </div>
+            </form>
+            <div class="panel" style="padding:0;overflow:auto">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Created</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="staffRows"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ===== My account ===== -->
+        <section class="admin-panel" data-panel="account" hidden>
+            <h2 style="margin-top:0">My Account</h2>
+            <form class="panel" id="accountForm" style="max-width:560px">
+                <div class="form-group"><label for="accName">Full name</label><input class="form-control" id="accName"
+                        name="name" required /></div>
+                <div class="form-group"><label for="accEmail">Email</label><input class="form-control" id="accEmail"
+                        name="email" required type="email" /></div>
+                <div class="form-row">
+                    <div class="form-group"><label for="accCurrent">Current password</label><input
+                            autocomplete="current-password" class="form-control" id="accCurrent" name="current_password"
+                            type="password" /></div>
+                    <div class="form-group"><label for="accNew">New password</label><input autocomplete="new-password"
+                            class="form-control" id="accNew" name="new_password" placeholder="Leave empty to keep"
+                            type="password" /></div>
+                </div>
+                <button class="btn btn-primary btn-sm" type="submit">Save changes</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

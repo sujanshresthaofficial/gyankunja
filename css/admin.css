@@ -1,0 +1,292 @@
+/* css/admin.css — admin / coordinator dashboard (uses the colour variables from styles.css) */
+.admin-body {
+  background: var(--surface-alt);
+  min-height: 100vh;
+}
+
+.admin-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 12px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-title {
+  font-weight: 800;
+  color: var(--primary-dark);
+}
+
+.admin-top-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: .7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.admin-wrap {
+  width: min(1100px, calc(100% - 32px));
+  margin: 22px auto 60px;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-tab {
+  padding: 10px 16px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 800;
+  color: var(--muted);
+  border-bottom: 3px solid transparent;
+  font-size: .92rem;
+}
+
+.admin-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.tab-count {
+  display: inline-block;
+  min-width: 20px;
+  padding: 1px 7px;
+  margin-left: 4px;
+  border-radius: 999px;
+  text-align: center;
+  font-size: .72rem;
+  background: var(--danger);
+  color: #fff;
+}
+
+.admin-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.chip-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: .84rem;
+}
+
+.chip span {
+  opacity: .7;
+  margin-left: 4px;
+}
+
+.chip.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+html[data-theme="dark"] .chip.active {
+  color: #0b1220;
+}
+
+.admin-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-filters .form-control {
+  width: auto;
+  min-width: 170px;
+}
+
+.file-list {
+  display: grid;
+  gap: 12px;
+}
+
+.file-card-admin {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.file-card-admin h3 {
+  margin: 0 0 4px;
+  font-size: 1.02rem;
+  overflow-wrap: anywhere;
+}
+
+.file-meta {
+  color: var(--muted);
+  font-size: .82rem;
+  margin-bottom: 8px;
+}
+
+.file-desc {
+  margin: 0 0 10px;
+  font-size: .9rem;
+  overflow-wrap: anywhere;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: .72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.status-pending {
+  background: #fff3d6;
+  color: #8a5a00;
+}
+
+.status-approved {
+  background: #dcf5e8;
+  color: #14633c;
+}
+
+.status-rejected {
+  background: #fde2e2;
+  color: #a12727;
+}
+
+html[data-theme="dark"] .status-pending {
+  background: #3a2e12;
+  color: #f0bd72;
+}
+
+html[data-theme="dark"] .status-approved {
+  background: #11301f;
+  color: #69d5a2;
+}
+
+html[data-theme="dark"] .status-rejected {
+  background: #3a1818;
+  color: #ff9292;
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 6px;
+  font-size: .72rem;
+  font-weight: 800;
+  background: var(--primary-light);
+  color: var(--primary);
+  margin-right: 4px;
+}
+
+.review-line {
+  font-size: .8rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.file-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.file-actions input[type=text] {
+  flex: 1;
+  min-width: 160px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.btn-approve {
+  background: #2e7d32;
+  color: #fff;
+  border: 0;
+}
+
+.btn-reject {
+  background: #c0392b;
+  color: #fff;
+  border: 0;
+}
+
+.btn-danger-outline {
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  background: transparent;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .9rem;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 11px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-table th {
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--muted);
+}
+
+.admin-table td .btn {
+  margin-right: 6px;
+}
+
+.staff-form {
+  margin-bottom: 16px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-empty {
+  text-align: center;
+  padding: 40px 12px;
+  color: var(--muted);
+}
