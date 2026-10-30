@@ -31,32 +31,51 @@
       <a class="brand" href="dashboard.html"><span class="brand-mark">G</span><span
           class="brand-name">GYANKUNJA</span></a>
       <nav class="side-nav">
-        <a class="side-link active" href="dashboard.html"><span class="side-icon">⌂</span><span>My Home</span></a>
-        <a class="side-link" data-my-notes="" href="semester1.html"><span class="side-icon">▤</span><span>My
-            Notes</span></a>
-        <a class="side-link" data-open-upload="" href="#"><span class="side-icon">↥</span><span>Uploads</span></a>
-        <a class="side-link" data-open-profile="" href="#"><span class="side-icon">☺</span><span>My Profile</span></a>
-        <a class="side-link" data-demo-action="Saved notes will load from the database later." href="#"><span
-            class="side-icon">★</span><span>Saved</span></a>
-        <a class="side-link" data-demo-action="Group management will connect to the backend later." href="#"><span
-            class="side-icon">◎</span><span>Groups</span></a>
-        <a class="side-link" href="notices.html"><span class="side-icon">◉</span><span>Notices</span></a><a
-          class="side-link" href="about.html"><span class="side-icon">i</span><span>About</span></a>
+        <a class="side-link active" href="dashboard.html">
+          <span class="side-icon">⌂</span><span>My Home</span>
+        </a>
+        <a class="side-link" data-my-notes="" href="semester1.html">
+          <span class="side-icon">▤</span><span>Notes</span>
+        </a>
+        <a class="side-link" data-open-upload="" href="#">
+          <span class="side-icon">↥</span><span>Uploads</span>
+        </a>
+        <a class="side-link" href="notices.html">
+          <span class="side-icon">◉</span><span>Notices</span>
+        </a>
+        <a class="side-link" data-demo-action="Saved notes will load from the database later." href="#">
+          <span class="side-icon">★</span><span>Saved</span>
+        </a>
+        <a class="side-link" data-demo-action="Group management will connect to the backend later." href="#">
+          <span class="side-icon">◎</span><span>Groups</span>
+        </a>
+        <a class="side-link" href="about.html">
+          <span class="side-icon">i</span><span>About</span>
+        </a>
+        <a class="side-link" data-open-profile="" href="#">
+          <span class="side-icon">☺</span><span>Edit Profile</span>
+        </a>
       </nav>
-      <div class="sidebar-bottom"><button class="side-link" data-logout=""
-          style="width:100%;border:0;background:transparent"><span
-            class="side-icon">↪</span><span>Logout</span></button></div>
+      <div class="sidebar-bottom">
+        <button class="side-link" data-logout="" style="width: 100%; border: 0;">
+          <span class="side-icon">↪</span><span>Logout</span>
+        </button>
+      </div>
     </aside>
     <div class="dashboard-main">
       <header class="dashboard-topbar">
         <button aria-label="Open sidebar" class="mobile-side-toggle">☰</button>
-        <div class="dashboard-search"><input id="dashboardSearch" placeholder="Search your recent notes…"
-            type="search" /></div>
+        <div class="dashboard-search">
+          <input id="dashboardSearch" placeholder="Search your recent notes…" type="search" />
+        </div>
         <div class="user-menu">
           <button aria-label="Switch to dark mode" class="theme-toggle" data-theme-toggle="" title="Switch to dark mode"
-            type="button"><span aria-hidden="true" data-theme-icon="">☾</span></button>
-          <div><strong data-user-firstname="">Student</strong>
-            <div class="muted" data-user-semester="" style="font-size:.72rem">Semester I</div>
+            type="button">
+            <span aria-hidden="true" data-theme-icon="">☾</span>
+          </button>
+          <div>
+            <strong data-user-firstname="">Student</strong>
+            <div class="muted" data-user-semester="" style="font-size: 0.72rem;">Semester I</div>
           </div>
           <div class="user-avatar" data-user-initials="">ST</div>
         </div>
@@ -68,7 +87,7 @@
             <div>
               <h1>Welcome, <span data-user-name="">Student</span>!</h1>
               <p data-user-email="">student@gyankunja.edu.np</p>
-              <p style="font-size:.84rem;margin-top:5px">Your personalized study dashboard is ready.</p>
+              <p style="font-size: 0.84rem; margin-top: 5px;">Your personalized study dashboard is ready.</p>
             </div>
           </div>
           <button class="btn btn-primary" data-open-upload="">Upload Note</button>
@@ -78,7 +97,8 @@
             <div>
               <h2><span data-dashboard-semester="">Semester I</span> Notes</h2>
               <p>Only resources for your registered semester are shown inside your dashboard.</p>
-            </div><a class="btn btn-outline btn-sm" data-my-notes="" href="semester1.html">See all</a>
+            </div>
+            <a class="btn btn-outline btn-sm" data-my-notes="" href="semester1.html">See all</a>
           </div>
           <div class="dashboard-note-grid" id="dashboardNotes"></div>
         </section>
@@ -111,12 +131,21 @@
               </div>
             </div>
             <div class="contribution-grid">
-              <div class="contribution-card"><strong>1,842</strong><span class="muted">Total reputation</span></div>
-              <div class="contribution-card"><strong data-upload-count="">18</strong><span class="muted">Resources
-                  uploaded</span></div>
-              <div class="contribution-card"><strong>96</strong><span class="muted">Helpful votes</span></div>
+              <div class="contribution-card">
+                <strong>1,842</strong>
+                <span class="muted">Total reputation</span>
+              </div>
+              <div class="contribution-card">
+                <strong data-upload-count="">18</strong>
+                <span class="muted">Resources uploaded</span>
+              </div>
+              <div class="contribution-card">
+                <strong>96</strong>
+                <span class="muted">Helpful votes</span>
+              </div>
             </div>
-            <div class="chart-box"><svg class="chart-svg" preserveaspectratio="none" viewbox="0 0 600 180">
+            <div class="chart-box">
+              <svg class="chart-svg" preserveaspectratio="none" viewbox="0 0 600 180">
                 <defs>
                   <lineargradient id="fill" x1="0" x2="0" y1="0" y2="1">
                     <stop offset="0" stop-color="#174ea6" stop-opacity=".30"></stop>
@@ -125,10 +154,13 @@
                 </defs>
                 <path
                   d="M0,70 C55,45 80,160 145,130 S215,30 275,95 S350,130 405,72 S475,115 525,55 S575,60 600,42 L600,180 L0,180Z"
-                  fill="url(#fill)"></path>
+                  fill="url(#fill)">
+                </path>
                 <path d="M0,70 C55,45 80,160 145,130 S215,30 275,95 S350,130 405,72 S475,115 525,55 S575,60 600,42"
-                  fill="none" stroke="#174ea6" stroke-width="3"></path>
-              </svg></div>
+                  fill="none" stroke="#174ea6" stroke-width="3">
+                </path>
+              </svg>
+            </div>
           </div>
         </section>
       </main>
@@ -178,21 +210,28 @@
       </div>
       <form id="profileForm">
         <div class="form-row">
-          <div class="form-group"><label>Full name</label><input class="form-control" name="name" required="" /></div>
-          <div class="form-group"><label>University ID</label><input class="form-control" name="studentId"
-              readonly="" /></div>
+          <div class="form-group">
+            <label>Full name</label>
+            <input class="form-control" name="name" required="" />
+          </div>
+          <div class="form-group">
+            <label>University ID</label>
+            <input class="form-control" name="studentId" readonly="" />
+          </div>
         </div>
-        <div class="form-group"><label>Email</label><input class="form-control" name="email" required="" type="email" />
+        <div class="form-group">
+          <label>Email</label>
+          <input class="form-control" name="email" required="" type="email" />
         </div>
         <div class="form-row">
-          <div class="form-group"><label>Program</label>
+          <div class="form-group">
+            <label>Program</label>
             <select class="form-control" name="program" required="">
-              <option>Bachelor of Information Technology</option>
-              <option>Bachelor of Computer Science</option>
-              <option>Other</option>
+              <option>BIT (Bachelor of Information Technology)</option>
             </select>
           </div>
-          <div class="form-group"><label>Current semester</label>
+          <div class="form-group">
+            <label>Current semester</label>
             <select class="form-control" name="semester" required="">
               <option>Semester I</option>
               <option>Semester II</option>
@@ -206,12 +245,16 @@
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label>Current password</label><input autocomplete="current-password"
-              class="form-control" name="current_password" type="password" /></div>
-          <div class="form-group"><label>New password</label><input autocomplete="new-password" class="form-control"
-              name="new_password" placeholder="Leave empty to keep" type="password" /></div>
+          <div class="form-group">
+            <label>Current password</label>
+            <input autocomplete="current-password" class="form-control" name="current_password" type="password" />
+          </div>
+          <div class="form-group">
+            <label>New password</label>
+            <input autocomplete="new-password" class="form-control" name="new_password" placeholder="Leave empty to keep" type="password" />
+          </div>
         </div>
-        <div id="profileMsg" style="margin-bottom:10px;font-size:.85rem"></div>
+        <div id="profileMsg" style="margin-bottom: 10px; font-size: 0.85rem"></div>
         <button class="btn btn-primary btn-block" type="submit">Save Profile</button>
       </form>
     </div>

@@ -965,6 +965,22 @@ textarea.form-control {
   right: 16px;
 }
 
+.sidebar-bottom .side-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 13px;
+  border-radius: 10px;
+  font-weight: 750;
+  background: transparent;
+}
+
+.sidebar-bottom .side-link:hover,
+.sidebar-bottom .side-link.active {
+  color: var(--primary);
+  background: var(--primary-light);
+}
+
 .dashboard-main {
   min-width: 0;
 }

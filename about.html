@@ -10,12 +10,7 @@
     (() => {
       try {
         const savedTheme = localStorage.getItem("gyankunjaTheme");
-
-        const systemTheme = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches
-          ? "dark"
-          : "light";
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 
         const theme = savedTheme || systemTheme;
 
@@ -33,20 +28,13 @@
   <meta name="description"
     content="Learn about Gyankunja and the student developers behind the academic note-sharing platform.">
 
-  <title>About — Gyankunja</title>
+  <title>About | Gyankunja</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
   <link rel="icon" type="image/png" href="images/fav.png">
   <link rel="stylesheet" href="css/styles.css">
 
   <style>
-    /*
-      Developer image styling
-
-      This CSS affects only images inside developer cards.
-      It will not change logos or other images on the page.
-    */
-
     .developer-card {
       display: flex;
       flex-direction: column;
@@ -101,7 +89,6 @@
 
 <body>
 
-  <!-- Header -->
   <header class="site-header">
     <div class="container navbar">
 
@@ -149,11 +136,8 @@
     </div>
   </header>
 
-
-  <!-- Main Content -->
   <main>
 
-    <!-- Hero Section -->
     <section class="page-hero about-hero">
       <div class="container">
 
@@ -172,8 +156,6 @@
       </div>
     </section>
 
-
-    <!-- About Introduction -->
     <section class="section">
       <div class="container about-intro-grid">
 
@@ -555,23 +537,14 @@
         </div>
 
       </div>
-
-
       <div class="footer-bottom">
-
-        <span>
-          © 2026 Gyankunja. Front-end prototype.
-        </span>
-
-        <span>
-          Developed by Prabhab Tiwari, Sujan Shreshtha and Madhab Khanal.
-        </span>
-
+        <span>© 2026 Gyankunja. All rights reserved.</span>
+        <span>Developed by <a href="https://prabhabtiwari.com.np" target="_blank"><strong>Prabhab Tiwari</strong></a>,
+          <a href="https://ssujan.com.np" target="_blank"><strong>Sujan Shrestha</strong></a>
+          and <strong>Madhab Khanal</strong></span>
       </div>
-
     </div>
   </footer>
-
 
   <script src="js/app.js"></script>
 

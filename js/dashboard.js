@@ -121,7 +121,7 @@
   const notesContainer = document.querySelector('#dashboardNotes');
   if (notesContainer) {
     notesContainer.innerHTML = semesterContent[semesterNumber].notes.map(([file, badge, title, meta]) => `
-      <article class="note-card">
+      <article class="note-card"> 
         <div class="note-cover"><div class="file-icon">${file}</div><span class="badge ${badge === 'Verified' ? 'badge-green' : 'badge-blue'}">${badge}</span></div>
         <div class="note-body"><h3>${title}</h3><div class="note-meta"><span>${meta}</span><span>• ${user.semester}</span></div></div>
       </article>`).join('');
