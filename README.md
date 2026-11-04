@@ -1,60 +1,49 @@
+# GYANKUNJA — Academic Note Sharing Platform
 
-# gyankunja
-A note sharing web application.
-=======
-# Gyankunja Front-End Website
+**Less Searching, More Learning!**
 
-A responsive HTML, CSS and JavaScript front-end for the Gyankunja academic note-sharing platform.
+GYANKUNJA is an academic note-sharing platform developed by students of Gandaki University to make study materials easily accessible to BIT students.
 
-## Main pages
+## Key Features
+- Semester-wise resources (Semester I–VIII).
+- Syllabi, notes, lab manuals, question banks, books, and references.
+- Student registration and login.
+- Personalized student dashboard.
+- Note uploading and approval system.
+- Admin and coordinator dashboard.
+- Gandaki University examination notices.
+- Light and dark mode.
+- Responsive design for mobile and desktop.
 
-- `index.html` — landing page with a latest-notice preview
-- `notices.html` — dedicated Gandaki University examination notice page
-- `about.html` — project information and the three student developers
-- `resources.html` — public semester resource directory
-- `semester1.html` to `semester8.html` — public semester notes; no login required
-- `login.html` — semester-based student login
-- `signup.html` — student account registration
-- `dashboard.html` — protected, semester-personalized student dashboard
+## Latest UI & Website Updates
+- Redesigned homepage with modern blue-themed graphics.
+- Improved semester and subject cards with borders, shadows, and hover effects.
+- Enhanced login and signup pages.
+- Added background textures to Resources, Notices, and About pages.
+- Restored the original student dashboard and developer profile designs.
+- Improved navigation, spacing, and mobile responsiveness.
+- Added the GYANKUNJA logo to the resource ribbon.
+- Introduced clean URLs (`/resources` instead of `/resources.html`).
+- Improved CSS organization and fixed frontend UI issues.
+- Updated Apache `.htaccess` configuration for clean URL routing.
 
-## University notice feed
+## Technologies Used
+**Frontend:** HTML, CSS, JavaScript  
+**Backend:** PHP, MySQL  
+**Development Tools:** VS Code, WAMP, Git & GitHub
 
-`js/notices.js` tries to fetch public notice data from the Gandaki University Office of the Controller of Examinations WordPress REST API:
+## Current Development Status
+GYANKUNJA is under active development, focusing on frontend improvements, user experience, testing, and future enhancements.
 
-- `https://guexam.edu.np/wp-json/wp/v2/news`
-- `https://guexam.edu.np/wp-json/wp/v2/posts`
+Some dashboard information is sample data, and certain features require further testing before public deployment.
 
-The official page is `https://guexam.edu.np/notice/`.
+## Developers
+- **Prabhab Tiwari** — Full-stack Developer
+- **Sujan Shrestha** — Full-stack Developer
+- **Madhab Khanal** — Front-end Developer
 
-Because this project is front-end only, the university server must allow cross-origin browser requests. If the live request is unavailable or blocked by CORS, the page clearly switches to a small cached notice list and still links users to the official website. For production, route the request through your own PHP/Node backend proxy and cache the official data.
 
-## Student developers
 
-The About page identifies the project as developed by three second-semester Information Technology students:
+---
 
-- Prabhab Tiwari
-- Sujan Shreshtha
-- Madhab Khanal
-
-## Demo authentication
-
-Use the accounts in `DEMO-LOGIN-CREDENTIALS.txt`. Examples:
-
-- Semester I: `BIT-SEM1-001` / `sem1@123`
-- Semester II: `BIT-SEM2-001` / `sem2@123`
-- Semester VIII: `BIT-SEM8-001` / `sem8@123`
-
-The authentication is a browser-storage demonstration only. Replace it with server-side authentication, password hashing, sessions or secure tokens, database authorization and input validation before production use.
-
-## Behaviour
-
-- All Semester I–VIII resource pages are public.
-- The dashboard redirects unauthenticated visitors to login.
-- The dashboard displays notes and exam information based on the logged-in student's semester.
-- Theme selection is saved in `localStorage` under `gyankunjaTheme`.
-- Every page uses `images/fav.png` as its favicon.
-
-## Run
-
-Open the folder in VS Code and run `index.html` with Live Server. Internet access is needed for the live university notice request.
->>>>>>> 4297c4b (Frontend of Gyankunj from Prabhab Workspace)
+**GYANKUNJA — Built by Students, for Students.**

@@ -1,0 +1,63 @@
+<!-- Replace the existing <form id="uploadForm">...</form> with this -->
+<form id="uploadForm" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="noteTitle">Note title</label>
+    <input
+      class="form-control"
+      id="noteTitle"
+      name="title"
+      placeholder="Enter note title"
+      required
+    >
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="uploadSemester">Semester</label>
+      <select
+        class="form-control"
+        id="uploadSemester"
+        name="semester"
+        required
+      ></select>
+    </div>
+
+    <div class="form-group">
+      <label for="noteSubject">Subject</label>
+      <input
+        class="form-control"
+        id="noteSubject"
+        name="subject"
+        placeholder="Subject name"
+        required
+      >
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="noteFile">Choose PDF</label>
+    <input
+      accept="application/pdf,.pdf"
+      class="form-control"
+      id="noteFile"
+      name="noteFile"
+      required
+      type="file"
+    >
+    <small class="muted">PDF only, maximum 10 MB.</small>
+  </div>
+
+  <div class="form-group">
+    <label for="noteDescription">Description</label>
+    <textarea
+      class="form-control"
+      id="noteDescription"
+      name="description"
+      placeholder="Brief description of the resource"
+    ></textarea>
+  </div>
+
+  <button class="btn btn-primary btn-block" type="submit">
+    SUBMIT FOR REVIEW
+  </button>
+</form>

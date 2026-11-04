@@ -12,7 +12,7 @@
       const icon = $('[data-theme-icon]', button);
       const label = $('[data-theme-label]', button);
       if (icon) icon.textContent = darkModeIsActive ? '☀' : '☾';
-      if (label) label.textContent = darkModeIsActive ? 'Light' : 'Dark';
+      // if (label) label.textContent = darkModeIsActive ? 'Light' : 'Dark';
       button.setAttribute('aria-label', `Switch to ${nextMode} mode`);
       button.setAttribute('title', `Switch to ${nextMode} mode`);
       button.setAttribute('aria-pressed', String(darkModeIsActive));
@@ -39,12 +39,16 @@
       return localStorage.getItem('gyankunjaAuth') === 'true' ||
         sessionStorage.getItem('gyankunjaAuth') === 'true';
     },
-    logout() {
+    logout(skipConfirm) {
+      if (skipConfirm !== true && !confirm('Are you sure you want to log out?')) return;
       localStorage.removeItem('gyankunjaAuth');
       localStorage.removeItem('gyankunjaUser');
       sessionStorage.removeItem('gyankunjaAuth');
       sessionStorage.removeItem('gyankunjaUser');
-      location.href = 'login.html';
+      // also end the server-side login, then go to the login page
+      fetch('php/auth_logout.php', { method: 'POST' })
+        .catch(() => { })
+        .finally(() => { location.href = 'login'; });
     },
     getTheme,
     setTheme(theme) { applyTheme(theme, true); },
@@ -90,8 +94,15 @@
   const toggle = $('.menu-toggle');
   const links = $('.nav-links');
   if (toggle && links) {
-    toggle.addEventListener('click', () => links.classList.toggle('open'));
-    $$('.nav-links a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+    const closeMenu = () => { links.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Open navigation menu'); };
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
+    document.addEventListener('click', event => { if (!links.contains(event.target) && !toggle.contains(event.target)) closeMenu(); });
+    $$('.nav-links a').forEach(a => a.addEventListener('click', closeMenu));
   }
 
   $$('[data-demo-action]').forEach(btn => {
@@ -101,9 +112,11 @@
     });
   });
 
-  const currentPage = location.pathname.split('/').pop() || 'index.html';
-  $$('[data-nav]').forEach(link => {
-    if (link.getAttribute('href') === currentPage) link.classList.add('active');
+  // Match both /resources and legacy /resources.html for active navigation.
+  const currentPage = (location.pathname.split('/').pop() || 'index').replace(/\.html$/i, '');
+  $('[data-nav]').forEach(link => {
+    const linkPage = (link.getAttribute('href') || '').split(/[?#]/)[0].split('/').pop().replace(/\.html$/i, '');
+    if (linkPage === currentPage) link.classList.add('active');
   });
 })();
 
@@ -335,3 +348,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
   renderReviews();
 });
+
