@@ -19,13 +19,13 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Admin Dashboard — Gyankunja</title>
-<link href="images/fav.png" rel="icon" type="image/png"/>
-<link href="css/styles.css?v=ui-depth-4" rel="stylesheet"/>
+<link href="images/gyankunja-icon.png?v=brand-2" rel="icon" type="image/png"/>
+<link href="css/styles.css?v=brand-2" rel="stylesheet"/>
 <link href="css/admin.css?v=ui-polish-3" rel="stylesheet"/>
 </head>
 <body class="admin-body">
 <header class="admin-top">
-<a class="brand" href="index"><span class="brand-mark">G</span><span class="brand-name">GYANKUNJA</span></a>
+<a class="brand brand-image" href="index" aria-label="Gyankunja home"><img class="brand-logo brand-logo-light" src="images/gyankunja-logo.png?v=brand-2" alt="Gyankunja" width="400" height="114"/><img class="brand-logo brand-logo-dark" src="images/gyankunja-logo-dark.png?v=brand-2" alt="Gyankunja" width="400" height="114"/></a>
 <span class="admin-title">Staff workspace</span>
 <div class="admin-top-right">
 <span class="admin-who"><strong id="adminName">…</strong> <span class="role-badge" id="adminRole"></span></span>
@@ -38,6 +38,7 @@
 <button class="admin-tab active" data-tab="uploads" type="button">Student Uploads <span class="tab-count" hidden="" id="pendingBadge"></span></button>
 <button class="admin-tab" data-tab="coordinators" hidden="" id="tabCoordinators" type="button">Coordinators
                 &amp; Admins</button>
+<button class="admin-tab" data-tab="exams" type="button">Exam Schedule</button>
 <button class="admin-tab" data-tab="account" type="button">My Account</button>
 </nav>
 <div aria-live="polite" class="alert" id="adminAlert" role="status"></div>
@@ -109,6 +110,53 @@
 </table>
 </div>
 </section>
+<!-- ===== Staff-managed exam timetable ===== -->
+<section class="admin-panel" data-panel="exams" hidden>
+  <div class="admin-toolbar">
+    <div><h2 class="course-section-title3">Exam Schedule</h2>
+      <p class="muted">Manage exam dates, subjects and venues for each semester.</p></div>
+  </div>
+  <p class="muted" id="examAdminStatus" role="status">Loading exam schedule…</p>
+  <form class="panel staff-form" id="examAdminForm">
+    <h3 id="examAdminFormTitle">Add an exam</h3>
+    <input type="hidden" name="id" value="">
+    <div class="form-row">
+      <div class="form-group"><label for="examAdminSemester">Semester</label>
+        <select class="form-control" id="examAdminSemester" name="semester" required>
+          <option value="" disabled selected>Choose semester</option>
+          <option>Semester I</option><option>Semester II</option><option>Semester III</option><option>Semester IV</option>
+          <option>Semester V</option><option>Semester VI</option><option>Semester VII</option><option>Semester VIII</option>
+        </select>
+      </div>
+      <div class="form-group"><label for="examAdminWhen">Date and time</label>
+        <input class="form-control" id="examAdminWhen" name="starts_at" type="datetime-local" required>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label for="examAdminSubject">Subject</label>
+        <input class="form-control" id="examAdminSubject" name="subject" maxlength="150" required placeholder="e.g. Database Management">
+      </div>
+      <div class="form-group"><label for="examAdminType">Exam type</label>
+        <input class="form-control" id="examAdminType" name="exam_type" maxlength="100" required placeholder="e.g. Internal Assessment">
+      </div>
+    </div>
+    <div class="form-group"><label for="examAdminVenue">Venue (optional)</label>
+      <input class="form-control" id="examAdminVenue" name="venue" maxlength="200" placeholder="Hall or campus location">
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary btn-sm" type="submit" id="examAdminSubmit">Save exam</button>
+      <button class="btn btn-outline btn-sm" type="button" id="examAdminCancel" hidden>Cancel edit</button>
+    </div>
+  </form>
+  <div class="panel">
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead><tr><th>Semester</th><th>Subject</th><th>Type</th><th>Date &amp; Time</th><th>Venue</th><th>Manage</th></tr></thead>
+        <tbody id="examAdminRows"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
 <!-- ===== My account ===== -->
 <section class="admin-panel" data-panel="account" hidden="">
 <h2 class="course-section-title5">My Account</h2>
@@ -123,8 +171,8 @@
 </form>
 </section>
 </main>
-<script src="js/app.js?v=ui-polish-3"></script>
-<script src="js/admin.js?v=ui-polish-3"></script>
+<script src="js/app.js?v=brand-2"></script>
+<script src="js/admin.js?v=database-dashboard-1"></script>
 <script src="js/ui.js?v=ui-polish-3"></script></body>
 </html>
 

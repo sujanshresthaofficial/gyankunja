@@ -47,13 +47,13 @@ $userJson = json_encode(
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Dashboard â€” Gyankunja</title>
-<link href="images/fav.png" rel="icon" type="image/png"/>
-<link href="css/styles.css" rel="stylesheet"/>
+<link href="images/gyankunja-icon.png?v=brand-2" rel="icon" type="image/png"/>
+<link href="css/styles.css?v=brand-2" rel="stylesheet"/>
 </head>
 <body class="dashboard-body">
 <div class="dashboard-layout">
 <aside class="sidebar">
-<a class="brand" href="dashboard.php"><span class="brand-mark">G</span><span class="brand-name">GYANKUNJA</span></a>
+<a class="brand brand-image" href="dashboard.php" aria-label="Gyankunja home"><img class="brand-logo brand-logo-light" src="images/gyankunja-logo.png?v=brand-2" alt="Gyankunja" width="400" height="114"/><img class="brand-logo brand-logo-dark" src="images/gyankunja-logo-dark.png?v=brand-2" alt="Gyankunja" width="400" height="114"/></a>
 <nav class="side-nav">
 <a class="side-link active" href="dashboard.php"><span class="side-icon">âŒ‚</span><span>My Home</span></a>
 <a class="side-link" data-my-notes="" href="semester1.html"><span class="side-icon">â–¤</span><span>My Notes</span></a>
@@ -124,7 +124,7 @@ $userJson = json_encode(
 </div>
 </div>
 
-<script src="js/app.js"></script>
+<script src="js/app.js?v=brand-2"></script>
 <script src="js/backend-session.js"></script>
 <script src="js/dashboard.js?v=20"></script>
 
@@ -219,7 +219,7 @@ $userJson = json_encode(
 })();
 </script>
 
-<script src="js/app.js"></script>
+<script src="js/app.js?v=brand-2"></script>
 <script src="js/backend-session.js"></script>
 <script src="js/dashboard.js?v=21"></script>
 

@@ -30,34 +30,15 @@
   <meta content="Learn about Gyankunja and the student developers behind the academic note-sharing platform."
     name="description" />
   <title>About — Gyankunja</title>
-  <link href="images/fav.png" rel="icon" type="image/png" />
+  <link href="images/gyankunja-icon.png?v=brand-2" rel="icon" type="image/png" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" rel="stylesheet" />
-  <link href="css/styles.css?v=ui-texture-6" rel="stylesheet" />
+  <link href="css/styles.css?v=brand-2" rel="stylesheet" />
 </head>
 
 <body class="about-textured-page">
   <!-- Header -->
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <header class="site-header">
-    <div class="container navbar">
-      <a aria-label="Gyankunja home" class="brand" href="index"><span aria-hidden="true" class="brand-mark">G<span
-            class="brand-dot"></span></span><span class="brand-name">GYANKUNJA<small>THE BIT RESOURCE
-            LIBRARY</small></span></a>
-      <nav aria-label="Primary navigation" class="nav-links" id="primary-navigation"><a data-nav=""
-          href="index">Home</a><a data-nav="" href="resources">Resources</a><a data-nav="" href="notices">Notices</a><a
-          data-nav="" href="about">About</a><a class="nav-mobile-account" data-auth-guest="" href="signup">Create an
-          account</a><button class="nav-mobile-account" data-auth-user="" data-logout="" hidden="" type="button">Sign
-          out</button></nav>
-      <div class="nav-actions"><a class="btn btn-outline btn-sm" data-auth-guest="" href="login">Sign in</a><a
-          class="btn btn-primary btn-sm nav-join" data-auth-guest="" href="signup">Join Gyankunja</a><a
-          class="btn btn-primary btn-sm" data-auth-user="" hidden="" href="dashboard">Dashboard</a><button
-          class="btn btn-outline btn-sm" data-auth-user="" data-logout="" hidden="" type="button">Sign
-          out</button><button aria-label="Switch colour theme" class="theme-toggle" data-theme-toggle=""
-          type="button"><span aria-hidden="true" data-theme-icon="">☾</span></button><button
-          aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle"
-          type="button">☰</button></div>
-    </div>
-  </header>
+  <div class="shared-header-placeholder" data-site-header></div>
   <!-- Main Content -->
   <main id="main-content">
     <!-- Hero Section -->
@@ -78,7 +59,7 @@
     <section class="section">
       <div class="container about-intro-grid">
         <article class="about-story-card">
-          <span class="about-icon">G</span>
+          <span class="about-icon"><img src="images/gyankunja-icon.png" alt="Gyankunja Icon" /></span>
           <div>
             <span class="eyebrow">Our Purpose</span>
             <h2>A single academic hub for the BIT community</h2>
@@ -144,7 +125,7 @@
           <!-- Prabhab -->
           <article class="developer-card">
             <div class="developer-image-wrapper">
-              <img alt="Prabhab Tiwari" loading="lazy" src="images/prabhabnew.jpg" />
+              <img alt="Prabhab Tiwari" loading="lazy" src="images/prabhab.jpg" />
             </div>
             <a href="https://prabhabtiwari.com.np">
               <h3>Prabhab Tiwari</h3>
@@ -295,33 +276,9 @@
     </section>
   </main>
   <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand"><a class="brand" href="index"><span aria-hidden="true"
-              class="brand-mark">G</span><span class="brand-name">GYANKUNJA</span></a>
-          <p>A shared place for BIT learning.<br />Organized by semester. Open to everyone.</p><span
-            class="footer-university">Built by students at Gandaki University.</span>
-        </div>
-        <div class="footer-col">
-          <h4>Explore</h4><a href="resources">Study resources</a><a href="notices">University notices</a><a
-            href="about">About the project</a>
-        </div>
-        <div class="footer-col">
-          <h4>Your library</h4><a href="resources">Choose your semester</a><a href="login">Student dashboard</a><a
-            href="signup">Contribute your notes</a>
-        </div>
-        <div class="footer-col">
-          <h4>A little help goes a long way.</h4>
-          <p>Share a useful note. Make someone’s next study session easier.</p><a class="footer-contribute"
-            href="signup">Become a contributor ↗</a>
-        </div>
-      </div>
-      <div class="footer-bottom"><span>© 2026 Gyankunja</span><span>Prabhab Tiwari · Sujan Shrestha · Madhab
-          Khanal</span></div>
-    </div>
-  </footer>
-  <script src="js/app.js?v=ui-refresh-2"></script>
+  <div data-site-footer></div>
+  <script src="js/layout.js?v=shared-layout-1"></script>
+  <script src="js/app.js?v=brand-2"></script>
   <script src="js/ui.js?v=ui-refresh-2"></script>
 </body>
 

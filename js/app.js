@@ -1,4 +1,5 @@
-(() => {
+(async () => {
+  if (window.GyankunjaLayoutReady) await window.GyankunjaLayoutReady;
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
 
@@ -93,8 +94,44 @@
 
   const toggle = $('.menu-toggle');
   const links = $('.nav-links');
+
+  // Semester menu beneath the shared Resources navigation.
+  const semesterDropdown = links && links.querySelector('.nav-semester-dropdown');
+  const resourcesTrigger = semesterDropdown && semesterDropdown.querySelector('a[href="resources"]');
+  const setSemesterOpen = open => {
+    if (!semesterDropdown || !resourcesTrigger) return;
+    semesterDropdown.classList.toggle('is-open', open);
+    resourcesTrigger.setAttribute('aria-expanded', String(open));
+  };
+  if (resourcesTrigger) {
+    resourcesTrigger.addEventListener('click', event => {
+      // On touch/mobile, the first tap opens the menu; the second follows the link.
+      if ((window.matchMedia('(max-width: 1024px)').matches || window.matchMedia('(hover: none)').matches)
+          && !semesterDropdown.classList.contains('is-open')) {
+        event.preventDefault();
+        setSemesterOpen(true);
+      }
+    });
+    resourcesTrigger.addEventListener('keydown', event => {
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        setSemesterOpen(true);
+        semesterDropdown.querySelector('.nav-semester-list a')?.focus();
+      }
+    });
+    document.addEventListener('click', event => {
+      if (!semesterDropdown.contains(event.target)) setSemesterOpen(false);
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && semesterDropdown.classList.contains('is-open')) {
+        setSemesterOpen(false);
+        resourcesTrigger.focus();
+      }
+    });
+  }
+
   if (toggle && links) {
-    const closeMenu = () => { links.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Open navigation menu'); };
+    const closeMenu = () => { links.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Open navigation menu'); setSemesterOpen(false); };
     toggle.addEventListener('click', () => {
       const open = links.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(open));
@@ -102,7 +139,7 @@
     });
     document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
     document.addEventListener('click', event => { if (!links.contains(event.target) && !toggle.contains(event.target)) closeMenu(); });
-    $$('.nav-links a').forEach(a => a.addEventListener('click', closeMenu));
+    $('.nav-links a').forEach(a => { if (a !== resourcesTrigger) a.addEventListener('click', closeMenu); });
   }
 
   $$('[data-demo-action]').forEach(btn => {
@@ -114,9 +151,15 @@
 
   // Match both /resources and legacy /resources.html for active navigation.
   const currentPage = (location.pathname.split('/').pop() || 'index').replace(/\.html$/i, '');
-  $('[data-nav]').forEach(link => {
+  $$('[data-nav]').forEach(link => {
     const linkPage = (link.getAttribute('href') || '').split(/[?#]/)[0].split('/').pop().replace(/\.html$/i, '');
-    if (linkPage === currentPage) link.classList.add('active');
+    if (linkPage === currentPage || (linkPage === 'resources' && /^semester[1-8]$/.test(currentPage))) link.classList.add('active');
+  });
+  $('.nav-semester-list a').forEach(link => {
+    if (link.getAttribute('href') === currentPage) {
+      link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
+    }
   });
 })();
 

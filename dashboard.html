@@ -19,14 +19,14 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Dashboard — Gyankunja</title>
-<link href="images/fav.png" rel="icon" type="image/png"/>
-<link href="css/styles.css?v=ui-restore-5" rel="stylesheet"/>
+<link href="images/gyankunja-icon.png?v=brand-2" rel="icon" type="image/png"/>
+<link href="css/styles.css?v=brand-2" rel="stylesheet"/>
 <script src="js/protect.js?v=ui-polish-3"></script>
 </head>
 <body class="dashboard-body">
 <div class="dashboard-layout">
 <aside class="sidebar">
-<a class="brand" href="dashboard"><span class="brand-mark">G</span><span class="brand-name">GYANKUNJA</span></a>
+<a class="brand brand-image" href="dashboard" aria-label="Gyankunja home"><img class="brand-logo brand-logo-light" src="images/gyankunja-logo.png?v=brand-2" alt="Gyankunja" width="400" height="114"/><img class="brand-logo brand-logo-dark" src="images/gyankunja-logo-dark.png?v=brand-2" alt="Gyankunja" width="400" height="114"/></a>
 <nav class="side-nav">
 <a class="side-link active" href="dashboard"><span class="side-icon">⌂</span><span>My Home</span></a>
 <a class="side-link" data-my-notes="" href="semester1"><span class="side-icon">▤</span><span>My
@@ -65,12 +65,12 @@
   <div class="dashboard-section-head">
     <div>
       <h2><span data-dashboard-semester="">Semester I</span> Notes</h2>
-      <p>Study-note previews for your semester. Open the library for approved documents.</p>
+      <p>Recently approved notes for your semester. Open or download the original files.</p>
     </div>
     <a class="btn btn-outline btn-sm" data-my-notes="" href="semester1">See all resources</a>
   </div>
-  <p class="dashboard-preview-caption">Illustrative note cards — browse your semester for actual approved resources.</p>
-  <div class="dashboard-note-grid" id="dashboardNotes"></div>
+  <p class="dashboard-preview-caption">Only approved uploads from the database appear here.</p>
+  <div class="dashboard-note-grid" id="dashboardNotes" aria-live="polite"><p class="muted">Loading approved notes…</p></div>
 </section>
 <section class="dashboard-section">
   <div class="dashboard-section-head">
@@ -86,32 +86,28 @@
     <div class="dashboard-section-head">
       <div>
         <h2>Exam Schedule</h2>
-        <p>Illustrative exam cards. Verify dates using official university notices.</p>
+        <p>Upcoming exam dates and times for your semester.</p>
       </div>
     </div>
-    <div class="exam-list" id="dashboardExams"></div>
+    <div class="exam-list" id="dashboardExams" aria-live="polite"><p class="muted">Loading upcoming exams…</p></div>
     <a class="text-link dashboard-panel-link" href="notices">View official university notices →</a>
   </div>
   <div class="panel">
     <div class="dashboard-section-head">
       <div>
         <h2>My Contributions</h2>
-        <p>Keep contributing to the shared learning community.</p>
+        <p>Your actual upload statistics and activity from MySQL.</p>
       </div>
     </div>
     <div class="contribution-grid">
-      <div class="contribution-card"><strong>Share</strong><span class="muted">Helpful notes</span></div>
-      <div class="contribution-card"><strong>Review</strong><span class="muted">Upload status</span></div>
-      <div class="contribution-card"><strong>Learn</strong><span class="muted">Together</span></div>
+      <div class="contribution-card"><strong data-contrib-total>0</strong><span class="muted">Uploaded</span></div>
+      <div class="contribution-card"><strong data-contrib-approved>0</strong><span class="muted">Approved</span></div>
+      <div class="contribution-card"><strong data-contrib-pending>0</strong><span class="muted">Pending review</span></div>
     </div>
-    <div class="chart-box dashboard-chart-preview" aria-label="Decorative learning activity illustration">
-      <svg class="chart-svg" viewBox="0 0 600 180" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-        <defs><linearGradient id="dashboardChartFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2458cf" stop-opacity=".25"/><stop offset="1" stop-color="#2458cf" stop-opacity=".02"/></linearGradient></defs>
-        <path d="M0,119 C55,87 85,156 145,121 S217,71 275,107 S347,119 405,81 S475,120 525,62 S570,85 600,42 L600,180 L0,180Z" fill="url(#dashboardChartFill)"/>
-        <path d="M0,119 C55,87 85,156 145,121 S217,71 275,107 S347,119 405,81 S475,120 525,62 S570,85 600,42" fill="none" stroke="#2458cf" stroke-width="3"/>
-      </svg>
-      <span class="dashboard-chart-caption">Learning grows when knowledge is shared</span>
+    <div class="chart-box dashboard-chart-preview" id="dashboardActivityChart" aria-live="polite">
+      <p class="muted">Loading your monthly upload activity…</p>
     </div>
+    <span class="dashboard-chart-caption" id="dashboardActivityCaption">Monthly uploaded notes</span>
   </div>
 </section>
 </main>
@@ -196,9 +192,9 @@
 </form>
 </div>
 </div>
-<script src="js/app.js?v=ui-polish-3"></script>
+<script src="js/app.js?v=brand-2"></script>
 <script src="js/courses.js?v=ui-polish-3"></script>
-<script src="js/dashboard.js?v=ui-polish-3"></script>
+<script src="js/dashboard.js?v=database-dashboard-1"></script>
 <script src="js/ui.js?v=ui-polish-3"></script></body>
 </html>
 

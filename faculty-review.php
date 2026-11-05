@@ -25,8 +25,8 @@ if (!in_array($role, ['faculty', 'admin'], true)) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Faculty Note Review — Gyankunja</title>
-<link href="images/fav.png" rel="icon" type="image/png">
-<link href="css/styles.css" rel="stylesheet">
+<link href="images/gyankunja-icon.png?v=brand-2" rel="icon" type="image/png">
+<link href="css/styles.css?v=brand-2" rel="stylesheet">
 <style>
 .review-shell{max-width:1200px;margin:0 auto;padding:32px 20px}
 .review-head{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:24px}
@@ -43,7 +43,7 @@ if (!in_array($role, ['faculty', 'admin'], true)) {
 <body>
 <header class="site-header">
 <div class="container navbar">
-<a class="brand" href="dashboard.php"><span class="brand-mark">G</span><span class="brand-name">GYANKUNJA</span></a>
+<a class="brand brand-image" href="dashboard.php" aria-label="Gyankunja home"><img class="brand-logo brand-logo-light" src="images/gyankunja-logo.png?v=brand-2" alt="Gyankunja" width="400" height="114"/><img class="brand-logo brand-logo-dark" src="images/gyankunja-logo-dark.png?v=brand-2" alt="Gyankunja" width="400" height="114"/></a>
 <div class="nav-actions">
 <a class="btn btn-outline btn-sm" href="dashboard.php">Dashboard</a>
 <button class="btn btn-primary btn-sm" id="logoutButton">Logout</button>

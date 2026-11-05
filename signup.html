@@ -19,18 +19,14 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Create Account — Gyankunja</title>
-<link href="images/fav.png" rel="icon" type="image/png"/>
-<link href="css/styles.css?v=ui-texture-6" rel="stylesheet"/>
+<link href="images/gyankunja-icon.png?v=brand-2" rel="icon" type="image/png"/>
+<link href="css/styles.css?v=brand-2" rel="stylesheet"/>
 </head>
 <body class="auth-page auth-page-with-navbar signup-textured-page">
 <a class="skip-link" href="#main-content">Skip to content</a>
-<header class="site-header"><div class="container navbar">
-<a aria-label="Gyankunja home" class="brand" href="index"><span aria-hidden="true" class="brand-mark">G<span class="brand-dot"></span></span><span class="brand-name">GYANKUNJA<small>THE BIT RESOURCE LIBRARY</small></span></a>
-<nav aria-label="Primary navigation" class="nav-links" id="primary-navigation"><a data-nav="" href="index">Home</a><a data-nav="" href="resources">Resources</a><a data-nav="" href="notices">Notices</a><a data-nav="" href="about">About</a><a class="nav-mobile-account" data-auth-guest="" href="signup">Create an account</a><button class="nav-mobile-account" data-auth-user="" data-logout="" hidden="" type="button">Sign out</button></nav>
-<div class="nav-actions"><a class="btn btn-outline btn-sm" data-auth-guest="" href="login">Sign in</a><a class="btn btn-primary btn-sm nav-join" data-auth-guest="" href="signup">Join Gyankunja</a><a class="btn btn-primary btn-sm" data-auth-user="" hidden="" href="dashboard">Dashboard</a><button class="btn btn-outline btn-sm" data-auth-user="" data-logout="" hidden="" type="button">Sign out</button><button aria-label="Switch colour theme" class="theme-toggle" data-theme-toggle="" type="button"><span aria-hidden="true" data-theme-icon="">☾</span></button><button aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" type="button">☰</button></div>
-</div></header>
+<div class="shared-header-placeholder" data-site-header></div>
 <main class="auth-shell signup-layout signup-artboard" id="main-content">
-<div class="auth-brand"><a class="brand" href="index"><span class="brand-mark">G</span><span class="brand-name signup-brand-name">GYANKUNJA</span></a></div>
+<div class="auth-brand"><a class="brand brand-image" href="index" aria-label="Gyankunja home"><img class="brand-logo brand-logo-light" src="images/gyankunja-logo.png?v=brand-2" alt="Gyankunja" width="400" height="114"/><img class="brand-logo brand-logo-dark" src="images/gyankunja-logo-dark.png?v=brand-2" alt="Gyankunja" width="400" height="114"/></a></div>
 <div class="signup-process" aria-label="How Gyankunja works"><span><b>01</b> Create account</span><span><b>02</b> Choose semester</span><span><b>03</b> Share resources</span></div>
 <section class="auth-card auth-card-refined">
 <span class="eyebrow">JOIN THE BIT COMMUNITY</span><h1>Make knowledge a shared resource.</h1>
@@ -84,7 +80,9 @@
 </div>
 </main>
 <div class="auth-wave"></div>
-<script src="js/app.js?v=ui-polish-3"></script>
+<div data-site-footer></div>
+<script src="js/layout.js?v=shared-layout-1"></script>
+<script src="js/app.js?v=brand-2"></script>
 <script src="js/auth.js?v=ui-polish-3"></script>
 <script src="js/ui.js?v=ui-polish-3"></script></body>
 </html>
