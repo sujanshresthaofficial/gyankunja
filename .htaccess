@@ -1,0 +1,18 @@
+# GYANKUNJA — extensionless HTML pages (Apache 2.4 / WAMP)
+# The actual files remain .html. Public links can use /index, /resources, etc.
+# Deliberately no external 301 redirect: relative redirects in Windows subfolders
+# can mistakenly expose C:/wamp64/... as a URL and generate AH00127 / 403.
+
+Options -MultiViews
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Only rewrite clean page names for existing HTML files.
+    # Do not alter PHP, assets, or real directories.
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^([A-Za-z0-9_-]+)$ $1.html [END]
+</IfModule>

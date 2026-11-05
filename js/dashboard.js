@@ -1,329 +1,312 @@
+/* Student dashboard: only actual PHP/MySQL records, no demo notes or schedules. */
 (async () => {
-  // The login lives on the server (PHP session); ask it who is logged in.
-  let user = null;
+  const $ = selector => document.querySelector(selector);
+  const $$ = selector => [...document.querySelectorAll(selector)];
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, ch =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+  const request = async (url, options = {}) => {
+    const response = await fetch(url, { cache: 'no-store', credentials: 'same-origin', ...options });
+    const data = await response.json();
+    if (!response.ok || !data.success) throw new Error(data.message || 'Request failed.');
+    return data;
+  };
+
+  let user;
   try {
-    const me = await (await fetch('php/auth_me.php', { cache: 'no-store' })).json();
-    if (me.loggedIn && me.role === 'student') user = me.user;
-    else if (me.loggedIn) { location.replace('admin.html'); return; } // coordinators/admins have their own dashboard
-  } catch { /* server not reachable */ }
+    const response = await fetch('php/auth_me.php', { cache: 'no-store', credentials: 'same-origin' });
+    const me = await response.json();
+    if (me.loggedIn && me.role !== 'student') {
+      location.replace('admin');
+      return;
+    }
+    if (me.loggedIn) user = me.user;
+  } catch (error) {
+    console.error('Student session unavailable:', error);
+  }
   if (!user) {
-    ['gyankunjaAuth', 'gyankunjaUser'].forEach(k => { localStorage.removeItem(k); sessionStorage.removeItem(k); });
-    location.replace('login.html?required=1');
+    ['gyankunjaAuth', 'gyankunjaUser'].forEach(key => {
+      localStorage.removeItem(key);
+      sessionStorage.removeItem(key);
+    });
+    location.replace('login?required=1');
     return;
   }
-  // keep the small browser copy (used by the navigation bar) in step with the database
-  (localStorage.getItem('gyankunjaAuth') ? localStorage : sessionStorage).setItem('gyankunjaUser', JSON.stringify(user));
 
-  const semesterNumber = Math.max(1, ['Semester I', 'Semester II', 'Semester III', 'Semester IV', 'Semester V', 'Semester VI', 'Semester VII', 'Semester VIII'].indexOf(user.semester) + 1);
-  const roman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'][semesterNumber - 1];
-  const firstName = user.name.split(' ')[0];
-  const initials = user.name.split(' ').map(part => part[0]).join('').slice(0, 2).toUpperCase();
+  try {
+    const storage = localStorage.getItem('gyankunjaAuth') === 'true' ? localStorage : sessionStorage;
+    storage.setItem('gyankunjaAuth', 'true');
+    storage.setItem('gyankunjaUser', JSON.stringify(user));
+  } catch { /* Browsers may disable storage. The session is still authoritative. */ }
 
-  const semesterContent = {
-    1: {
-      notes: [
-        ['PDF', 'Verified', 'Basics of IT — Complete Unit Notes', 'BIT101 • 164 views'],
-        ['PDF', 'New', 'Basic Electronics — Diodes and Transistors', 'ELX111 • 286 views'],
-        ['DOC', 'Verified', 'Mathematics I Formula Sheet', 'BSM111 • 95 views'],
-        ['LAB', 'Popular', 'C Programming I Lab Manual', 'CIT111 • 312 views'],
-        ['PDF', 'Verified', 'Workshop Safety and Tools', 'CIT113 • 173 views'],
-        ['PDF', 'Saved', 'Business Communication Quick Revision', 'CIT115 • 118 views']
-      ],
-      exams: [['21', 'JUL', 'C Programming I', 'Internal Assessment', '10:00 AM'], ['25', 'JUL', 'Basic Electronics', 'Lab Practical', '1:00 PM'], ['29', 'JUL', 'Mathematics I', 'Unit Test', '8:00 AM']]
-    },
-    2: {
-      notes: [
-        ['PDF', 'Verified', 'Exception Handling in C Programming II', 'CIT121 • 184 views'],
-        ['LAB', 'New', 'Digital Logic Lab Manual', 'CIT123 • 241 views'],
-        ['DOC', 'Verified', 'Mathematics II Formula Sheet', 'BSM121 • 132 views'],
-        ['PDF', 'Popular', 'HTML, CSS and JavaScript Notes', 'CIT125 • 327 views'],
-        ['PDF', 'Verified', 'Computer Architecture Revision Notes', 'CIT127 • 159 views'],
-        ['PDF', 'Saved', 'Principles of Management Summary', 'MGT121 • 104 views']
-      ],
-      exams: [['20', 'JUL', 'C Programming II', 'Internal Assessment', '10:00 AM'], ['24', 'JUL', 'Digital Logic', 'Lab Practical', '1:00 PM'], ['28', 'JUL', 'Mathematics II', 'Unit Test', '8:00 AM']]
-    },
-    3: {
-      notes: [
-        ['PDF', 'Verified', 'OOP Concepts and Examples', 'CIT211 • 214 views'],
-        ['DOC', 'New', 'Data Structures — Stack and Queue', 'CIT213 • 196 views'],
-        ['PDF', 'Verified', 'DBMS Normalization Notes', 'CIT215 • 284 views'],
-        ['LAB', 'Popular', 'Web Technology II Practical Files', 'CIT217 • 237 views'],
-        ['PDF', 'Verified', 'Probability and Statistics Formulas', 'STA211 • 149 views'],
-        ['PDF', 'Saved', 'Economics Short Notes', 'ECO211 • 92 views']
-      ],
-      exams: [['19', 'JUL', 'Object-Oriented Programming', 'Internal Assessment', '9:00 AM'], ['23', 'JUL', 'Database Management', 'Practical', '12:00 PM'], ['27', 'JUL', 'Statistics', 'Unit Test', '8:00 AM']]
-    },
-    4: {
-      notes: [
-        ['PDF', 'Verified', 'Java Programming Complete Notes', 'CIT221 • 255 views'],
-        ['DOC', 'New', 'Operating System Process Scheduling', 'CIT223 • 188 views'],
-        ['PDF', 'Verified', 'Computer Network Protocols', 'CIT225 • 279 views'],
-        ['PDF', 'Popular', 'Software Engineering Models', 'CIT227 • 221 views'],
-        ['LAB', 'Verified', 'Numerical Methods Practical Manual', 'CIT229 • 143 views'],
-        ['PDF', 'Saved', 'Organizational Behaviour Summary', 'MGT221 • 87 views']
-      ],
-      exams: [['18', 'JUL', 'Java Programming', 'Internal Assessment', '10:00 AM'], ['22', 'JUL', 'Computer Networks', 'Practical', '1:00 PM'], ['26', 'JUL', 'Numerical Methods', 'Unit Test', '8:00 AM']]
-    },
-    5: {
-      notes: [
-        ['PDF', 'Verified', 'Python Programming Handbook', 'CIT311 • 301 views'],
-        ['DOC', 'New', 'System Analysis UML Notes', 'CIT313 • 169 views'],
-        ['PDF', 'Verified', 'Information Security Fundamentals', 'CIT315 • 254 views'],
-        ['LAB', 'Popular', 'Mobile App Development Practical', 'CIT317 • 286 views'],
-        ['PDF', 'Verified', 'Research Methodology Guide', 'CIT319 • 137 views'],
-        ['PDF', 'Saved', 'Elective I Study Pack', 'ELE311 • 81 views']
-      ],
-      exams: [['17', 'JUL', 'Python Programming', 'Internal Assessment', '9:00 AM'], ['21', 'JUL', 'Mobile App Development', 'Practical', '12:00 PM'], ['25', 'JUL', 'Information Security', 'Unit Test', '8:00 AM']]
-    },
-    6: {
-      notes: [
-        ['PDF', 'Verified', 'Artificial Intelligence Search Algorithms', 'CIT321 • 332 views'],
-        ['DOC', 'New', 'Cloud Computing Service Models', 'CIT323 • 194 views'],
-        ['PDF', 'Verified', 'Data Mining Techniques', 'CIT325 • 241 views'],
-        ['PDF', 'Popular', 'Human Computer Interaction Principles', 'CIT327 • 213 views'],
-        ['LAB', 'Verified', 'Project Management Templates', 'CIT329 • 146 views'],
-        ['PDF', 'Saved', 'Elective II Study Pack', 'ELE321 • 79 views']
-      ],
-      exams: [['16', 'JUL', 'Artificial Intelligence', 'Internal Assessment', '10:00 AM'], ['20', 'JUL', 'Cloud Computing', 'Presentation', '1:00 PM'], ['24', 'JUL', 'Data Mining', 'Unit Test', '8:00 AM']]
-    },
-    7: {
-      notes: [
-        ['PDF', 'Verified', 'Machine Learning Algorithms', 'CIT411 • 346 views'],
-        ['DOC', 'New', 'Internet of Things Architecture', 'CIT413 • 203 views'],
-        ['PDF', 'Verified', 'Enterprise Application Patterns', 'CIT415 • 229 views'],
-        ['PDF', 'Popular', 'Cyber Law and Ethics Notes', 'CIT417 • 278 views'],
-        ['LAB', 'Verified', 'Major Project I Documentation Guide', 'PRJ411 • 184 views'],
-        ['PDF', 'Saved', 'Elective III Study Pack', 'ELE411 • 75 views']
-      ],
-      exams: [['15', 'JUL', 'Machine Learning', 'Internal Assessment', '9:00 AM'], ['19', 'JUL', 'IoT', 'Project Demo', '12:00 PM'], ['23', 'JUL', 'Cyber Law', 'Unit Test', '8:00 AM']]
-    },
-    8: {
-      notes: [
-        ['PDF', 'Verified', 'Big Data Analytics Notes', 'CIT421 • 318 views'],
-        ['DOC', 'New', 'IT Governance Frameworks', 'CIT423 • 187 views'],
-        ['PDF', 'Verified', 'Internship Report Format', 'INT421 • 269 views'],
-        ['LAB', 'Popular', 'Major Project II Documentation', 'PRJ421 • 306 views'],
-        ['PDF', 'Verified', 'Seminar Presentation Guide', 'SEM421 • 141 views'],
-        ['PDF', 'Saved', 'Elective IV Study Pack', 'ELE421 • 73 views']
-      ],
-      exams: [['14', 'JUL', 'Big Data Analytics', 'Internal Assessment', '10:00 AM'], ['18', 'JUL', 'Major Project II', 'Final Demo', '11:00 AM'], ['22', 'JUL', 'IT Governance', 'Unit Test', '8:00 AM']]
+  const roman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+  const semesterNumber = Math.max(1, roman.findIndex(n => user.semester === 'Semester ' + n) + 1);
+  const firstName = String(user.name || 'Student').trim().split(/\s+/)[0];
+  const initials = String(user.name || 'Student').trim().split(/\s+/).slice(0, 2)
+    .map(part => part[0]).join('').toUpperCase();
+
+  $$('[data-user-name]').forEach(el => { el.textContent = user.name; });
+  $$('[data-user-firstname]').forEach(el => { el.textContent = firstName; });
+  $$('[data-user-email]').forEach(el => { el.textContent = user.email; });
+  $$('[data-user-semester]').forEach(el => { el.textContent = user.semester; });
+  $$('[data-user-initials]').forEach(el => { el.textContent = initials; });
+  $$('[data-dashboard-semester]').forEach(el => { el.textContent = user.semester; });
+  $$('[data-my-notes]').forEach(link => { link.href = 'semester' + semesterNumber; });
+
+  const notesContainer = $('#dashboardNotes');
+  const myUploads = $('#myUploads');
+  const examContainer = $('#dashboardExams');
+  const searchInput = $('#dashboardSearch');
+  let latestNotes = [];
+
+  const renderNotes = () => {
+    if (!notesContainer) return;
+    const query = (searchInput?.value || '').trim().toLowerCase();
+    const list = latestNotes.filter(note =>
+      [note.title, note.subject, note.category].some(value => String(value || '').toLowerCase().includes(query)));
+    if (!list.length) {
+      notesContainer.innerHTML = '<div class="panel dashboard-data-empty">' +
+        (query ? 'No approved notes match your search.' : 'No approved notes for your semester yet. New notes will appear after staff approval.') +
+        '</div>';
+      return;
+    }
+    notesContainer.innerHTML = list.map(note => {
+      const id = Number(note.id);
+      if (!Number.isSafeInteger(id) || id <= 0) return '';
+      const ext = String(note.extension || 'FILE').slice(0, 5).toUpperCase();
+      const url = 'php/download.php?id=' + id;
+      return `
+        <article class="note-card">
+          <div class="note-cover">
+            <div class="file-icon">${esc(ext)}</div><span class="badge badge-green">Approved</span>
+          </div>
+          <div class="note-body">
+            <h3>${esc(note.title)}</h3>
+            <div class="note-meta"><span>${esc(note.subject)}</span><span>• ${esc(note.category)}</span></div>
+            <a class="btn btn-outline btn-sm dashboard-open-file" href="${url}" target="_blank" rel="noopener">Open file</a>
+          </div>
+        </article>`;
+    }).join('');
+  };
+  searchInput?.addEventListener('input', renderNotes);
+
+  const renderUploads = uploads => {
+    if (!myUploads) return;
+    if (!uploads.length) {
+      myUploads.innerHTML = '<p class="muted" style="margin:0">You have not uploaded any notes yet. Use “Upload Note” to contribute.</p>';
+      return;
+    }
+    myUploads.innerHTML = uploads.map(file => {
+      const status = ['approved', 'pending', 'rejected'].includes(file.status) ? file.status : 'pending';
+      const remarks = file.review_remarks
+        ? `<div class="muted dashboard-upload-remarks">Staff feedback: ${esc(file.review_remarks)}</div>` : '';
+      return `<div class="dashboard-upload-row">
+        <div><strong>${esc(file.title)}</strong>
+          <div class="muted dashboard-upload-meta">${esc(file.semester)} · ${esc(file.subject)} · ${esc(file.category)}</div>
+          ${remarks}
+        </div><span class="badge ${status === 'approved' ? 'badge-green' : 'badge-blue'}">${esc(status)}</span>
+      </div>`;
+    }).join('');
+  };
+
+  const renderContributions = data => {
+    const counts = data.counts || {};
+    const values = {
+      '[data-contrib-total]': counts.total || 0,
+      '[data-contrib-approved]': counts.approved || 0,
+      '[data-contrib-pending]': counts.pending || 0,
+      '[data-upload-count]': counts.total || 0,
+    };
+    for (const [selector, value] of Object.entries(values)) {
+      $$(selector).forEach(el => { el.textContent = String(value); });
+    }
+    const chart = $('#dashboardActivityChart');
+    if (!chart) return;
+    const activity = Array.isArray(data.activity) ? data.activity : [];
+    if (!activity.length) {
+      chart.innerHTML = '<p class="muted">No upload activity recorded yet.</p>';
+      return;
+    }
+    const countsByMonth = activity.map(point => Math.max(0, Number(point.count) || 0));
+    const maximum = Math.max(1, ...countsByMonth);
+    const coordinates = countsByMonth.map((value, index) => {
+      const x = 24 + index * (552 / Math.max(1, countsByMonth.length - 1));
+      const y = 145 - value / maximum * 110;
+      return [x, y];
+    });
+    const points = coordinates.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
+    const first = coordinates[0], last = coordinates[coordinates.length - 1];
+    const area = `M ${points.replaceAll(' ', ' L ')} L ${last[0]},155 L ${first[0]},155 Z`;
+    const labels = activity.map((point, index) => {
+      const month = /^\d{4}-\d{2}$/.test(point.month) ? point.month.slice(5) + '/' + point.month.slice(2, 4) : '';
+      return `<text x="${coordinates[index][0].toFixed(1)}" y="175" text-anchor="middle" font-size="11" fill="currentColor">${esc(month)}</text>`;
+    }).join('');
+    chart.innerHTML = `
+      <svg class="chart-svg" viewBox="0 0 600 185" preserveAspectRatio="none" role="img" aria-label="Monthly uploaded notes over the last six months">
+        <path d="${area}" fill="rgba(36, 88, 207, .13)"/>
+        <polyline points="${points}" fill="none" stroke="#2458cf" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        ${coordinates.map(([x,y]) => `<circle cx="${x}" cy="${y}" r="4.5" fill="#2458cf"/>`).join('')}
+        ${labels}
+      </svg>`;
+    const caption = $('#dashboardActivityCaption');
+    if (caption) caption.textContent = 'Actual uploads from your account · last six months';
+  };
+
+  const loadDashboard = async () => {
+    try {
+      const data = await request('php/dashboard_data.php');
+      latestNotes = data.notes || [];
+      renderNotes();
+      renderUploads(data.uploads || []);
+      renderContributions(data);
+    } catch (error) {
+      console.error('Dashboard data unavailable:', error);
+      if (notesContainer) notesContainer.innerHTML = '<div class="panel dashboard-data-empty">Could not load approved notes. Check the MySQL connection.</div>';
+      if (myUploads) myUploads.textContent = 'Could not load your uploads right now.';
+      const chart = $('#dashboardActivityChart');
+      if (chart) chart.textContent = 'Contribution data is temporarily unavailable.';
     }
   };
 
-  document.querySelectorAll('[data-user-name]').forEach(el => el.textContent = user.name);
-  document.querySelectorAll('[data-user-firstname]').forEach(el => el.textContent = firstName);
-  document.querySelectorAll('[data-user-email]').forEach(el => el.textContent = user.email);
-  document.querySelectorAll('[data-user-semester]').forEach(el => el.textContent = user.semester);
-  document.querySelectorAll('[data-user-initials]').forEach(el => el.textContent = initials);
-  document.querySelectorAll('[data-my-notes]').forEach(link => link.href = `semester${semesterNumber}.html`);
-  document.querySelectorAll('[data-dashboard-semester]').forEach(el => el.textContent = `Semester ${roman}`);
+  const renderExams = exams => {
+    if (!examContainer) return;
+    if (!exams.length) {
+      examContainer.innerHTML = '<p class="muted">No upcoming exams scheduled for your semester.</p>';
+      return;
+    }
+    examContainer.innerHTML = exams.map(exam => {
+      const starts = new Date(String(exam.starts_at).replace(' ', 'T'));
+      const validDate = !Number.isNaN(starts.getTime());
+      const date = validDate ? starts.toLocaleDateString(undefined, { day: '2-digit' }) : '—';
+      const month = validDate ? starts.toLocaleDateString(undefined, { month: 'short' }) : '';
+      const time = validDate ? starts.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' }) : '';
+      return `<div class="exam-item">
+        <div class="exam-date">${esc(date)}<small>${esc(month)}</small></div>
+        <div><strong>${esc(exam.subject)}</strong><div class="muted dashboard-exam-sub">${esc(exam.exam_type)}${exam.venue ? ' · ' + esc(exam.venue) : ''}</div></div>
+        <strong>${esc(time)}</strong>
+      </div>`;
+    }).join('');
+  };
 
-  const notesContainer = document.querySelector('#dashboardNotes');
-  if (notesContainer) {
-    notesContainer.innerHTML = semesterContent[semesterNumber].notes.map(([file, badge, title, meta]) => `
-      <article class="note-card">
-        <div class="note-cover"><div class="file-icon">${file}</div><span class="badge ${badge === 'Verified' ? 'badge-green' : 'badge-blue'}">${badge}</span></div>
-        <div class="note-body"><h3>${title}</h3><div class="note-meta"><span>${meta}</span><span>• ${user.semester}</span></div></div>
-      </article>`).join('');
-  }
+  const loadExams = async () => {
+    if (!examContainer) return;
+    try {
+      const data = await request('php/exams.php');
+      renderExams(data.exams || []);
+    } catch (error) {
+      console.error('Exam schedule request failed:', error);
+      examContainer.innerHTML = '<p class="muted">Exam schedule is temporarily unavailable. Please try again later.</p>';
+    }
+  };
 
-  const examContainer = document.querySelector('#dashboardExams');
-  if (examContainer) {
-    examContainer.innerHTML = semesterContent[semesterNumber].exams.map(([day, month, subject, type, time]) => `
-      <div class="exam-item"><div class="exam-date">${day}<small>${month}</small></div><div><strong>${subject}</strong><div class="muted" style="font-size:.78rem">${type}</div></div><strong>${time}</strong></div>`).join('');
-  }
+  // Sidebar and modal controls.
+  const sidebar = $('.sidebar');
+  const mobileToggle = $('.mobile-side-toggle');
+  if (sidebar && mobileToggle) mobileToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
 
-  const sidebar = document.querySelector('.sidebar');
-  const toggle = document.querySelector('.mobile-side-toggle');
-  if (sidebar && toggle) toggle.addEventListener('click', () => sidebar.classList.toggle('open'));
-
-  const openModalButtons = document.querySelectorAll('[data-open-upload]');
-  const modal = document.querySelector('#uploadModal');
-  const closeModal = document.querySelector('[data-close-modal]');
-  if (modal) openModalButtons.forEach(button => button.addEventListener('click', event => {
+  const uploadModal = $('#uploadModal');
+  $$('[data-open-upload]').forEach(button => button.addEventListener('click', event => {
     event.preventDefault();
-    modal.classList.add('open');
+    uploadModal?.classList.add('open');
   }));
-  if (closeModal && modal) closeModal.addEventListener('click', () => modal.classList.remove('open'));
-  if (modal) modal.addEventListener('click', event => { if (event.target === modal) modal.classList.remove('open'); });
+  $('[data-close-modal]')?.addEventListener('click', () => uploadModal?.classList.remove('open'));
+  uploadModal?.addEventListener('click', event => { if (event.target === uploadModal) uploadModal.classList.remove('open'); });
 
-  const uploadSemester = document.querySelector('#uploadSemester');
+  const uploadSemester = $('#uploadSemester');
   if (uploadSemester) {
-    uploadSemester.innerHTML = `<option value="${user.semester}">${user.semester}</option>`;
+    const option = document.createElement('option');
+    option.value = user.semester;
+    option.textContent = user.semester;
+    uploadSemester.replaceChildren(option);
   }
-
-  // Subject dropdown: the same course list the semester pages use, so an
-  // approved note always shows up under the exact subject it was uploaded for.
-  const uploadSubject = document.querySelector('#uploadSubject');
+  const uploadSubject = $('#uploadSubject');
   const fillSubjects = () => {
     if (!uploadSubject) return;
-    const list = (window.GyankunjaCourses || {})[semesterNumber] || [];
-    uploadSubject.innerHTML = '<option value="" disabled selected>Select a subject</option>' +
-      list.map(([code, title]) => {
-        const value = window.GyankunjaSubjectValue(code, title);
-        return `<option value="${value}">${code} — ${title}</option>`;
-      }).join('');
-  };
-  fillSubjects();
-
-  // Category dropdown: Syllabus, Theory Notes, ... (same list the semester pages show)
-  const CATEGORIES = window.GyankunjaCategories || ['Syllabus', 'Theory Notes', 'Lab Manuals', 'Question Bank', 'Books', 'References'];
-  const uploadCategory = document.querySelector('#uploadCategory');
-  const fillCategories = () => {
-    if (!uploadCategory) return;
-    uploadCategory.innerHTML = '<option value="" disabled selected>Select a category</option>' +
-      CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('');
-  };
-  fillCategories();
-
-  // ---------------------------------------------------------------
-  // Real upload: sends the form to php/upload.php and stores it in
-  // MySQL as 'pending'. Replaces the old localStorage-only fake save.
-  // ---------------------------------------------------------------
-  const uploadForm = document.querySelector('#uploadForm');
-  const uploadStatusMsg = document.querySelector('#uploadStatusMsg');
-
-  if (uploadForm) {
-    uploadForm.addEventListener('submit', event => {
-      event.preventDefault();
-
-      const submitButton = uploadForm.querySelector('button[type="submit"]');
-      const formData = new FormData(uploadForm);
-
-      // Check the size here first so a too-big file gives a clear message
-      const chosen = uploadForm.file && uploadForm.file.files[0];
-      if (chosen && chosen.size > 2 * 1024 * 1024) {
-        if (uploadStatusMsg) {
-          uploadStatusMsg.style.color = '#c0392b';
-          uploadStatusMsg.textContent = `This file is ${(chosen.size / 1048576).toFixed(1)} MB. The limit is 2 MB — please compress it or split it.`;
-        }
-        return;
-      }
-
-      if (submitButton) submitButton.disabled = true;
-      if (uploadStatusMsg) {
-        uploadStatusMsg.style.color = '';
-        uploadStatusMsg.textContent = 'Uploading…';
-      }
-
-      fetch('php/upload.php', {
-        method: 'POST',
-        body: formData
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            const uploads = Number(localStorage.getItem('gyankunjaUploads') || 18) + 1;
-            localStorage.setItem('gyankunjaUploads', uploads);
-            document.querySelectorAll('[data-upload-count]').forEach(el => el.textContent = uploads);
-
-            uploadForm.reset();
-            if (uploadSemester) uploadSemester.innerHTML = `<option value="${user.semester}">${user.semester}</option>`;
-            fillSubjects();
-            fillCategories();
-            loadMyUploads();
-            if (uploadStatusMsg) uploadStatusMsg.textContent = '';
-            modal.classList.remove('open');
-
-            Gyankunja.toast(data.message || 'Note uploaded and pending approval.');
-          } else {
-            if (uploadStatusMsg) {
-              uploadStatusMsg.style.color = '#c0392b';
-              uploadStatusMsg.textContent = data.message || 'Upload failed. Please try again.';
-            }
-          }
-        })
-        .catch(() => {
-          if (uploadStatusMsg) {
-            uploadStatusMsg.style.color = '#c0392b';
-            uploadStatusMsg.textContent = 'Could not reach the server. Is WAMP running?';
-          }
-        })
-        .finally(() => {
-          if (submitButton) submitButton.disabled = false;
-        });
-    });
-  }
-
-  document.querySelectorAll('[data-upload-count]').forEach(el => el.textContent = localStorage.getItem('gyankunjaUploads') || '18');
-
-  const searchInput = document.querySelector('#dashboardSearch');
-  if (searchInput) {
-    searchInput.addEventListener('input', () => {
-      const term = searchInput.value.toLowerCase();
-      document.querySelectorAll('.dashboard-note-grid .note-card').forEach(card => {
-        card.style.display = card.textContent.toLowerCase().includes(term) ? '' : 'none';
-      });
-    });
-  }
-
-  // ---------------------------------------------------------------
-  // My Uploads: the student's own notes and their review status
-  // ---------------------------------------------------------------
-  const esc = v => String(v ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
-  const myUploads = document.querySelector('#myUploads');
-  const loadMyUploads = async () => {
-    if (!myUploads) return;
-    try {
-      const data = await (await fetch('php/my_files.php', { cache: 'no-store' })).json();
-      if (!data.success) throw new Error(data.message);
-      myUploads.innerHTML = data.files.length ? data.files.map(f => `
-        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--line)">
-          <div><strong>${esc(f.title)}</strong>
-            <div class="muted" style="font-size:.8rem">${esc(f.semester)} · ${esc(f.subject)} · ${esc(f.category)}</div>
-            ${f.review_remarks ? `<div class="muted" style="font-size:.8rem">Coordinator note: ${esc(f.review_remarks)}</div>` : ''}
-          </div>
-          <span class="badge ${f.status === 'approved' ? 'badge-green' : 'badge-blue'}" style="align-self:center">${esc(f.status)}</span>
-        </div>`).join('') : '<p class="muted" style="margin:0">You have not uploaded anything yet. Use “Upload Note” to share your first one.</p>';
-    } catch {
-      myUploads.innerHTML = '<p class="muted" style="margin:0">Could not load your uploads right now.</p>';
+    const subjects = (window.GyankunjaCourses || {})[semesterNumber] || [];
+    uploadSubject.replaceChildren(new Option('Select a subject', '', true, true));
+    uploadSubject.options[0].disabled = true;
+    for (const [code, title] of subjects) {
+      const value = window.GyankunjaSubjectValue ? window.GyankunjaSubjectValue(code, title) : code + ' - ' + title;
+      uploadSubject.add(new Option(code + ' — ' + title, value));
     }
   };
-  loadMyUploads();
-
-  // ---------------------------------------------------------------
-  // My Profile: edit your own details (saved in MySQL)
-  // ---------------------------------------------------------------
-  const profileModal = document.querySelector('#profileModal');
-  const profileForm = document.querySelector('#profileForm');
-  const profileMsg = document.querySelector('#profileMsg');
-  if (profileModal && profileForm) {
-    const fillProfile = () => {
-      profileForm.name.value = user.name;
-      profileForm.studentId.value = user.studentId || '';
-      profileForm.email.value = user.email;
-      profileForm.program.value = user.program;
-      profileForm.semester.value = user.semester;
-      profileForm.current_password.value = '';
-      profileForm.new_password.value = '';
-      profileMsg.textContent = '';
-    };
-    document.querySelectorAll('[data-open-profile]').forEach(b => b.addEventListener('click', e => {
-      e.preventDefault();
-      fillProfile();
-      profileModal.classList.add('open');
-    }));
-    document.querySelector('[data-close-profile]').addEventListener('click', () => profileModal.classList.remove('open'));
-    profileModal.addEventListener('click', e => { if (e.target === profileModal) profileModal.classList.remove('open'); });
-
-    profileForm.addEventListener('submit', async e => {
-      e.preventDefault();
-      profileMsg.style.color = '';
-      profileMsg.textContent = 'Saving…';
-      try {
-        const res = await fetch('php/profile_update.php', { method: 'POST', body: new URLSearchParams(new FormData(profileForm)) });
-        const data = await res.json();
-        if (!data.success) {
-          profileMsg.style.color = '#c0392b';
-          profileMsg.textContent = data.message || 'Could not save.';
-          return;
-        }
-        (localStorage.getItem('gyankunjaAuth') ? localStorage : sessionStorage).setItem('gyankunjaUser', JSON.stringify(data.user));
-        location.reload(); // reload so the semester-specific dashboard matches the new details
-      } catch {
-        profileMsg.style.color = '#c0392b';
-        profileMsg.textContent = 'Could not reach the server. Is WAMP running?';
-      }
-    });
+  fillSubjects();
+  const uploadCategory = $('#uploadCategory');
+  const categories = window.GyankunjaCategories || ['Syllabus', 'Theory Notes', 'Lab Manuals', 'Question Bank', 'Books', 'References'];
+  if (uploadCategory) {
+    uploadCategory.replaceChildren(new Option('Select a category', '', true, true));
+    uploadCategory.options[0].disabled = true;
+    categories.forEach(category => uploadCategory.add(new Option(category, category)));
   }
+
+  const uploadForm = $('#uploadForm');
+  const uploadStatusMsg = $('#uploadStatusMsg');
+  uploadForm?.addEventListener('submit', async event => {
+    event.preventDefault();
+    const file = uploadForm.elements.namedItem('file')?.files?.[0];
+    const button = uploadForm.querySelector('button[type="submit"]');
+    if (file && file.size > 25 * 1024 * 1024) {
+      if (uploadStatusMsg) uploadStatusMsg.textContent = 'Maximum upload size is 25 MB.';
+      return;
+    }
+    if (button) button.disabled = true;
+    if (uploadStatusMsg) uploadStatusMsg.textContent = 'Uploading…';
+    try {
+      const response = await request('php/upload.php', { method: 'POST', body: new FormData(uploadForm) });
+      uploadForm.reset();
+      if (uploadSemester) uploadSemester.value = user.semester;
+      fillSubjects();
+      uploadModal?.classList.remove('open');
+      if (uploadStatusMsg) uploadStatusMsg.textContent = '';
+      await loadDashboard();
+      window.Gyankunja?.toast(response.message || 'Your note was submitted for review.');
+    } catch (error) {
+      if (uploadStatusMsg) uploadStatusMsg.textContent = error.message || 'Upload failed.';
+    } finally {
+      if (button) button.disabled = false;
+    }
+  });
+
+  const profileModal = $('#profileModal');
+  const profileForm = $('#profileForm');
+  const profileMsg = $('#profileMsg');
+  const profileField = name => profileForm?.elements.namedItem(name);
+  const openProfile = () => {
+    if (!profileForm) return;
+    for (const [name, value] of Object.entries({
+      name: user.name, studentId: user.studentId || '', email: user.email,
+      program: user.program, semester: user.semester, current_password: '', new_password: ''
+    })) {
+      const input = profileField(name);
+      if (input) input.value = value;
+    }
+    if (profileMsg) profileMsg.textContent = '';
+    profileModal?.classList.add('open');
+  };
+  $$('[data-open-profile]').forEach(button => button.addEventListener('click', event => {
+    event.preventDefault();
+    openProfile();
+  }));
+  $('[data-close-profile]')?.addEventListener('click', () => profileModal?.classList.remove('open'));
+  profileModal?.addEventListener('click', event => { if (event.target === profileModal) profileModal.classList.remove('open'); });
+  profileForm?.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (profileMsg) profileMsg.textContent = 'Saving…';
+    try {
+      await request('php/profile_update.php', {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(profileForm))
+      });
+      location.reload();
+    } catch (error) {
+      if (profileMsg) profileMsg.textContent = error.message || 'Could not save profile.';
+    }
+  });
+
+  await Promise.all([loadDashboard(), loadExams()]);
+  window.setInterval(() => {
+    if (!document.hidden) { loadDashboard(); loadExams(); }
+  }, 60000);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) { loadDashboard(); loadExams(); }
+  });
 })();

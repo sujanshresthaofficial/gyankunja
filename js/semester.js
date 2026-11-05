@@ -85,7 +85,7 @@
 
   const renderPanel = (code) => {
     const cat = openCategory[key(code)];
-    if (!cat) return '<p class="muted note-empty">Choose a category above to see its notes.</p>';
+    if (!cat) return '<p class="muted note-empty">Select a category above to view approved resources.</p>';
     const items = notesFor(code, cat);
     return `
       <div class="course-notes-head">${esc(cat)} <span class="count">${items.length}</span></div>
@@ -103,6 +103,10 @@
       return notesFor(code).some(n => n.title.toLowerCase().includes(term));
     });
 
+    if (!list.length) {
+      grid.innerHTML = '<div class="empty-state course-search-empty" role="status"><strong>No subjects found.</strong><span>Try a different subject name, course code, or note title.</span></div>';
+      return;
+    }
     grid.innerHTML = list.map(([code, title]) => {
       const open = openCategory[key(code)];
       return `
@@ -110,12 +114,13 @@
         <div class="course-head">
           <small>${esc(code)}</small>
           <h3>${esc(title)}</h3>
+          <span class="course-resource-meta">${notesFor(code).length ? `${notesFor(code).length} approved resource${notesFor(code).length === 1 ? "" : "s"}` : "Explore resource categories"}</span>
         </div>
         <div class="course-resources">
           ${CATEGORIES.map(cat => {
         const count = notesFor(code, cat).length;
-        return `<button class="resource-btn${open === cat ? ' active' : ''}" data-category="${esc(cat)}" type="button">
-              ${CATEGORY_ICONS[cat] || '•'} ${esc(cat)}${count ? ` <span class="cat-count">${count}</span>` : ''}
+        return `<button class="resource-btn${open === cat ? ' active' : ''}" data-category="${esc(cat)}" aria-pressed="${open === cat}" type="button">
+              <span class="resource-icon" aria-hidden="true">${CATEGORY_ICONS[cat] || '•'}</span><span class="resource-label">${esc(cat)}</span><span class="resource-count" aria-label="${count} resources">${count || "—"}</span>
             </button>`;
       }).join('')}
         </div>
@@ -130,8 +135,11 @@
     if (!btn) return;
     const card = btn.closest('.course-card');
     const k = key(card.dataset.code);
-    openCategory[k] = openCategory[k] === btn.dataset.category ? null : btn.dataset.category;
+    const chosen = btn.dataset.category;
+    openCategory[k] = openCategory[k] === chosen ? null : chosen;
     renderCourses();
+    const updated = [...grid.querySelectorAll(".course-card")].find(item => key(item.dataset.code) === k);
+    [...(updated?.querySelectorAll(".resource-btn") || [])].find(item => item.dataset.category === chosen)?.focus({ preventScroll: true });
   });
 
   const renderOther = () => {
@@ -193,6 +201,7 @@
   const select = document.querySelector('#semesterSelect');
   if (select) {
     select.value = String(number);
-    select.addEventListener('change', () => location.href = `semester${select.value}.html`);
+    select.addEventListener('change', () => location.href = `semester${select.value}`);
   }
 })();
+

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
 <head>
-  <meta content="light dark" name="color-scheme" />
-  <script>
+<meta content="light dark" name="color-scheme"/>
+<script>
     (() => {
       try {
         const savedTheme = localStorage.getItem('gyankunjaTheme');
@@ -17,157 +16,21 @@
       }
     })();
   </script>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <meta content="Browse public BIT notes and resources for Semester I to Semester VIII." name="description" />
-  <title>Public Resources — Gyankunja</title>
-  <link href="images/fav.png" rel="icon" type="image/png" />
-  <link href="css/styles.css" rel="stylesheet" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Browse public BIT notes and resources for Semester I to Semester VIII." name="description"/>
+<title>Public Resources — Gyankunja</title>
+<link href="images/gyankunja-icon.png?v=brand-2" rel="icon" type="image/png"/>
+<link href="css/styles.css?v=brand-2" rel="stylesheet"/>
 </head>
-
-<body>
-  <header class="site-header">
-    <div class="container navbar">
-      <a class="brand" href="index.html"><span class="brand-mark">G</span><span class="brand-name">GYANKUNJA</span></a>
-      <nav aria-label="Primary navigation" class="nav-links">
-        <a data-nav="" href="index.html">Home</a>
-        <a data-nav="" href="notices.html">Notices</a>
-        <a data-nav="" href="resources.html">Resources</a>
-        <a href="index.html#community">Community</a>
-        <a data-nav="" href="about.html">About</a>
-      </nav>
-      <div class="nav-actions">
-        <a class="btn btn-outline btn-sm" data-auth-guest="" href="signup.html">Sign Up</a>
-        <a class="btn btn-primary btn-sm" data-auth-guest="" href="login.html">Login</a>
-        <a class="btn btn-outline btn-sm" data-auth-user="" hidden="" href="dashboard.html">My Dashboard</a>
-        <button class="btn btn-primary btn-sm" data-auth-user="" data-logout="" hidden="">Logout</button>
-        <button aria-label="Switch to dark mode" class="theme-toggle" data-theme-toggle="" title="Switch to dark mode"
-          type="button">
-          <span aria-hidden="true" data-theme-icon="">☾</span>
-        </button>
-        <button aria-label="Open menu" class="menu-toggle">☰</button>
-      </div>
-    </div>
-  </header>
-  <main>
-    <section class="page-hero">
-      <div class="container">
-        <span class="eyebrow">Open academic library</span>
-        <h1>Public Semester Resources</h1>
-        <p>No login is required to browse semester notes, syllabuses, lab manuals, question banks, books, and
-          references.</p>
-      </div>
-    </section>
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title">Choose Your Semester</h2>
-        <p class="section-subtitle">All eight semester resource pages are available publicly.
-          Login is only required for the personalized student dashboard.</p>
-        <div class="semester-grid">
-          <a class="semester-card" href="semester1.html">
-            <span class="semester-number">Semester</span>
-            <h3>Build the Foundation</h3>
-            <p>Basics of IT, electronics, mathematics, programming, workshop, and communication.</p>
-            <span class="text-primary"><strong>Open public notes →</strong></span>
-          </a>
-          <a class="semester-card" href="semester2.html">
-            <span class="semester-number">Semester II</span>
-            <h3>Strengthen Core Skills</h3>
-            <p>Programming, digital logic, mathematics, web technology, architecture, and management.</p>
-            <span class="text-primary"><strong>Open public notes →</strong></span>
-          </a>
-          <a class="semester-card" href="semester3.html">
-            <span class="semester-number">Semester III</span>
-            <h3>Data and Development</h3>
-            <p>OOP, data structures, databases, web technology, statistics, and economics.</p>
-            <span class="text-primary"><strong>Open public notes →</strong></span>
-          </a>
-          <a class="semester-card" href="semester4.html">
-            <span class="semester-number">Semester IV</span>
-            <h3>Systems and Networks</h3>
-            <p>Java, operating systems, networking, software engineering, and numerical methods.</p>
-            <span class="text-primary"><strong>Open public notes →</strong></span>
-          </a>
-          <a class="semester-card" href="semester5.html">
-            <span class="semester-number">Semester V</span>
-            <h3>Modern Applications</h3>
-            <p>Python, security, mobile apps, system analysis, research, and electives.</p>
-            <span class="text-primary"><strong>Open public notes →</strong></span>
-          </a>
-          <a class="semester-card" href="semester6.html">
-            <span class="semester-number">Semester VI</span>
-            <h3>Intelligent Computing</h3>
-            <p>Artificial intelligence, cloud, data mining, HCI, and project management.</p>
-            <span class="text-primary"><strong>Open public notes →</strong></span>
-          </a>
-          <a class="semester-card" href="semester7.html">
-            <span class="semester-number">Semester VII</span>
-            <h3>Advanced Technology</h3>
-            <p>Machine learning, IoT, enterprise development, cyber law, and major project.</p>
-            <span class="text-primary"><strong>Open public notes →</strong></span>
-          </a>
-          <a class="semester-card" href="semester8.html">
-            <span class="semester-number">Semester VIII</span>
-            <h3>Industry Readiness</h3>
-            <p>Big data, IT governance, internship, seminar, elective, and final project.</p>
-            <span class="text-primary"><strong>Open public notes →</strong></span>
-          </a>
-        </div>
-      </div>
-    </section>
-    <section class="section-sm" style="background:var(--surface-alt)">
-      <div class="container split-grid">
-        <div class="panel">
-          <h3>Public Access</h3>
-          <p class="muted">Anyone can browse academic resources without creating an account.</p>
-          <a class="btn btn-outline btn-block" href="semester1.html">Open Semester I</a>
-        </div>
-        <div class="panel">
-          <h3>Personal Dashboard</h3>
-          <p class="muted">Sign in to see only the notes, exam schedule, and uploads for your registered semester.</p>
-          <a class="btn btn-primary btn-block" href="login.html">Student Login</a>
-        </div>
-      </div>
-    </section>
-  </main>
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a class="brand" href="index.html"><span class="brand-mark">G</span>
-            <span style="color:#fff">GYANKUNJA</span></a>
-          <p>An organized academic hub for BIT students with public semester resources, university exam notices, and
-            personalized student dashboards.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Explore</h4>
-          <a href="index.html">Home</a>
-          <a href="notices.html">University Notices</a>
-          <a href="resources.html">Resources</a>
-          <a href="about.html">About</a>
-        </div>
-        <div class="footer-col">
-          <h4>Semester I-IV</h4>
-          <a href="semester1.html">Semester I</a>
-          <a href="semester2.html">Semester II</a>
-          <a href="semester3.html">Semester III</a>
-          <a href="semester4.html">Semester IV</a>
-        </div>
-        <div class="footer-col">
-          <h4>Semester V-VIII</h4>
-          <a href="semester5.html">Semester V</a>
-          <a href="semester6.html">Semester VI</a>
-          <a href="semester7.html">Semester VII</a>
-          <a href="semester8.html">Semester VIII</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 Gyankunja. Front-end prototype.</span>
-        <span>Developed by <a href="https://prabhabtiwari.com.np" target="_blank">Prabhab Tiwari</a>, <a href="https://ssujan.com.np" target="_blank">Sujan Shreshtha</a> and Madhab Khanal.</span>
-      </div>
-    </div>
-  </footer>
-  <script src="js/app.js"></script>
+<body class="resources-textured-page">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="shared-header-placeholder" data-site-header></div>
+<main id="main-content"><section class="page-hero"><div class="container"><nav aria-label="Breadcrumb" class="breadcrumbs"><a href="index">Home</a><span aria-hidden="true">/</span><span aria-current="page">Resources</span></nav><span class="eyebrow">THE OPEN STUDY LIBRARY</span><h1>A place for every semester.</h1><p>Explore subject-wise BIT resources, from your first semester to your last. No account needed to browse.</p></div></section><section class="section resource-directory-section"><div class="container"><div class="library-toolbar"><div><h2>Choose your semester</h2><p class="muted">Eight semesters. Six resource categories per subject.</p></div><label class="semester-search"><span class="sr-only">Find a semester</span><input autocomplete="off" id="semesterSearch" placeholder="Find a semester, e.g. Semester II" type="search"/></label></div><div class="resource-types"><span>Syllabus</span><span>Theory notes</span><span>Lab manuals</span><span>Question banks</span><span>Books</span><span>References</span></div><div class="semester-grid semester-resource-grid"><a class="semester-card semester-resource-card" data-search="semester I 1 First year I" data-semester="1" data-semester-card="" href="semester1"><div class="semester-card-top"><span class="semester-number">YEAR I</span><span aria-hidden="true" class="semester-index">01</span></div><h3>First Semester</h3><p>Subject-wise notes, syllabi, lab manuals, question banks, books, and references.</p><span class="semester-card-bottom"><span>View subjects</span><span aria-hidden="true" class="card-arrow">↗</span></span></a><a class="semester-card semester-resource-card" data-search="semester II 2 Second year I" data-semester="2" data-semester-card="" href="semester2"><div class="semester-card-top"><span class="semester-number">YEAR I</span><span aria-hidden="true" class="semester-index">02</span></div><h3>Second Semester</h3><p>Subject-wise notes, syllabi, lab manuals, question banks, books, and references.</p><span class="semester-card-bottom"><span>View subjects</span><span aria-hidden="true" class="card-arrow">↗</span></span></a><a class="semester-card semester-resource-card" data-search="semester III 3 Third year II" data-semester="3" data-semester-card="" href="semester3"><div class="semester-card-top"><span class="semester-number">YEAR II</span><span aria-hidden="true" class="semester-index">03</span></div><h3>Third Semester</h3><p>Subject-wise notes, syllabi, lab manuals, question banks, books, and references.</p><span class="semester-card-bottom"><span>View subjects</span><span aria-hidden="true" class="card-arrow">↗</span></span></a><a class="semester-card semester-resource-card" data-search="semester IV 4 Fourth year II" data-semester="4" data-semester-card="" href="semester4"><div class="semester-card-top"><span class="semester-number">YEAR II</span><span aria-hidden="true" class="semester-index">04</span></div><h3>Fourth Semester</h3><p>Subject-wise notes, syllabi, lab manuals, question banks, books, and references.</p><span class="semester-card-bottom"><span>View subjects</span><span aria-hidden="true" class="card-arrow">↗</span></span></a><a class="semester-card semester-resource-card" data-search="semester V 5 Fifth year III" data-semester="5" data-semester-card="" href="semester5"><div class="semester-card-top"><span class="semester-number">YEAR III</span><span aria-hidden="true" class="semester-index">05</span></div><h3>Fifth Semester</h3><p>Subject-wise notes, syllabi, lab manuals, question banks, books, and references.</p><span class="semester-card-bottom"><span>View subjects</span><span aria-hidden="true" class="card-arrow">↗</span></span></a><a class="semester-card semester-resource-card" data-search="semester VI 6 Sixth year III" data-semester="6" data-semester-card="" href="semester6"><div class="semester-card-top"><span class="semester-number">YEAR III</span><span aria-hidden="true" class="semester-index">06</span></div><h3>Sixth Semester</h3><p>Subject-wise notes, syllabi, lab manuals, question banks, books, and references.</p><span class="semester-card-bottom"><span>View subjects</span><span aria-hidden="true" class="card-arrow">↗</span></span></a><a class="semester-card semester-resource-card" data-search="semester VII 7 Seventh year IV" data-semester="7" data-semester-card="" href="semester7"><div class="semester-card-top"><span class="semester-number">YEAR IV</span><span aria-hidden="true" class="semester-index">07</span></div><h3>Seventh Semester</h3><p>Subject-wise notes, syllabi, lab manuals, question banks, books, and references.</p><span class="semester-card-bottom"><span>View subjects</span><span aria-hidden="true" class="card-arrow">↗</span></span></a><a class="semester-card semester-resource-card" data-search="semester VIII 8 Eighth year IV" data-semester="8" data-semester-card="" href="semester8"><div class="semester-card-top"><span class="semester-number">YEAR IV</span><span aria-hidden="true" class="semester-index">08</span></div><h3>Eighth Semester</h3><p>Subject-wise notes, syllabi, lab manuals, question banks, books, and references.</p><span class="semester-card-bottom"><span>View subjects</span><span aria-hidden="true" class="card-arrow">↗</span></span></a></div><div class="empty-state" hidden="" id="semesterEmpty" role="status"><strong>No matching semester.</strong><span>Try a semester number from 1 to 8, or “First”, “Second”, and so on.</span></div><p class="library-note">Materials are added through reviewed contributions. Availability varies by subject.</p></div></section><section class="section" id="community"><div class="container"><div class="contribute-banner"><div><span class="eyebrow">KNOWLEDGE GROWS WHEN SHARED</span><h2>Your notes could make<br/>someone’s semester easier.</h2><p>Upload a useful resource. After review, it becomes part of the public library.</p></div><div class="contribute-actions"><a class="btn btn-primary" href="signup">Start contributing <span aria-hidden="true">↗</span></a><a class="text-link" href="login">Already a member? Sign in →</a></div></div></div></section></main>
+<div data-site-footer></div>
+<script src="js/layout.js?v=shared-layout-1"></script>
+<script src="js/app.js?v=brand-2"></script>
+<script src="js/ui.js?v=ui-polish-3"></script>
 </body>
-
 </html>
+

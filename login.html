@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
 <head>
-  <meta content="light dark" name="color-scheme" />
-  <script>
+<meta content="light dark" name="color-scheme"/>
+<script>
     (() => {
       try {
         const savedTheme = localStorage.getItem('gyankunjaTheme');
@@ -17,71 +16,71 @@
       }
     })();
   </script>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Login — Gyankunja</title>
-  <link href="images/fav.png" rel="icon" type="image/png" />
-  <link href="css/styles.css" rel="stylesheet" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login — Gyankunja</title>
+<link href="images/gyankunja-icon.png?v=brand-2" rel="icon" type="image/png"/>
+<link href="css/styles.css?v=brand-2" rel="stylesheet"/>
 </head>
-
 <body class="auth-page auth-page-with-navbar">
-  <header class="site-header">
-    <div class="container navbar">
-      <a class="brand" href="index.html"><span class="brand-mark">G</span><span class="brand-name">GYANKUNJA</span></a>
-      <nav aria-label="Primary navigation" class="nav-links"><a data-nav="" href="index.html">Home</a><a data-nav=""
-          href="notices.html">Notices</a><a data-nav="" href="resources.html">Resources</a><a
-          href="index.html#community">Community</a><a data-nav="" href="about.html">About</a></nav>
-      <div class="nav-actions">
-        <a class="btn btn-outline btn-sm" data-auth-guest="" data-nav="" href="signup.html">Sign Up</a>
-        <a class="btn btn-primary btn-sm" data-auth-guest="" data-nav="" href="login.html">Login</a>
-        <a class="btn btn-outline btn-sm" data-auth-user="" hidden="" href="dashboard.html">My Dashboard</a>
-        <button class="btn btn-primary btn-sm" data-auth-user="" data-logout="" hidden="" type="button">Logout</button>
-        <button aria-label="Switch to dark mode" class="theme-toggle theme-toggle-with-label" data-theme-toggle=""
-          title="Switch to dark mode" type="button">
-          <span aria-hidden="true" data-theme-icon="">☾</span>
-          <!-- <span class="theme-toggle-text" data-theme-label="">Dark</span> -->
-        </button>
-        <button aria-label="Open menu" class="menu-toggle" type="button">☰</button>
-      </div>
-    </div>
-  </header>
-  <main class="auth-shell auth-shell-wide">
-    <!-- <div class="auth-brand"><a class="brand" href="index.html"><span class="brand-mark">G</span><span class="brand-name"
-          style="font-size:1.45rem">GYANKUNJA</span></a></div> -->
-    <section class="auth-card">
-      <h1>Welcome Back to Gyankunja</h1>
-      <p>Students open their personal dashboard here. <br> Coordinators and admins sign in on this same page.</p>
-      <div class="alert" id="formAlert"></div>
-      <form id="loginForm" novalidate="">
-        <div class="form-group"><label for="identifier">University ID or Email Address</label><input
-            autocomplete="username" class="form-control" id="identifier" name="identifier"
-            placeholder="Student ID or email (admins: email)" required="" type="text" /></div>
-        <div class="form-group"><label for="password">Password</label>
-          <div class="input-wrap"><input autocomplete="current-password" class="form-control" id="password"
-              name="password" placeholder="Enter your password" required="" type="password" /><button
-              class="password-toggle" data-target="#password" type="button">Show</button></div>
-        </div>
-        <div class="form-options"><a class="text-primary"
-            data-demo-action="Password reset will be available after backend integration." href="#">Forgot
-            password?</a><label class="check-label"><input name="remember" type="checkbox" /> Remember me</label></div>
-        <button class="btn btn-primary btn-block" type="submit">SIGN IN</button>
-      </form>
-      <p class="auth-footer-text">New to Gyankunja? <a class="text-primary" href="signup.html"><strong>Create an
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="shared-header-placeholder" data-site-header></div>
+<main class="auth-shell auth-shell-wide auth-landing" id="main-content">
+<aside class="auth-showcase" aria-label="Your academic resource hub">
+<div class="showcase-copy">
+<span class="showcase-kicker">BUILT FOR BETTER STUDY SESSIONS</span>
+<h2>One space.<br/>Every semester.<br/>More possibilities.</h2>
+<p>Explore your subjects, find useful materials, and contribute to a stronger student learning community.</p>
+</div>
+<div class="showcase-art" aria-hidden="true">
+<div class="art-sheet art-sheet-back"></div>
+<div class="art-sheet art-sheet-front">
+<span class="art-sheet-tag">YOUR STUDY LIBRARY</span>
+<div class="art-row"><i>▤</i><b>Course notes</b><em>↗</em></div>
+<div class="art-row"><i>⌘</i><b>Lab manuals</b><em>↗</em></div>
+<div class="art-row"><i>▣</i><b>Question banks</b><em>↗</em></div>
+</div></div>
+<div class="showcase-foot"><span>Gandaki University BIT community</span><span>GYANKUNJA • STUDENT RESOURCE LIBRARY</span></div>
+</aside>
+<section class="auth-card auth-card-refined">
+<span class="eyebrow">YOUR STUDY SPACE</span><h1>Welcome back.</h1>
+<p>Sign in to share resources and manage your uploads. Students, coordinators, and admins use the same sign-in page.</p>
+<div class="auth-benefits" aria-label="Account benefits"><span>✓ Your semester</span><span>✓ Upload tracking</span><span>✓ Shared resources</span></div>
+<div aria-live="polite" class="alert" id="formAlert" role="status"></div>
+<form id="loginForm" novalidate="">
+<div class="form-group"><label for="identifier">University ID or Email Address</label><input autocomplete="username" class="form-control" id="identifier" name="identifier" placeholder="Student ID or email (admins: email)" required="" type="text"/></div>
+<div class="form-group"><label for="password">Password</label>
+<div class="input-wrap"><input autocomplete="current-password" class="form-control" id="password" name="password" placeholder="Enter your password" required="" type="password"/><button class="password-toggle" data-target="#password" type="button">Show</button></div>
+</div>
+<div class="form-options"><label class="check-label"><input name="remember" type="checkbox"/> Remember me</label></div>
+<button class="btn btn-primary btn-block" type="submit">Sign in</button>
+</form>
+<p class="auth-footer-text">New to Gyankunja? <a class="text-primary" href="signup"><strong>Create an
             account</strong></a></p>
-      <p class="auth-footer-text public-resource-link">Semester notes are public: <a class="text-primary"
-          href="resources.html"><strong>Browse Resources</strong></a></p>
-    </section>
-  </main>
-  <div class="auth-wave"></div>
-  <script src="js/app.js"></script>
-  <script src="js/auth.js"></script>
-  <script>
+<p class="auth-footer-text public-resource-link">Semester notes are public: <a class="text-primary" href="resources"><strong>Browse Resources</strong></a></p>
+</section>
+</main>
+<section class="auth-bottom" aria-labelledby="auth-bottom-title">
+  <div class="container">
+    <h2 class="auth-bottom-heading" id="auth-bottom-title">More ways to get started</h2>
+    <div class="auth-bottom-grid">
+      <a class="auth-bottom-link" href="resources"><span class="auth-bottom-icon" aria-hidden="true">▤</span><span><strong>Browse the library</strong><small>Semester resources are open to everyone.</small></span></a>
+      <a class="auth-bottom-link" href="signup"><span class="auth-bottom-icon" aria-hidden="true">＋</span><span><strong>New to Gyankunja?</strong><small>Join to contribute and manage your uploads.</small></span></a>
+      <a class="auth-bottom-link" href="about"><span class="auth-bottom-icon" aria-hidden="true">◎</span><span><strong>About the project</strong><small>Learn who built Gyankunja and why.</small></span></a>
+    </div>
+  </div>
+</section>
+<div data-site-footer></div>
+<script src="js/layout.js?v=shared-layout-1"></script>
+<script src="js/app.js?v=brand-2"></script>
+<script src="js/auth.js?v=ui-polish-3"></script>
+<script>
     if (new URLSearchParams(location.search).has('required')) {
       const alertBox = document.getElementById('formAlert');
       alertBox.className = 'alert show alert-danger';
       alertBox.textContent = 'Please log in before opening your personal dashboard.';
     }
   </script>
-</body>
-
+<script src="js/ui.js?v=ui-polish-3"></script></body>
 </html>
+

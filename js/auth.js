@@ -102,7 +102,7 @@
         return;
       }
       if (!signupForm.terms.checked) {
-        showAlert('Please accept the Terms and Privacy Policy.');
+        showAlert('Please confirm that you understand the upload review process.');
         return;
       }
 
@@ -120,7 +120,7 @@
         }
         showAlert(result.message || 'Account created. Redirecting to sign in…', 'success');
         signupForm.reset();
-        setTimeout(() => location.href = 'login.html', 1000);
+        setTimeout(() => location.href = 'login', 1000);
       } catch (error) {
         showAlert('Could not reach the server. Is WAMP running?');
       } finally {

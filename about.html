@@ -1,11 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-
-  <meta name="color-scheme" content="light dark">
-
+  <meta charset="utf-8" />
+  <meta content="light dark" name="color-scheme" />
   <script>
     (() => {
       try {
@@ -27,166 +26,43 @@
       }
     })();
   </script>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta name="description"
-    content="Learn about Gyankunja and the student developers behind the academic note-sharing platform.">
-
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="Learn about Gyankunja and the student developers behind the academic note-sharing platform."
+    name="description" />
   <title>About — Gyankunja</title>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
-  <link rel="icon" type="image/png" href="images/fav.png">
-  <link rel="stylesheet" href="css/styles.css">
-
-  <style>
-    /*
-      Developer image styling
-
-      This CSS affects only images inside developer cards.
-      It will not change logos or other images on the page.
-    */
-
-    .developer-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      height: 100%;
-    }
-
-    .developer-image-wrapper {
-      width: 150px;
-      height: 150px;
-      margin: 0 auto 20px;
-      border: 4px solid var(--primary);
-      border-radius: 50%;
-      overflow: hidden;
-      background-color: #e5e7eb;
-      box-shadow: 0 8px 24px rgba(23, 78, 166, 0.18);
-      flex-shrink: 0;
-    }
-
-    .developer-image-wrapper img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      object-position: center top;
-    }
-
-    .developer-card h3 {
-      margin: 0;
-    }
-
-    .developer-role {
-      display: block;
-      color: var(--primary);
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .developer-card p {
-      margin-top: 0;
-    }
-
-    @media (max-width: 768px) {
-      .developer-image-wrapper {
-        width: 125px;
-        height: 125px;
-      }
-    }
-  </style>
+  <link href="images/gyankunja-icon.png?v=brand-2" rel="icon" type="image/png" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" rel="stylesheet" />
+  <link href="css/styles.css?v=brand-2" rel="stylesheet" />
 </head>
 
-<body>
-
+<body class="about-textured-page">
   <!-- Header -->
-  <header class="site-header">
-    <div class="container navbar">
-
-      <a class="brand" href="index.html">
-        <span class="brand-mark">G</span>
-        <span class="brand-name">GYANKUNJA</span>
-      </a>
-
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a href="index.html" data-nav>Home</a>
-        <a href="notices.html" data-nav>Notices</a>
-        <a href="resources.html" data-nav>Resources</a>
-        <a href="index.html#community">Community</a>
-        <a href="about.html" data-nav>About</a>
-      </nav>
-
-      <div class="nav-actions">
-
-        <a class="btn btn-outline btn-sm" href="signup.html" data-auth-guest>
-          Sign Up
-        </a>
-
-        <a class="btn btn-primary btn-sm" href="login.html" data-auth-guest>
-          Login
-        </a>
-
-        <a class="btn btn-outline btn-sm" href="dashboard.html" data-auth-user hidden>
-          My Dashboard
-        </a>
-
-        <button class="btn btn-primary btn-sm" type="button" data-auth-user data-logout hidden>
-          Logout
-        </button>
-
-        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode"
-          title="Switch to dark mode">
-          <span data-theme-icon aria-hidden="true">☾</span>
-        </button>
-
-        <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
-          ☰
-        </button>
-
-      </div>
-    </div>
-  </header>
-
-
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="shared-header-placeholder" data-site-header></div>
   <!-- Main Content -->
-  <main>
-
+  <main id="main-content">
     <!-- Hero Section -->
     <section class="page-hero about-hero">
       <div class="container">
-
         <span class="eyebrow">
           Built by students, for students
         </span>
-
         <h1>About Gyankunja</h1>
-
         <p>
           Gyankunja is an academic note-sharing platform designed to make
           BIT learning resources easier to discover, organize and access
           semester by semester.
         </p>
-
       </div>
     </section>
-
-
     <!-- About Introduction -->
     <section class="section">
       <div class="container about-intro-grid">
-
         <article class="about-story-card">
-
-          <span class="about-icon">G</span>
-
+          <span class="about-icon"><img src="images/gyankunja-icon.png" alt="Gyankunja Icon" /></span>
           <div>
-
             <span class="eyebrow">Our Purpose</span>
-
             <h2>A single academic hub for the BIT community</h2>
-
             <p>
               Students often receive notes, lab files, question banks,
               notices and schedules through many disconnected channels.
@@ -194,387 +70,216 @@
               platform so students can spend less time searching and
               more time learning.
             </p>
-
             <p>
               The public resource section lets anyone browse notes from
               Semester I to Semester VIII, while a signed-in student
               receives a dashboard focused on their current semester.
             </p>
-
           </div>
         </article>
-
-
         <div class="about-feature-stack">
-
           <article class="mini-feature">
             <span aria-hidden="true">▤</span>
-
             <div>
               <h3>Organized Resources</h3>
-
               <p>
                 Semester-wise notes, lab manuals, question banks and
                 reference materials.
               </p>
             </div>
           </article>
-
-
           <article class="mini-feature">
             <span aria-hidden="true">◉</span>
-
             <div>
               <h3>University Notices</h3>
-
               <p>
                 Latest examination notices requested from the official
                 Gandaki University examination website.
               </p>
             </div>
           </article>
-
-
           <article class="mini-feature">
             <span aria-hidden="true">⌂</span>
-
             <div>
               <h3>Personal Dashboard</h3>
-
               <p>
                 A semester-specific dashboard experience for signed-in
                 students.
               </p>
             </div>
           </article>
-
         </div>
       </div>
     </section>
-
-
     <!-- Developers Section -->
     <section class="section developer-section">
-
       <div class="container">
-
         <h2 class="section-title">
           Gyankunja Developers
         </h2>
-
         <p class="section-subtitle">
           Gyankunja is developed by three second-semester IT students working together to create a practical academic
           platform for BIT students.
         </p>
-
-
         <div class="developer-grid">
-
           <!-- Prabhab -->
           <article class="developer-card">
             <div class="developer-image-wrapper">
-              <img src="images/prabhab.jpg" alt="Prabhab Tiwari" loading="lazy">
+              <img alt="Prabhab Tiwari" loading="lazy" src="images/prabhab.jpg" />
             </div>
             <a href="https://prabhabtiwari.com.np">
               <h3>Prabhab Tiwari</h3>
             </a>
             <span class="developer-role">Full-stack Developer</span>
-            <a href="mailto:t.prabhab@gmail.com">t.prabhab@gmail.com</a>
+            <a class="developer-email" href="mailto:t.prabhab@gmail.com">t.prabhab@gmail.com</a>
             <div class="user_social">
               <ul>
                 <li>
-                  <a href="https://www.github.com/PrabhabTiwari" target="_blank">
-                    <i class="fa-brands fa-square-github"></i>
-                  </a>
+                  <a aria-label="Open GitHub profile" class="developer-social-link"
+                    href="https://www.github.com/PrabhabTiwari" rel="noopener noreferrer" target="_blank"><i
+                      class="fa-brands fa-square-github" aria-hidden="true"></i></a>
                 </li>
                 <li>
-                  <a href="https://www.linkedin.com/in/" target="_blank">
-                    <i class="fa-brands fa-square-linkedin"></i>
-                  </a>
+                  <a aria-label="Open Facebook profile" class="developer-social-link"
+                    href="https://facebook.com/tiwariprabhab" rel="noopener noreferrer" target="_blank"><i
+                      class="fa-brands fa-square-facebook" aria-hidden="true"></i></a>
                 </li>
                 <li>
-                  <a href="https://facebook.com/tiwariprabhab" target="_blank">
-                    <i class="fa-brands fa-square-facebook"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://instagram.com/t_prab_hab" target="_blank">
-                    <i class="fa-brands fa-square-instagram"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://twitter.com/" target="_blank">
-                    <i class="fa-brands fa-square-x-twitter"></i>
-                  </a>
+                  <a aria-label="Open Instagram profile" class="developer-social-link"
+                    href="https://instagram.com/t_prab_hab" rel="noopener noreferrer" target="_blank"><i
+                      class="fa-brands fa-square-instagram" aria-hidden="true"></i></a>
                 </li>
               </ul>
             </div>
           </article>
-
-
           <!-- Sujan -->
           <article class="developer-card">
             <div class="developer-image-wrapper">
-              <img src="images/Sujan.png" alt="Sujan Shrestha" loading="lazy">
+              <img alt="Sujan Shrestha" loading="lazy" src="images/Sujan.png" />
             </div>
             <a href="https://ssujan.com.np">
               <h3>Sujan Shrestha</h3>
             </a>
             <span class="developer-role">Full-stack Developer</span>
-            <a href="mailto:itssujanshrestha@gmail.com">itssujanshrestha@gmail.com</a>
+            <a class="developer-email" href="mailto:itssujanshrestha@gmail.com">itssujanshrestha@gmail.com</a>
             <div class="user_social">
               <ul>
                 <li>
-                  <a href="https://www.github.com/sujanshresthaofficial" target="_blank">
-                    <i class="fa-brands fa-square-github"></i>
-                  </a>
+                  <a aria-label="Open GitHub profile" class="developer-social-link"
+                    href="https://www.github.com/sujanshresthaofficial" rel="noopener noreferrer" target="_blank"><i
+                      class="fa-brands fa-square-github" aria-hidden="true"></i></a>
                 </li>
                 <li>
-                  <a class="mail" href="https://www.linkedin.com/in/iamsujanshrestha" target="_blank">
-                    <i class="fa-brands fa-square-linkedin"></i>
-                  </a>
+                  <a aria-label="Open LinkedIn profile" class="developer-social-link"
+                    href="https://www.linkedin.com/in/iamsujanshrestha" rel="noopener noreferrer" target="_blank"><i
+                      class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
                 </li>
                 <li>
-                  <a href="https://facebook.com/mr.sujanshrestha" target="_blank">
-                    <i class="fa-brands fa-square-facebook"></i>
-                  </a>
+                  <a aria-label="Open Facebook profile" class="developer-social-link"
+                    href="https://facebook.com/mr.sujanshrestha" rel="noopener noreferrer" target="_blank"><i
+                      class="fa-brands fa-square-facebook" aria-hidden="true"></i></a>
                 </li>
                 <li>
-                  <a href="https://instagram.com/sujanshresthaofficial" target="_blank">
-                    <i class="fa-brands fa-square-instagram"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://twitter.com/" target="_blank">
-                    <i class="fa-brands fa-square-x-twitter"></i>
-                  </a>
+                  <a aria-label="Open Instagram profile" class="developer-social-link"
+                    href="https://instagram.com/sujanshresthaofficial" rel="noopener noreferrer" target="_blank"><i
+                      class="fa-brands fa-square-instagram" aria-hidden="true"></i></a>
                 </li>
               </ul>
             </div>
           </article>
-
-
           <!-- Madhab -->
           <article class="developer-card">
             <div class="developer-image-wrapper">
-              <img src="images/madhab.png" alt="Madhab Khanal" loading="lazy">
+              <img alt="Madhab Khanal" loading="lazy" src="images/madhab.png" />
             </div>
-            <a href="https://#">
-              <h3>Madhab Khanal</h3>
-            </a>
+            <h3>Madhab Khanal</h3>
             <span class="developer-role">Front-end Developer</span>
-            <a href="mailto:madhabkhanal63@gmail.com">madhabkhanal63@gmail.com</a>
+            <a class="developer-email" href="mailto:madhabkhanal63@gmail.com">madhabkhanal63@gmail.com</a>
             <div class="user_social">
               <ul>
                 <li>
-                  <a href="https://www.github.com/madhabkhanal" target="_blank">
-                    <i class="fa-brands fa-square-github"></i>
-                  </a>
+                  <a aria-label="Open GitHub profile" class="developer-social-link"
+                    href="https://www.github.com/madhabkhanal" rel="noopener noreferrer" target="_blank"><i
+                      class="fa-brands fa-square-github" aria-hidden="true"></i></a>
                 </li>
                 <li>
-                  <a class="mail" href="https://www.linkedin.com/in/" target="_blank">
-                    <i class="fa-brands fa-square-linkedin"></i>
-                  </a>
+                  <a aria-label="Open Facebook profile" class="developer-social-link"
+                    href="https://facebook.com/samir.khanal.2323" rel="noopener noreferrer" target="_blank"><i
+                      class="fa-brands fa-square-facebook" aria-hidden="true"></i></a>
                 </li>
                 <li>
-                  <a href="https://facebook.com/samir.khanal.2323" target="_blank">
-                    <i class="fa-brands fa-square-facebook"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://instagram.com/maddy_20252" target="_blank">
-                    <i class="fa-brands fa-square-instagram"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://twitter.com/" target="_blank">
-                    <i class="fa-brands fa-square-x-twitter"></i>
-                  </a>
+                  <a aria-label="Open Instagram profile" class="developer-social-link"
+                    href="https://instagram.com/maddy_20252" rel="noopener noreferrer" target="_blank"><i
+                      class="fa-brands fa-square-instagram" aria-hidden="true"></i></a>
                 </li>
               </ul>
             </div>
+          </article>
+        </div>
+      </div>
     </section>
-
-
     <!-- Values Section -->
     <section class="section">
       <div class="container values-grid">
-
         <article class="value-card">
-
           <span>01</span>
-
           <h3>Accessible</h3>
-
           <p>
             Core semester resources remain public so students can browse
             academic notes without being forced to log in.
           </p>
-
         </article>
-
-
         <article class="value-card">
-
           <span>02</span>
-
           <h3>Relevant</h3>
-
-          <p>
-            Signed-in users receive notes and schedules aligned with
-            the semester saved in their student account.
-          </p>
-
+          <p>Signed-in students can contribute resources and track the review status of their uploads.</p>
         </article>
-
-
         <article class="value-card">
-
           <span>03</span>
-
           <h3>Community-Oriented</h3>
-
           <p>
             The long-term goal is to let students share useful
             materials, discuss questions and support junior learners.
           </p>
-
         </article>
-
-
         <article class="value-card">
-
           <span>04</span>
-
           <h3>Expandable</h3>
-
           <p>
             The current HTML, CSS and JavaScript prototype is prepared
             for future backend, database and secure authentication
             integration.
           </p>
-
         </article>
-
       </div>
     </section>
-
-
     <!-- Call to Action -->
     <section class="section-sm about-cta-section">
-
       <div class="container about-cta">
-
         <div>
-
           <span class="eyebrow">Start Exploring</span>
-
           <h2>Find the resources for your semester</h2>
-
           <p>
             Browse the public academic library or sign in to open your
             personalized student dashboard.
           </p>
-
         </div>
-
-
         <div class="hero-actions">
-
-          <a class="btn btn-primary" href="resources.html">
+          <a class="btn btn-primary" href="resources">
             Browse Resources
           </a>
-
-          <a class="btn btn-outline" href="login.html">
+          <a class="btn btn-outline" href="login">
             Student Login
           </a>
-
         </div>
       </div>
     </section>
-
   </main>
-
-
   <!-- Footer -->
-  <footer class="site-footer">
-
-    <div class="container">
-
-      <div class="footer-grid">
-
-        <div class="footer-brand">
-
-          <a class="brand" href="index.html">
-            <span class="brand-mark">G</span>
-            <span style="color: #ffffff;">GYANKUNJA</span>
-          </a>
-
-          <p>
-            An organized academic hub for BIT students with public
-            semester resources, university exam notices and personalized
-            student dashboards.
-          </p>
-
-        </div>
-
-
-        <div class="footer-col">
-
-          <h4>Explore</h4>
-
-          <a href="index.html">Home</a>
-          <a href="notices.html">University Notices</a>
-          <a href="resources.html">Resources</a>
-          <a href="about.html">About</a>
-
-        </div>
-
-
-        <div class="footer-col">
-
-          <h4>Semester I–IV</h4>
-
-          <a href="semester1.html">Semester I</a>
-          <a href="semester2.html">Semester II</a>
-          <a href="semester3.html">Semester III</a>
-          <a href="semester4.html">Semester IV</a>
-
-        </div>
-
-
-        <div class="footer-col">
-
-          <h4>Semester V–VIII</h4>
-
-          <a href="semester5.html">Semester V</a>
-          <a href="semester6.html">Semester VI</a>
-          <a href="semester7.html">Semester VII</a>
-          <a href="semester8.html">Semester VIII</a>
-
-        </div>
-
-      </div>
-
-
-      <div class="footer-bottom">
-
-        <span>
-          © 2026 Gyankunja. Front-end prototype.
-        </span>
-
-        <span>
-          Developed by Prabhab Tiwari, Sujan Shreshtha and Madhab Khanal.
-        </span>
-
-      </div>
-
-    </div>
-  </footer>
-
-
-  <script src="js/app.js"></script>
-
+  <div data-site-footer></div>
+  <script src="js/layout.js?v=shared-layout-1"></script>
+  <script src="js/app.js?v=brand-2"></script>
+  <script src="js/ui.js?v=ui-refresh-2"></script>
 </body>
 
 </html>

@@ -33,8 +33,8 @@
     me = await api('php/auth_me.php');
   } catch { me = null; }
   if (!me || !me.loggedIn || me.role === 'student') {
-    sessionStorage.setItem('gyankunjaRedirect', 'admin.html');
-    location.replace('login.html?required=1');
+    sessionStorage.setItem('gyankunjaRedirect', 'admin');
+    location.replace('login?required=1');
     return;
   }
   const isAdmin = me.role === 'admin';
@@ -47,6 +47,7 @@
     $$('.admin-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
     $$('.admin-panel').forEach(p => { p.hidden = p.dataset.panel !== name; });
     if (name === 'coordinators') loadStaff();
+    if (name === 'exams') loadExams();
     if (name === 'account') fillAccount();
   };
   $$('.admin-tab').forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
@@ -210,6 +211,119 @@
         fillAccount();
       }
     } catch (e) { notify(e.message, 'danger'); }
+  });
+
+  // ---------- Exam schedule: real MySQL rows, maintained by authorized staff ----------
+  const examForm = $('#examAdminForm');
+  const examRows = $('#examAdminRows');
+  const examStatus = $('#examAdminStatus');
+  let exams = [];
+  let examCsrfToken = '';
+
+  const resetExamForm = () => {
+    examForm.reset();
+    examForm.elements.namedItem('id').value = '';
+    $('#examAdminFormTitle').textContent = 'Add an exam';
+    $('#examAdminSubmit').textContent = 'Save exam';
+    $('#examAdminCancel').hidden = true;
+  };
+
+  const renderExamRows = () => {
+    if (!exams.length) {
+      examRows.innerHTML = '<tr><td colspan="6">No exams recorded. Add a verified exam above.</td></tr>';
+      return;
+    }
+    examRows.innerHTML = exams.map(exam => {
+      const id = Number(exam.id);
+      if (!Number.isSafeInteger(id) || id <= 0) return '';
+      return '<tr>' +
+        '<td>' + esc(exam.semester) + '</td>' +
+        '<td>' + esc(exam.subject) + '</td>' +
+        '<td>' + esc(exam.exam_type) + '</td>' +
+        '<td>' + esc(exam.starts_at) + '</td>' +
+        '<td>' + esc(exam.venue || '—') + '</td>' +
+        '<td><button class="btn btn-outline btn-sm" type="button" data-edit-exam="' + id + '">Edit</button> ' +
+        '<button class="btn btn-danger-outline btn-sm" type="button" data-delete-exam="' + id + '">Delete</button></td>' +
+      '</tr>';
+    }).join('');
+  };
+
+  const loadExams = async () => {
+    examStatus.textContent = 'Loading exam schedule…';
+    try {
+      const data = await api('php/exams.php');
+      if (!data.success) throw new Error(data.message || 'Exam schedule unavailable.');
+      examCsrfToken = data.csrf_token || '';
+      exams = data.exams || [];
+      renderExamRows();
+      examStatus.textContent = exams.length
+        ? exams.length + ' saved exam(s). Only upcoming exams appear to students.'
+        : 'No exams listed yet. Add an exam using the form below.';
+    } catch (error) {
+      examStatus.textContent = error.message || 'Could not load the exam schedule. Please try again.';
+      examRows.replaceChildren();
+    }
+  };
+
+  examRows.addEventListener('click', async event => {
+    const editButton = event.target.closest('[data-edit-exam]');
+    const deleteButton = event.target.closest('[data-delete-exam]');
+    if (!editButton && !deleteButton) return;
+    const id = Number((editButton || deleteButton).dataset.editExam || deleteButton?.dataset.deleteExam);
+    const exam = exams.find(item => Number(item.id) === id);
+    if (!exam) return;
+    if (editButton) {
+      resetExamForm();
+      for (const [name, value] of Object.entries({
+        id: String(id), semester: exam.semester, subject: exam.subject,
+        exam_type: exam.exam_type,
+        starts_at: String(exam.starts_at).replace(' ', 'T').slice(0, 16),
+        venue: exam.venue || ''
+      })) {
+        const input = examForm.elements.namedItem(name);
+        if (input) input.value = value;
+      }
+      $('#examAdminFormTitle').textContent = 'Edit exam';
+      $('#examAdminSubmit').textContent = 'Update exam';
+      $('#examAdminCancel').hidden = false;
+      examForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    if (!confirm('Permanently remove this exam from the student timetable?')) return;
+    deleteButton.disabled = true;
+    try {
+      const data = await api('php/exams.php', {
+        action: 'delete', id: String(id), csrf_token: examCsrfToken
+      });
+      if (!data.success) throw new Error(data.message);
+      notify(data.message);
+      await loadExams();
+    } catch (error) {
+      notify(error.message || 'Could not remove exam.', 'danger');
+    } finally {
+      deleteButton.disabled = false;
+    }
+  });
+
+  $('#examAdminCancel').addEventListener('click', resetExamForm);
+  examForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    const fields = Object.fromEntries(new FormData(examForm).entries());
+    fields.action = fields.id ? 'update' : 'create';
+    fields.csrf_token = examCsrfToken;
+    const submit = $('#examAdminSubmit');
+    submit.disabled = true;
+    try {
+      const data = await api('php/exams.php', fields);
+      if (!data.success) throw new Error(data.message || 'Could not save exam.');
+      notify(data.message);
+      resetExamForm();
+      await loadExams();
+    } catch (error) {
+      notify(error.message || 'Could not save exam.', 'danger');
+    } finally {
+      submit.disabled = false;
+    }
   });
 
   loadFiles();
