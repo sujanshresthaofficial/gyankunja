@@ -11,8 +11,12 @@ if (is_student_logged_in()) {
     $u = $stmt->fetch();
     if ($u) {
         json_out(['loggedIn' => true, 'role' => 'student', 'user' => [
-            'name' => $u['name'], 'email' => $u['email'], 'studentId' => $u['student_id'],
-            'program' => $u['program'], 'semester' => $u['semester'], 'role' => 'student',
+            'name' => $u['name'],
+            'email' => $u['email'],
+            'studentId' => $u['student_id'],
+            'program' => $u['program'],
+            'semester' => $u['semester'],
+            'role' => 'student',
         ]]);
     }
 }
@@ -25,7 +29,9 @@ if (is_staff_logged_in()) {
         $_SESSION['coordinator_name'] = $c['name'];
         $_SESSION['coordinator_role'] = $c['role'];
         json_out(['loggedIn' => true, 'role' => $c['role'], 'user' => [
-            'name' => $c['name'], 'email' => $c['email'], 'role' => $c['role'],
+            'name' => $c['name'],
+            'email' => $c['email'],
+            'role' => $c['role'],
         ]]);
     }
 }

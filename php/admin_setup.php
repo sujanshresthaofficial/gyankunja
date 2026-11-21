@@ -32,7 +32,12 @@ if (!$adminExists && $_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><title>First admin setup — Gyankunja</title></head>
+
+<head>
+    <meta charset="UTF-8">
+    <title>First admin setup — Gyankunja</title>
+</head>
+
 <body style="font-family: sans-serif; max-width: 460px; margin: 60px auto; padding: 0 16px;">
     <h2>Gyankunja — first admin setup</h2>
     <?php if ($done): ?>
@@ -49,4 +54,5 @@ if (!$adminExists && $_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     <?php endif; ?>
 </body>
+
 </html>

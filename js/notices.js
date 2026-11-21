@@ -113,7 +113,7 @@
     link.href = safeUrl(notice.link);
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
-    link.textContent = 'Read Official Notice ↗';
+    link.textContent = 'Read Official Notice';
 
     article.append(dateBox, content, link);
     return article;
