@@ -15,12 +15,16 @@ if ($identifier === '' || $password === '') {
     json_out(['success' => false, 'message' => 'Please enter your login ID or email and password.'], 400);
 }
 
-function start_login_session(bool $remember): void {
+function start_login_session(bool $remember): void
+{
     $_SESSION = [];
     session_regenerate_id(true);
     if ($remember) { // keep the cookie for 30 days instead of until the browser closes
         setcookie(session_name(), session_id(), [
-            'expires' => time() + 60 * 60 * 24 * 30, 'path' => '/', 'httponly' => true, 'samesite' => 'Lax',
+            'expires' => time() + 60 * 60 * 24 * 30,
+            'path' => '/',
+            'httponly' => true,
+            'samesite' => 'Lax',
         ]);
     }
 }
@@ -41,8 +45,12 @@ if ($student && password_verify($password, $student['password_hash'])) {
         'role'     => 'student',
         'redirect' => 'dashboard.html',
         'user'     => [
-            'name' => $student['name'], 'email' => $student['email'], 'studentId' => $student['student_id'],
-            'program' => $student['program'], 'semester' => $student['semester'], 'role' => 'student',
+            'name' => $student['name'],
+            'email' => $student['email'],
+            'studentId' => $student['student_id'],
+            'program' => $student['program'],
+            'semester' => $student['semester'],
+            'role' => 'student',
         ],
     ]);
 }

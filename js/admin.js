@@ -1,7 +1,3 @@
-// =====================================================
-// js/admin.js — admin / coordinator dashboard
-// Talks to: php/auth_me.php, admin_files.php, admin_review.php, admin_coordinators.php, profile_update.php
-// =====================================================
 (async () => {
   const $ = (sel) => document.querySelector(sel);
   const $$ = (sel) => Array.from(document.querySelectorAll(sel));
@@ -244,7 +240,7 @@
         '<td>' + esc(exam.venue || '—') + '</td>' +
         '<td><button class="btn btn-outline btn-sm" type="button" data-edit-exam="' + id + '">Edit</button> ' +
         '<button class="btn btn-danger-outline btn-sm" type="button" data-delete-exam="' + id + '">Delete</button></td>' +
-      '</tr>';
+        '</tr>';
     }).join('');
   };
 

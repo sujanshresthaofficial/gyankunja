@@ -38,8 +38,10 @@ if ($isStudent) {
     $semester = trim($_POST['semester'] ?? '');
     if ($program === '' || strlen($program) > 100) json_out(['success' => false, 'message' => 'Please choose your program.'], 400);
     if (!in_array($semester, SEMESTERS, true)) json_out(['success' => false, 'message' => 'Please choose a valid semester.'], 400);
-    $sets[] = 'program = :program';   $fields[':program']  = $program;
-    $sets[] = 'semester = :semester'; $fields[':semester'] = $semester;
+    $sets[] = 'program = :program';
+    $fields[':program']  = $program;
+    $sets[] = 'semester = :semester';
+    $fields[':semester'] = $semester;
     $sets[] = 'updated_at = NOW()';
 }
 

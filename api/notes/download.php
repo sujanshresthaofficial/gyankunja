@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 define('GYANKUNJA_HTML_PAGE', true);
@@ -70,8 +71,8 @@ header('Content-Type: application/pdf');
 header('Content-Length: ' . filesize($realFilePath));
 header(
     'Content-Disposition: inline; filename="' .
-    addcslashes($safeFilename, '"\\') .
-    '"'
+        addcslashes($safeFilename, '"\\') .
+        '"'
 );
 header('X-Content-Type-Options: nosniff');
 header('Cache-Control: private, max-age=0, must-revalidate');
