@@ -1,7 +1,3 @@
-// =====================================================
-// js/auth.js — login + sign-up. Accounts now live in MySQL (php/auth_*.php);
-// the browser only keeps a small copy of the user's name/semester for the UI.
-// =====================================================
 (() => {
   const alertBox = document.querySelector('#formAlert');
 

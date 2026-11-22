@@ -10,7 +10,8 @@
 require_once 'config.php';
 require_admin_json();
 
-function admin_count(PDO $pdo): int {
+function admin_count(PDO $pdo): int
+{
     return (int) $pdo->query("SELECT COUNT(*) FROM coordinators WHERE role = 'admin'")->fetchColumn();
 }
 
@@ -58,7 +59,10 @@ if ($action === 'update') {
     }
     $sets = ['name = :n', 'email = :e', 'role = :r'];
     $params = [':n' => $name, ':e' => $email, ':r' => $role, ':id' => $id];
-    if ($pass !== '') { $sets[] = 'password_hash = :h'; $params[':h'] = password_hash($pass, PASSWORD_DEFAULT); }
+    if ($pass !== '') {
+        $sets[] = 'password_hash = :h';
+        $params[':h'] = password_hash($pass, PASSWORD_DEFAULT);
+    }
     $pdo->prepare("UPDATE coordinators SET " . implode(', ', $sets) . " WHERE id = :id")->execute($params);
     if ($id === (int) $_SESSION['coordinator_id']) {
         $_SESSION['coordinator_name'] = $name;

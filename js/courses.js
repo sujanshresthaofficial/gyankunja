@@ -73,6 +73,5 @@ window.GyankunjaCourses = {
 
 window.GyankunjaRoman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
 
-// Value saved in the database `subject` column, e.g. "CIT111 - C Programming I".
 window.GyankunjaSubjectValue = (code, title) => `${code} - ${title}`;
 window.GyankunjaCategories = ['Syllabus', 'Theory Notes', 'Lab Manuals', 'Question Bank', 'Books', 'References'];

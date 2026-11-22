@@ -13,7 +13,6 @@
       const icon = $('[data-theme-icon]', button);
       const label = $('[data-theme-label]', button);
       if (icon) icon.textContent = darkModeIsActive ? '☀' : '☾';
-      // if (label) label.textContent = darkModeIsActive ? 'Light' : 'Dark';
       button.setAttribute('aria-label', `Switch to ${nextMode} mode`);
       button.setAttribute('title', `Switch to ${nextMode} mode`);
       button.setAttribute('aria-pressed', String(darkModeIsActive));
@@ -107,7 +106,7 @@
     resourcesTrigger.addEventListener('click', event => {
       // On touch/mobile, the first tap opens the menu; the second follows the link.
       if ((window.matchMedia('(max-width: 1024px)').matches || window.matchMedia('(hover: none)').matches)
-          && !semesterDropdown.classList.contains('is-open')) {
+        && !semesterDropdown.classList.contains('is-open')) {
         event.preventDefault();
         setSemesterOpen(true);
       }

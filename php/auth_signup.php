@@ -45,8 +45,12 @@ $stmt = $pdo->prepare(
      VALUES (:sid, :name, :email, :program, :semester, :hash)"
 );
 $stmt->execute([
-    ':sid' => $studentId, ':name' => $name, ':email' => $email, ':program' => $program,
-    ':semester' => $semester, ':hash' => password_hash($password, PASSWORD_DEFAULT),
+    ':sid' => $studentId,
+    ':name' => $name,
+    ':email' => $email,
+    ':program' => $program,
+    ':semester' => $semester,
+    ':hash' => password_hash($password, PASSWORD_DEFAULT),
 ]);
 
 json_out(['success' => true, 'message' => "Account created for $semester. You can sign in now."]);

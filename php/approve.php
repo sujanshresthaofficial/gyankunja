@@ -35,21 +35,68 @@ $pendingFiles = $pdo->query(
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Review Pending Uploads — Gyankunja</title>
     <style>
-        body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 0 16px; }
-        .file-card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
-        .file-card h3 { margin: 0 0 6px; }
-        .meta { color: #666; font-size: 0.85rem; margin-bottom: 10px; }
-        .actions input[type=text] { padding: 6px; width: 220px; }
-        .actions button { padding: 6px 14px; margin-left: 6px; cursor: pointer; }
-        .approve-btn { background: #2e7d32; color: white; border: none; border-radius: 4px; }
-        .reject-btn { background: #c0392b; color: white; border: none; border-radius: 4px; }
-        .topbar { display: flex; justify-content: space-between; align-items: center; }
+        body {
+            font-family: sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 16px;
+        }
+
+        .file-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .file-card h3 {
+            margin: 0 0 6px;
+        }
+
+        .meta {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .actions input[type=text] {
+            padding: 6px;
+            width: 220px;
+        }
+
+        .actions button {
+            padding: 6px 14px;
+            margin-left: 6px;
+            cursor: pointer;
+        }
+
+        .approve-btn {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .reject-btn {
+            background: #c0392b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
     </style>
 </head>
+
 <body>
     <div class="topbar">
         <h2>Pending Uploads (<?= count($pendingFiles) ?>)</h2>
@@ -74,8 +121,8 @@ $pendingFiles = $pdo->query(
             </div>
             <p><?= htmlspecialchars($f['description']) ?></p>
             <p><a href="download.php?id=<?= (int) $f['id'] ?>" target="_blank">
-                View file (<?= htmlspecialchars($f['original_name']) ?>)
-            </a></p>
+                    View file (<?= htmlspecialchars($f['original_name']) ?>)
+                </a></p>
 
             <form method="POST" class="actions">
                 <input type="hidden" name="file_id" value="<?= $f['id'] ?>">
@@ -86,4 +133,5 @@ $pendingFiles = $pdo->query(
         </div>
     <?php endforeach; ?>
 </body>
+
 </html>

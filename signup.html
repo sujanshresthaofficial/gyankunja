@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
-<meta content="light dark" name="color-scheme"/>
-<script>
+  <meta content="light dark" name="color-scheme" />
+  <script>
     (() => {
       try {
         const savedTheme = localStorage.getItem('gyankunjaTheme');
@@ -16,74 +17,106 @@
       }
     })();
   </script>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Create Account — Gyankunja</title>
-<link href="images/gyankunja-icon.png?v=brand-2" rel="icon" type="image/png"/>
-<link href="css/styles.css?v=brand-2" rel="stylesheet"/>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Create Account | Gyankunja</title>
+  <link rel="icon" type="image/png"  href="images/gyankunja-icon.png?v=brand-2"/>
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/styles.css?v=brand-2"/>
 </head>
-<body class="auth-page auth-page-with-navbar signup-textured-page">
-<a class="skip-link" href="#main-content">Skip to content</a>
-<div class="shared-header-placeholder" data-site-header></div>
-<main class="auth-shell signup-layout signup-artboard" id="main-content">
-<div class="auth-brand"><a class="brand brand-image" href="index" aria-label="Gyankunja home"><img class="brand-logo brand-logo-light" src="images/gyankunja-logo.png?v=brand-2" alt="Gyankunja" width="400" height="114"/><img class="brand-logo brand-logo-dark" src="images/gyankunja-logo-dark.png?v=brand-2" alt="Gyankunja" width="400" height="114"/></a></div>
-<div class="signup-process" aria-label="How Gyankunja works"><span><b>01</b> Create account</span><span><b>02</b> Choose semester</span><span><b>03</b> Share resources</span></div>
-<section class="auth-card auth-card-refined">
-<span class="eyebrow">JOIN THE BIT COMMUNITY</span><h1>Make knowledge a shared resource.</h1>
-<p>Create a student account for a dashboard personalized to your selected semester. Public notes remain available
-        without login.</p>
-<div class="auth-benefits" aria-label="Account benefits"><span>✓ Personalized dashboard</span><span>✓ Note sharing</span><span>✓ Approval tracking</span></div>
-<div aria-live="polite" class="alert" id="formAlert" role="status"></div>
-<form id="signupForm" novalidate="">
-<div class="form-row">
-<div class="form-group"><label for="name">Full Name</label><input class="form-control" id="name" name="name" placeholder="Your full name" required="" type="text"/></div>
-<div class="form-group"><label for="studentId">University ID</label><input class="form-control" id="studentId" name="studentId" placeholder="Registration number" required="" type="text"/></div>
-</div>
-<div class="form-group"><label for="email">Student Email Address</label><input class="form-control" id="email" name="email" placeholder="student@example.com" required="" type="email"/></div>
-<div class="form-row">
-<div class="form-group"><label for="program">Program</label><select class="form-control" id="program" name="program" required="">
-<option value="">Select program</option>
-<option>Bachelor of Information Technology</option>
-<option>Bachelor of Computer Science</option>
-<option>Other</option>
-</select></div>
-<div class="form-group"><label for="semester">Current Semester</label><select class="form-control" id="semester" name="semester" required="">
-<option value="">Select semester</option>
-<option>Semester I</option>
-<option>Semester II</option>
-<option>Semester III</option>
-<option>Semester IV</option>
-<option>Semester V</option>
-<option>Semester VI</option>
-<option>Semester VII</option>
-<option>Semester VIII</option>
-</select></div>
-</div>
-<div class="form-row">
-<div class="form-group"><label for="signupPassword">Password</label>
-<div class="input-wrap"><input class="form-control" id="signupPassword" name="password" placeholder="At least 6 characters" required="" type="password"/><button class="password-toggle" data-target="#signupPassword" type="button">Show</button></div>
-</div>
-<div class="form-group"><label for="confirmPassword">Confirm Password</label>
-<div class="input-wrap"><input class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Repeat password" required="" type="password"/><button class="password-toggle" data-target="#confirmPassword" type="button">Show</button></div>
-</div>
-</div>
-<label class="check-label signup-terms"><input name="terms" type="checkbox"/> I understand that uploads are reviewed before being made publicly available.</label>
-<button class="btn btn-primary btn-block" type="submit">CREATE ACCOUNT</button>
-</form>
-<p class="auth-footer-text">Already have an account? <a class="text-primary" href="login"><strong>Sign
-            in</strong></a></p>
-</section>
-<div class="signup-visual-footer" aria-label="Benefits of joining Gyankunja">
-  <div class="signup-visual-card"><span class="signup-feature-icon" aria-hidden="true">▤</span><strong>Semester-focused</strong><span>Find study materials organized for your semester.</span></div>
-  <div class="signup-visual-card"><span class="signup-feature-icon" aria-hidden="true">✦</span><strong>Share knowledge</strong><span>Contribute useful notes for other BIT students.</span></div>
-  <div class="signup-visual-card"><span class="signup-feature-icon" aria-hidden="true">✓</span><strong>Track uploads</strong><span>See the review status of your contributions.</span></div>
-</div>
-</main>
-<div class="auth-wave"></div>
-<div data-site-footer></div>
-<script src="js/layout.js?v=shared-layout-1"></script>
-<script src="js/app.js?v=brand-2"></script>
-<script src="js/auth.js?v=ui-polish-3"></script>
-<script src="js/ui.js?v=ui-polish-3"></script></body>
-</html>
 
+<body class="auth-page auth-page-with-navbar signup-textured-page">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="shared-header-placeholder" data-site-header></div>
+  <main class="auth-shell signup-layout signup-artboard" id="main-content">
+    <div class="auth-brand"><a class="brand brand-image" href="index" aria-label="Gyankunja home"><img
+          class="brand-logo brand-logo-light" src="images/gyankunja-logo.png?v=brand-2" alt="Gyankunja" width="400"
+          height="114" /><img class="brand-logo brand-logo-dark" src="images/gyankunja-logo-dark.png?v=brand-2"
+          alt="Gyankunja" width="400" height="114" /></a></div>
+    <div class="signup-process" aria-label="How Gyankunja works"><span><b>01</b> Create account</span><span><b>02</b>
+        Choose semester</span><span><b>03</b> Share resources</span></div>
+    <section class="auth-card auth-card-refined">
+      <span class="eyebrow">JOIN THE BIT COMMUNITY</span>
+      <h1>Make knowledge a shared resource.</h1>
+      <p>Create a student account for a dashboard personalized to your selected semester. Public notes remain available without login.</p>
+      <div class="auth-benefits" aria-label="Account benefits">
+        <span> <a class="fa fa-check"></a> Personalized dashboard</span>
+        <span> <a class="fa fa-check"></a> Note sharing</span>
+        <span> <a class="fa fa-check"></a> Approval tracking</span>
+      </div>
+      <div aria-live="polite" class="alert" id="formAlert" role="status"></div>
+      <form id="signupForm" novalidate="">
+        <div class="form-row">
+          <div class="form-group"><label for="name">Full Name</label><input class="form-control" id="name" name="name"
+              placeholder="Your full name" required="" type="text" /></div>
+          <div class="form-group"><label for="studentId">University ID</label><input class="form-control" id="studentId"
+              name="studentId" placeholder="Registration number" required="" type="text" /></div>
+        </div>
+        <div class="form-group"><label for="email">Student Email Address</label><input class="form-control" id="email"
+            name="email" placeholder="student@example.com" required="" type="email" /></div>
+        <div class="form-row">
+          <div class="form-group"><label for="program">Program</label><select class="form-control" id="program"
+              name="program" required="">
+              <option value="">Select program</option>
+              <option>Bachelor of Information Technology</option>
+            </select>
+          </div>
+          <div class="form-group"><label for="semester">Current Semester</label><select class="form-control"
+              id="semester" name="semester" required="">
+              <option value="">Select semester</option>
+              <option>Semester I</option>
+              <option>Semester II</option>
+              <option>Semester III</option>
+              <option>Semester IV</option>
+              <option>Semester V</option>
+              <option>Semester VI</option>
+              <option>Semester VII</option>
+              <option>Semester VIII</option>
+            </select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label for="signupPassword">Password</label>
+            <div class="input-wrap"><input class="form-control" id="signupPassword" name="password"
+                placeholder="At least 6 characters" required="" type="password" /><button class="password-toggle"
+                data-target="#signupPassword" type="button">Show</button></div>
+          </div>
+          <div class="form-group"><label for="confirmPassword">Confirm Password</label>
+            <div class="input-wrap"><input class="form-control" id="confirmPassword" name="confirmPassword"
+                placeholder="Repeat password" required="" type="password" /><button class="password-toggle"
+                data-target="#confirmPassword" type="button">Show</button></div>
+          </div>
+        </div>
+        <label class="check-label signup-terms"><input name="terms" type="checkbox" /> I understand that uploads are
+          reviewed before being made publicly available.</label>
+        <button class="btn btn-primary btn-block" type="submit">CREATE ACCOUNT</button>
+      </form>
+      <p class="auth-footer-text-log-account">Already have an account? <a class="text-primary" href="login"><strong>Sign
+            in</strong></a></p>
+    </section>
+    <div class="signup-visual-footer" aria-label="Benefits of joining Gyankunja">
+      <div class="signup-visual-card">
+        <span class="signup-feature-icon fa fa-book"></span>
+        <strong>Semester-focused</strong>
+        <span>Find study materials organized for your semester.</span>
+        </div>
+      <div class="signup-visual-card">
+        <span class="signup-feature-icon fa fa-brain"></span>
+        <strong>Share knowledge</strong>
+        <span>Contribute useful notes for other BIT students.</span>
+      </div>
+      <div class="signup-visual-card">
+        <span class="signup-feature-icon fa fa-arrow-trend-up"></span>
+        <strong>Track uploads</strong>
+        <span>See the review status of your contributions.</span>
+      </div>
+    </div>
+  </main>
+  <div class="auth-wave"></div>
+  <div data-site-footer></div>
+  <script src="js/layout.js?v=shared-layout-1"></script>
+  <script src="js/app.js?v=brand-2"></script>
+  <script src="js/auth.js?v=ui-polish-3"></script>
+  <script src="js/ui.js?v=ui-polish-3"></script>
+</body>
+
+</html>

@@ -1,4 +1,3 @@
-/* Student dashboard: only actual PHP/MySQL records, no demo notes or schedules. */
 (async () => {
   const $ = selector => document.querySelector(selector);
   const $$ = selector => [...document.querySelectorAll(selector)];
@@ -65,7 +64,7 @@
       [note.title, note.subject, note.category].some(value => String(value || '').toLowerCase().includes(query)));
     if (!list.length) {
       notesContainer.innerHTML = '<div class="panel dashboard-data-empty">' +
-        (query ? 'No approved notes match your search.' : 'No approved notes for your semester yet. New notes will appear after staff approval.') +
+        (query ? 'No approved notes match your search.' : 'No approved notes for your semester yet. New notes will appear after approval.') +
         '</div>';
       return;
     }
@@ -97,13 +96,10 @@
     }
     myUploads.innerHTML = uploads.map(file => {
       const status = ['approved', 'pending', 'rejected'].includes(file.status) ? file.status : 'pending';
-      const remarks = file.review_remarks
-        ? `<div class="muted dashboard-upload-remarks">Staff feedback: ${esc(file.review_remarks)}</div>` : '';
-      return `<div class="dashboard-upload-row">
-        <div><strong>${esc(file.title)}</strong>
-          <div class="muted dashboard-upload-meta">${esc(file.semester)} · ${esc(file.subject)} · ${esc(file.category)}</div>
+      const remarks = file.review_remarks ? `<div class="muted dashboard-upload-remarks">Feedback: ${esc(file.review_remarks)}</div>` : '';
+      return `<div class="dashboard-upload-row"> <div> <strong>${esc(file.title)}</strong> <div class="muted dashboard-upload-meta">${esc(file.semester)} · ${esc(file.subject)} · ${esc(file.category)}</div>
           ${remarks}
-        </div><span class="badge ${status === 'approved' ? 'badge-green' : 'badge-blue'}">${esc(status)}</span>
+        </div><span class="badge ${status === 'approved' ? 'badge-green' : status === 'rejected' ? 'badge-rejected' : 'badge-orange'}">${esc(status)}</span>
       </div>`;
     }).join('');
   };
@@ -144,7 +140,7 @@
       <svg class="chart-svg" viewBox="0 0 600 185" preserveAspectRatio="none" role="img" aria-label="Monthly uploaded notes over the last six months">
         <path d="${area}" fill="rgba(36, 88, 207, .13)"/>
         <polyline points="${points}" fill="none" stroke="#2458cf" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        ${coordinates.map(([x,y]) => `<circle cx="${x}" cy="${y}" r="4.5" fill="#2458cf"/>`).join('')}
+        ${coordinates.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="4.5" fill="#2458cf"/>`).join('')}
         ${labels}
       </svg>`;
     const caption = $('#dashboardActivityCaption');
@@ -160,7 +156,7 @@
       renderContributions(data);
     } catch (error) {
       console.error('Dashboard data unavailable:', error);
-      if (notesContainer) notesContainer.innerHTML = '<div class="panel dashboard-data-empty">Could not load approved notes. Check the MySQL connection.</div>';
+      if (notesContainer) notesContainer.innerHTML = '<div class="panel dashboard-data-empty"> Could not load approved notes. Check the MySQL connection.</div>';
       if (myUploads) myUploads.textContent = 'Could not load your uploads right now.';
       const chart = $('#dashboardActivityChart');
       if (chart) chart.textContent = 'Contribution data is temporarily unavailable.';
@@ -273,8 +269,13 @@
   const openProfile = () => {
     if (!profileForm) return;
     for (const [name, value] of Object.entries({
-      name: user.name, studentId: user.studentId || '', email: user.email,
-      program: user.program, semester: user.semester, current_password: '', new_password: ''
+      name: user.name,
+      studentId: user.studentId || '',
+      email: user.email,
+      program: user.program,
+      semester: user.semester,
+      current_password: '',
+      new_password: ''
     })) {
       const input = profileField(name);
       if (input) input.value = value;
